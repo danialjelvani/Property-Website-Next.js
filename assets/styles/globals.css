@@ -1,1 +1,4 @@
 @import "tailwindcss";
+.linkhover {
+    @apply hover:bg-gradient-to-b hover:from-orange-200 hover:via-amber-700 hover:to-orange-300 rounded-md
+}
