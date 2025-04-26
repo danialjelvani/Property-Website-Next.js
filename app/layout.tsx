@@ -3,9 +3,9 @@ import "@/assets/styles/globals.css";
 import Navbar from "@/components/navbar";
 
 export const metadata = {
-  title: "Property Website",
-  description: "find rental",
-  keywords: ["rental", "apartment", "villa", "cottage", "suite"],
+  title: "Isfahan Traditional Rentals",
+  description: "find traditional property rentals in Isfahan",
+  keywords: ["rental", "apartment", "villa", "cottage", "suite", "Isfahan", "Esfahan", "traditional", "property"],
 }
 
 const MainLayout = ({children}:{children: React.ReactNode}) => {

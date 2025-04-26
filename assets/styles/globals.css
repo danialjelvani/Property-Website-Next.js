@@ -1,4 +1,49 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: "Felix Titling";
+  src: url("./fonts/FelixTitlingMT.woff2") format("woff2"),
+    url("./fonts/FelixTitlingMT.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Trebuchet MS';
+  src: url('./fonts/TrebuchetMS.woff2') format('woff2'),
+      url('./fonts/TrebuchetMS.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Californian FB';
+  src: url('./fonts/CalifornianFB-Reg.woff2') format('woff2'),
+      url('./fonts/CalifornianFB-Reg.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 .linkhover {
-    @apply hover:bg-gradient-to-b hover:from-orange-200 hover:via-amber-700 hover:to-orange-300 rounded-md
+  @apply hover:bg-gradient-to-b hover:from-orange-200 hover:via-amber-700 hover:to-orange-300 rounded-md;
+}
+
+.linkactive {
+  @apply active:bg-gradient-to-b active:from-orange-200 active:via-amber-800 active:to-orange-300 active:scale-95 
+  transition-transform duration-200 ease-in-out rounded-md;
+}
+
+@theme {
+  --font-Title: "Felix Titling", sans-serif;
+}
+
+@theme {
+  --font-Title2: "Trebuchet MS", sans-serif;
+}
+
+@theme {
+  --font-Title3: "Californian FB", sans-serif;
 }
