@@ -11,7 +11,7 @@ export const metadata = {
 const MainLayout = ({children}:{children: React.ReactNode}) => {
   return (
     <html lang="en">
-      <body>
+      <body className="bg-cover bg-fixed bg-no-repeat bg-center bg-gradient-to-b from-neutral-800 via-neutral-700 to-teal-950">
         <Navbar />
         <main>{children}</main>
       </body>

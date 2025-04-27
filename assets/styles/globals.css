@@ -10,18 +10,18 @@
 }
 
 @font-face {
-  font-family: 'Trebuchet MS';
-  src: url('./fonts/TrebuchetMS.woff2') format('woff2'),
-      url('./fonts/TrebuchetMS.woff') format('woff');
+  font-family: "Trebuchet MS";
+  src: url("./fonts/TrebuchetMS.woff2") format("woff2"),
+    url("./fonts/TrebuchetMS.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Californian FB';
-  src: url('./fonts/CalifornianFB-Reg.woff2') format('woff2'),
-      url('./fonts/CalifornianFB-Reg.woff') format('woff');
+  font-family: "Californian FB";
+  src: url("./fonts/CalifornianFB-Reg.woff2") format("woff2"),
+    url("./fonts/CalifornianFB-Reg.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -32,8 +32,44 @@
 }
 
 .linkactive {
-  @apply active:bg-gradient-to-b active:from-orange-200 active:via-amber-800 active:to-orange-300 active:scale-95 
+  @apply active:bg-gradient-to-b active:from-orange-200 active:via-amber-800 active:to-orange-300 active:scale-95
   transition-transform duration-200 ease-in-out rounded-md;
+}
+
+.linkactive2 {
+  @apply relative overflow-hidden before:pointer-events-none before:absolute before:top-1/2 before:left-1/2 before:w-0 before:h-0 before:bg-amber-200/10 before:rounded-full before:transform before:-translate-x-1/2 before:-translate-y-1/2 before:transition-all before:duration-500 hover:before:w-56 hover:before:h-56;
+}
+
+.linkhover2 {
+  @apply relative overflow-hidden after:absolute after:top-0 after:left-[-75%] after:w-1/2 after:h-full after:bg-white/20 after:skew-x-[-20deg] after:transition-all after:duration-1000 hover:after:left-[125%];
+}
+
+.linkanimation {
+  @apply relative overflow-hidden;
+}
+
+.linkanimation::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.2);
+  transform: skewX(-20deg);
+  animation: shimmer 5s infinite;
+}
+
+@layer utilities {
+  @keyframes shimmer {
+    0% {
+      left: -50%;
+    }
+    100% {
+      left: 125%;
+    }
+  }
 }
 
 @theme {

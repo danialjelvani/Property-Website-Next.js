@@ -1,11 +1,20 @@
+'use client';
+import { useState } from "react";
 import React from "react";
+import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import logo from "@/assets/images/logo-white.png";
 import profileDefault from "@/assets/images/profile.png";
+import {FaGoogle} from "react-icons/fa";
 
 const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
   return (
-    <nav className="bg-gradient-to-b from-black via-gray-800 to-gray-950">
+    <nav className="bg-gradient-to-b from-teal-950 via-teal-900 to-teal-950 border-b-2 border-neutral-800">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-20 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
@@ -14,9 +23,10 @@ const Navbar = () => {
             <button
               type="button"
               id="mobile-dropdown-button"
-              className="relative inline-flex items-center justify-center rounded-md p-2 linkhover linkactive focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              className={`relative inline-flex items-center justify-center rounded-md p-2 linkhover linkactive linkactive2 focus:outline-none  ${!isMobileMenuOpen ? "focus:ring-0":"focus:ring-2 focus:ring-inset focus:ring-white"}`}
               aria-controls="mobile-menu"
               aria-expanded="false"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               <span className="absolute -inset-0.5"></span>
               <span className="sr-only">Open main menu</span>
@@ -39,7 +49,7 @@ const Navbar = () => {
           <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
             {/*           <!-- Logo -->
              */}{" "}
-            <a className="flex flex-shrink-0 items-center rounded-full" href="/index.html">
+            <Link className="flex flex-shrink-0 items-center rounded-full" href="/">
               <Image
                 className="h-10 w-auto lg:mr-4"
                 src={logo}
@@ -48,41 +58,41 @@ const Navbar = () => {
 
               <span
                 style={{ textShadow: "0px 0px 80px rgba(255, 255, 255)"}}
-                className="hidden md:block leading-7 font-Title2 bg-gradient-to-b from-gray-400 via-teal-100 to-gray-800 bg-clip-text text-transparent font-bold text-[23px] ml-2 lg:-mr-5 md:mr-2"
+                className="hidden md:block leading-7 font-Title2 bg-gradient-to-b from-gray-300 via-teal-100 to-gray-400 bg-clip-text text-transparent font-bold text-[23px] ml-2 lg:-mr-5 md:mr-2"
               >
-                Isfahan <span className="font-Title bg-gradient-to-b from-amber-100 via-amber-300 to-amber-100 bg-clip-text text-transparent tracking-wide font-light shadow-lg shadow-black rounded-md">&nbsp;<span className="font-bold text-2xl">T</span>raditional&nbsp;</span> Rentals</span>
-            </a>
+                Isfahan <span className="font-Title bg-gradient-to-b from-amber-100 via-amber-300 to-amber-100 bg-clip-text text-transparent tracking-wide font-light rounded-md">&nbsp;<span className="font-bold text-2xl">T</span>raditional&nbsp;</span> Rentals</span>
+            </Link>
             {/*           <!-- Desktop Menu Hidden below md screens -->
              */}{" "}
             <div className="hidden lg:ml-6 md:flex md:items-center md:flex-1">
               <div className="lg:flex-row md:flex md:flex-[0.3_1.6_80%] md:flex-col lg:mx-2 ml-2 -mr-18 lg:space-x-2">
-                <div className="lg:flex lg:justify-center lg:items-center lg:w-1/3 xl:ml-8 text-center lg:outline-none outline-1 outline-[rgba(200,200,255,0.2)] linkactive linkhover rounded-md">
-                  <a
-                    href="/index.html"
+                <div className={`lg:flex lg:justify-center lg:items-center lg:w-1/3 xl:ml-8 text-center lg:outline-none outline-1 outline-[rgba(200,200,255,0.2)] linkactive linkhover linkactive2 rounded-md ${pathname === "/" ? "linkanimation" : ""}`}>
+                  <Link
+                    href="/"
                     style={{ textShadow: "2px 2px 4px rgba(255, 255, 0, 0.2)" }}
                     className="text-gray-200 lg:h-auto lg:w-full md:h-6 hover:text-gray-200 rounded-md md:flex md:items-center justify-center px-3 py-2"
                   >
                     Home
-                  </a>
+                  </Link>
                 </div>
-                <div className="lg:flex lg:items-center lg:justify-center text-center lg:outline-none outline-1 outline-[rgba(200,200,255,0.2)] 
-                 linkhover linkactive rounded-md lg:w-1/3">
-                  <a
-                    href="/properties.html"
+                <div className={`lg:flex lg:items-center lg:justify-center text-center lg:outline-none outline-1 outline-[rgba(200,200,255,0.2)] 
+                 linkhover linkactive linkactive2 rounded-md lg:w-1/3 ${pathname === "/properties" ? "linkanimation" : ""}`}>
+                  <Link
+                    href="/properties"
                     style={{ textShadow: "2px 2px 4px rgba(255, 255, 0, 0.2)" }}
                     className="text-gray-200 lg:h-auto lg:w-full md:h-6  hover:text-gray-200 rounded-md md:flex md:items-center justify-center px-3 py-2"
                   >
                     Properties
-                  </a>
+                  </Link>
                 </div>
-                <div className="lg:flex lg:items-center lg:justify-center lg:w-1/3 text-center lg:outline-none outline-1 outline-[rgba(200,200,255,0.2)] linkactive linkhover rounded-md">
-                  <a
-                    href="/add-property.html"
+                <div className={`lg:flex lg:items-center lg:justify-center lg:w-1/3 text-center lg:outline-none outline-1 outline-[rgba(200,200,255,0.2)] linkactive linkhover linkactive2 rounded-md ${pathname === "/properties/add" ? "linkanimation" : ""}`}>
+                  <Link
+                    href="/properties/add"
                     style={{ textShadow: "2px 2px 4px rgba(255, 255, 0, 0.2)" }}
-                    className="text-gray-200 lg:h-auto lg:w-full md:h-6  hover:text-gray-200 rounded-md md:flex md:items-center justify-center px-3 py-2"
+                    className="text-gray-200 lg:h-auto lg:w-full md:h-6 md:-mx-2.5 hover:text-gray-200 rounded-md md:flex md:items-center justify-center px-3 py-2"
                   >
                     Add Property
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -91,8 +101,8 @@ const Navbar = () => {
            */}{" "}
           <div className="hidden md:flex md:ml-3 lg:mr-auto -mr-5">
             <div className="flex items-center">
-              <button className="flex items-center cursor-pointer md:tracking-tight lg:tracking-normal text-sm text-gray-200 bg-gradient-to-b from-green-700 via-amber-900 to-green-700 linkhover linkactive hover:text-gray-200 rounded-md px-3 py-2 lg:-ml-10">
-                <i className="fa-brands fa-google text-gray-200"></i>
+              <button className="flex items-center cursor-pointer md:tracking-tight lg:tracking-normal text-sm text-gray-200 bg-gradient-to-b from-orange-400 via-amber-700 to-orange-400 shadow-[0_0_20px] shadow-neutral-800 linkhover linkactive linkactive2 hover:text-gray-200 rounded-md px-3 py-2 lg:-ml-10">
+                <FaGoogle className="mr-2" />
                 <span>Login / Register</span>
               </button>
             </div>
@@ -100,10 +110,10 @@ const Navbar = () => {
           {/*         <!-- Right Side Menu (Logged In) -->
            */}{" "}
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
-            <a href="messages.html" className="relative group">
+            <Link href="/messages" className="relative group">
               <button
                 type="button"
-                className="relative rounded-full cursor-pointer bg-gradient-to-b from-green-700 via-amber-900 to-green-700 p-1 text-gray-200 linkactive linkhover focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-700"
+                className="relative rounded-full cursor-pointer bg-gradient-to-b from-orange-400 via-amber-900 to-orange-400 shadow-[0_0_20px] shadow-neutral-800 p-1 text-gray-200 linkactive linkactive2 linkhover focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-700"
               >
                 <span className="absolute -inset-1.5"></span>
                 <span className="sr-only">View notifications</span>
@@ -127,17 +137,18 @@ const Navbar = () => {
                 {/*               <!-- Replace with the actual number of notifications -->
                  */}{" "}
               </span>
-            </a>
+            </Link>
             {/*           <!-- Profile dropdown button -->
              */}{" "}
             <div className="relative ml-3">
               <div>
                 <button
                   type="button"
-                  className="relative flex rounded-full bg-green-200 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-800"
+                  className={`relative flex rounded-full cursor-pointer shadow-[0_0_20px] shadow-neutral-800 hover:scale-105 bg-green-200 text-sm focus:outline-none ${isProfileMenuOpen ?  "focus:ring-white focus:ring-3" : "ring-2 ring-gray-200"}`}
                   id="user-menu-button"
                   aria-expanded="false"
                   aria-haspopup="true"
+                  onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
                 >
                   <span className="absolute -inset-1.5"></span>
                   <span className="sr-only">Open user menu</span>
@@ -152,32 +163,32 @@ const Navbar = () => {
                */}{" "}
               <div
                 id="user-menu"
-                className="hidden absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-gradient-to-b from-black via-gray-950 to-teal-950 py-1 shadow-[-3px_3px_20px_rgb(0,0,0,0.2)] shadow-teal-800 ring-1 ring-teal-950 ring-opacity-5 focus:outline-none"
+                className={`${isProfileMenuOpen ? "block":"hidden"} absolute right-0 z-10 mt-3 w-50 origin-top-right space-y-1 rounded-lg bg-gradient-to-b from-neutral-800 via-neutral-800 to-teal-950 py-1 shadow-[-3px_3px_20px_rgb(0,0,0,0.2)] shadow-teal-800 ring-1 ring-teal-950 ring-opacity-5 focus:outline-none`}
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="user-menu-button"
                 tabIndex={-1}
               >
-                <a
-                  href="/profile.html"
-                  className="block linkactive linkhover px-4 py-2 text-sm cursor-pointer text-gray-300"
+                <Link
+                  href="/profile"
+                  className="block linkactive linkactive2 linkhover px-4 py-2 text-sm cursor-pointer text-gray-300"
                   role="menuitem"
                   tabIndex={-1}
                   id="user-menu-item-0"
                 >
                   Your Profile
-                </a>
-                <a
-                  href="/saved-properties.html"
-                  className="block linkactive linkhover px-4 py-2 text-sm cursor-pointer text-gray-300"
+                </Link>
+                <Link
+                  href="/properties/saved"
+                  className="block linkactive linkactive2 linkhover px-4 py-2 text-sm cursor-pointer text-gray-300"
                   role="menuitem"
                   tabIndex={-1}
                   id="user-menu-item-1"
                 >
                   Saved Properties
-                </a>
+                </Link>
                 <button
-                  className="block linkactive linkhover w-full text-left px-4 py-2 text-sm cursor-pointer text-gray-300"
+                  className="block linkactive linkactive2 linkhover w-full text-left px-4 py-2 text-sm cursor-pointer text-gray-300"
                   role="menuitem"
                   tabIndex={-1}
                   id="user-menu-item-2"
@@ -191,29 +202,29 @@ const Navbar = () => {
       </div>
       {/*     <!-- Mobile menu, show/hide based on menu state. -->
        */}{" "}
-      <div className="hidden" id="mobile-menu">
+      <div className={isMobileMenuOpen ? "block" : "hidden"} id="mobile-menu">
         <div className="space-y-1 px-2 pb-3 pt-1">
-          <a
-            href="/index.html"
-            className="text-gray-200 block linkactive linkhover leading-7 rounded-md px-3 py-2 text-center font-medium"
+          <Link
+            href="/"
+            className="text-gray-200 block linkactive linkactive2 linkhover leading-7 rounded-md px-3 py-2 text-center font-medium"
           >
             Home
-          </a>
-          <a
-            href="/properties.html"
-            className="text-gray-200 block linkactive linkhover leading-7 rounded-md px-3 py-2 text-center font-medium"
+          </Link>
+          <Link
+            href="/properties"
+            className="text-gray-200 block linkactive linkactive2 linkhover leading-7 rounded-md px-3 py-2 text-center font-medium"
           >
             Properties
-          </a>
-          <a
-            href="/add-property.html"
-            className="text-gray-200 block linkactive linkhover leading-7 rounded-md px-3 py-2 text-center font-medium"
+          </Link>
+          <Link
+            href="/properties/add"
+            className="text-gray-200 block linkactive linkactive2 linkhover leading-7 rounded-md px-3 py-2 text-center font-medium"
           >
             Add Property
-          </a>
-          <button className="flex items-center w-full justify-center cursor-pointer tracking-wider leading-7 font-semibold linkactive linkhover text-gray-200 bg-gradient-to-b from-amber-500 via-amber-900 to-amber-600 hover:text-gray-200 rounded-md px-3 py-2 mt-5 mb-3">
-            <i className="fa-brands fa-google mr-2"></i>
-            <span>Login or Register</span>
+          </Link>
+          <button className="flex items-center w-full justify-center cursor-pointer tracking-wider leading-7 font-semibold linkactive linkactive2 linkhover text-gray-200 bg-gradient-to-b from-amber-500 via-amber-900 to-amber-600 hover:text-gray-200 rounded-md px-3 py-2 mt-5 mb-3">
+          <FaGoogle className="mr-2" />
+          <span>Login or Register</span>
           </button>
         </div>
       </div>
