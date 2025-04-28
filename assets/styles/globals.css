@@ -83,3 +83,28 @@
 @theme {
   --font-Title3: "Californian FB", sans-serif;
 }
+
+select option {
+  @apply bg-teal-300;
+}
+
+.linkbuttonemerald {
+  @apply bg-gradient-to-b from-emerald-400 via-emerald-700 to-emerald-500
+  hover:bg-gradient-to-b hover:from-emerald-500 hover:via-emerald-800 hover:to-emerald-600
+  active:bg-gradient-to-b active:from-emerald-500 active:via-emerald-800 active:to-emerald-600
+  active:scale-95 transition-all;
+}
+
+.linkbuttonslate {
+  @apply bg-gradient-to-b from-slate-400 via-slate-700 to-slate-500
+  hover:bg-gradient-to-b hover:from-slate-500 hover:via-slate-800 hover:to-slate-600
+  active:bg-gradient-to-b active:from-slate-500 active:via-slate-800 active:to-slate-600
+  active:scale-95 transition-all;
+}
+
+.linkbuttonamber {
+  @apply bg-gradient-to-b from-orange-200 via-amber-600 to-orange-300
+  hover:bg-gradient-to-b hover:from-orange-200 hover:via-amber-700 hover:to-orange-300
+  active:bg-gradient-to-b active:from-orange-200 active:via-amber-700 active:to-orange-300
+  active:scale-95 transition-all;
+}
