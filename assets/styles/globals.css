@@ -108,3 +108,10 @@ select option {
   active:bg-gradient-to-b active:from-orange-200 active:via-amber-700 active:to-orange-300
   active:scale-95 transition-all;
 }
+
+.linkbuttondark {
+  @apply bg-gradient-to-b from-black/40 via-black to-black/60
+  hover:bg-gradient-to-b hover:from-black/30 hover:via-black/80 hover:to-black/50
+  active:bg-gradient-to-b active:from-black/30 active:via-black/80 active:to-black/50
+  active:scale-95 transition-all;
+}

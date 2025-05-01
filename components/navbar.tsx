@@ -7,12 +7,28 @@ import { usePathname } from "next/navigation";
 import logo from "@/assets/images/logo-white.png";
 import profileDefault from "@/assets/images/profile.png";
 import { FaGoogle } from "react-icons/fa";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const pathname = usePathname();
+  const divref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      divref.current?.focus();
+    }
+  }, [isMobileMenuOpen]);
+
+  const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+    setTimeout(() => {
+      if (divref.current && !divref.current.contains(document.activeElement)) {
+        setIsMobileMenuOpen(false);
+      }
+    }, 0);
+  };
 
   return (
     <nav className="bg-gradient-to-b from-emerald-900/30 via-[#1D1C15]/40 to-[#1D1C15]/30">
@@ -24,7 +40,7 @@ const Navbar = () => {
             <button
               type="button"
               id="mobile-dropdown-button"
-              className={`relative inline-flex items-center justify-center rounded-md p-2 linkhover linkactive linkactive2 focus:outline-none  ${
+              className={`relative inline-flex cursor-pointer items-center justify-center rounded-md p-2 linkhover linkactive linkactive2 focus:outline-none  ${
                 !isMobileMenuOpen
                   ? "focus:ring-0"
                   : "focus:ring-2 focus:ring-inset focus:ring-white"
@@ -245,10 +261,17 @@ const Navbar = () => {
       </div>
       {/*     <!-- Mobile menu, show/hide based on menu state. -->
        */}{" "}
-      <div className={isMobileMenuOpen ? "block" : "hidden"} id="mobile-menu">
+      <div
+        onBlur={handleBlur}
+        className={isMobileMenuOpen ? "block" : "hidden"}
+        ref={divref}
+        tabIndex={-1}
+        id="mobile-menu"
+      >
         <div className="space-y-1 px-2 pb-3 pt-1">
           <Link
             href="/"
+            onClick={() => setIsMobileMenuOpen(false)}
             className={`text-gray-200 block linkactive linkactive2 linkhover leading-7 rounded-md px-3 py-2 text-center font-medium ${
               pathname === "/" ? "linkanimation" : ""
             }`}
@@ -257,6 +280,7 @@ const Navbar = () => {
           </Link>
           <Link
             href="/properties"
+            onClick={() => setIsMobileMenuOpen(false)}
             className={`text-gray-200 block linkactive linkactive2 linkhover leading-7 rounded-md px-3 py-2 text-center font-medium ${
               pathname === "/properties" ? "linkanimation" : ""
             }`}
@@ -266,6 +290,7 @@ const Navbar = () => {
           {isLoggedIn && (
             <Link
               href="/properties/add"
+              onClick={() => setIsMobileMenuOpen(false)}
               className={`text-gray-200 block linkactive linkactive2 linkhover leading-7 rounded-md px-3 py-2 text-center font-medium ${
                 pathname === "/properties/add" ? "linkanimation" : ""
               }`}
@@ -274,7 +299,10 @@ const Navbar = () => {
             </Link>
           )}
           {!isLoggedIn && (
-            <button className="flex items-center w-full justify-center cursor-pointer tracking-wider leading-7 font-semibold linkactive linkactive2 linkhover text-gray-200 bg-gradient-to-b from-amber-500 via-amber-900 to-amber-600 hover:text-gray-200 rounded-md px-3 py-2 mt-5 mb-3">
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center w-full justify-center cursor-pointer tracking-wider leading-7 font-semibold linkactive linkactive2 linkhover text-gray-200 bg-gradient-to-b from-amber-500 via-amber-900 to-amber-600 hover:text-gray-200 rounded-md px-3 py-2 mt-5 mb-3"
+            >
               <FaGoogle className="mr-2" />
               <span>Login or Register</span>
             </button>
