@@ -115,3 +115,17 @@ select option {
   active:bg-gradient-to-b active:from-black/30 active:via-black/80 active:to-black/50
   active:scale-95 transition-all;
 }
+
+.linkbuttongray {
+  @apply bg-gradient-to-b from-gray-400 via-gray-800 to-gray-500
+  hover:bg-gradient-to-b hover:from-gray-500 hover:via-gray-800 hover:to-gray-600
+  active:bg-gradient-to-b active:from-gray-500 active:via-gray-800 active:to-gray-600
+  active:scale-95 transition-all;
+}
+
+.linkbuttonred {
+  @apply bg-gradient-to-b from-red-400 via-red-800 to-red-500
+  hover:bg-gradient-to-b hover:from-red-500 hover:via-red-800 hover:to-red-600
+  active:bg-gradient-to-b active:from-red-500 active:via-red-800 active:to-red-600
+  active:scale-95 transition-all;
+}

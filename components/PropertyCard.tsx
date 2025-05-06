@@ -6,7 +6,7 @@ import {FaBed, FaBath, FaRulerCombined,FaDollarSign,FaMapMarker} from 'react-ico
 interface PropertyCardProps {
   property: Iproperty;
 }
-interface Iproperty {
+export interface Iproperty {
   _id: string;
   owner: string;
   name: string;
@@ -55,6 +55,8 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
         width={0}
         height={0}
         sizes="100vw"
+        placeholder="blur"
+        blurDataURL="data:image/jpeg;base64,/9j/2wCEAAIBAQEBAQEBAQECAgICAgQDAgICA..."
         className="w-full h-auto [mask-image:linear-gradient(to_bottom,black_90%,transparent_100%)] shadow-lg shadow-black rounded-t-xl"
       />
       <div className="bg-gradient-to-b from-black/0 via-black/0 to-black/30 z-10 absolute top-0 left-0 w-full h-full"></div>

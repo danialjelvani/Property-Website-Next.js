@@ -1,0 +1,22 @@
+// npm i mongodb mongoose
+
+import mongoose from "mongoose";
+
+let connected = false;
+
+const connectDB = async () => {
+  mongoose.set("strictQuery", true);
+  if (connected) {
+    console.log("Already connected");
+    return;
+  }
+  try {
+    await mongoose.connect(process.env.MONGODB_URI!);
+    connected = true;
+    console.log("Database connected");
+  } catch (error) {
+    console.log("Database connection failed");
+  }
+};
+
+export default connectDB;

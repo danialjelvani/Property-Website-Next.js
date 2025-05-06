@@ -24,7 +24,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang="en">
       <body
         className="absolute inset-0 bg-cover bg-fixed bg-no-repeat bg-center"
-        style={{ backgroundImage: "url('images/background.png')" }}
+        style={{ backgroundImage: "url('/images/background.png')" }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-neutral-800/70 via-neutral-800/60 to-neutral-800/40 opacity-80"></div>
 

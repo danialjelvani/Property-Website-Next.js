@@ -1,15 +1,17 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Hero from "@/components/hero";
 import InfoBoxes from "@/components/infoBoxes"
-import PropertiesPage from "@/components/homeProperties"
-import LoadingPage from "./loading";
+import HomeProperties from "@/components/homeProperties"
+import LoadingPage from "@/app/loading";
 
 const HomePage = () => {
   return (
     <>
       <Hero />
       <InfoBoxes />
-      <PropertiesPage />
+      <Suspense fallback={<LoadingPage />}>
+      <HomeProperties />
+      </Suspense>
     </>
   );
 };

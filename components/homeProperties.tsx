@@ -1,12 +1,15 @@
 import React from "react";
 import Link from "next/link";
-import properties from "@/properties.json";
 import PropertyCard from "@/components/PropertyCard";
+import { Iproperty } from "@/components/PropertyCard";
+import {fetchProperties} from "@/utils/requests";
 
-const homeProperties = () => {
+const homeProperties = async () => {
+  const properties = await fetchProperties();
   const randomProperties = properties
     .sort(() => Math.random() - Math.random())
     .slice(0, 3);
+
   return (
     <>
       <section className="px-4 py-6">
@@ -21,7 +24,7 @@ const homeProperties = () => {
             {randomProperties.length === 0 ? (
               <p>No properties found.</p>
             ) : (
-              randomProperties.map((property) => (
+              randomProperties.map((property: Iproperty) => (
                 <PropertyCard key={property._id} property={property} />
               ))
             )}
