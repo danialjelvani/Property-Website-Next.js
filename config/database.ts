@@ -15,8 +15,10 @@ const connectDB = async () => {
     connected = true;
     console.log("Database connected");
   } catch (error) {
-    console.log("Database connection failed");
+    console.error("Database connection failed", error);
+    throw new Error("Database connection failed");
   }
 };
 
 export default connectDB;
+

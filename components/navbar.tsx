@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,27 +8,31 @@ import logo from "@/assets/images/logo-white.png";
 import profileDefault from "@/assets/images/profile.png";
 import { FaGoogle } from "react-icons/fa";
 import { useRef } from "react";
-import { useEffect } from "react";
+import { signIn, signOut, getProviders, useSession } from "next-auth/react";
 
 const Navbar = () => {
+  const [isMounted, setIsMounted] = useState(false); // to check if component is mounted and prevent SSR mismatch
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const pathname = usePathname();
-  const divref = useRef<HTMLDivElement>(null);
+  const { data: session, status } = useSession();
+  console.log(session, status); // helps to see if user is logged in
+
+  useEffect(() => setIsMounted(true), []);
+
   useEffect(() => {
     if (isMobileMenuOpen) {
-      divref.current?.focus();
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
     }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isMobileMenuOpen]);
 
-  const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
-    setTimeout(() => {
-      if (divref.current && !divref.current.contains(document.activeElement)) {
-        setIsMobileMenuOpen(false);
-      }
-    }, 0);
-  };
+  if (!isMounted) return null;
 
   return (
     <nav className="bg-gradient-to-b from-emerald-900/30 via-[#1D1C15]/40 to-[#1D1C15]/30">
@@ -47,7 +51,7 @@ const Navbar = () => {
               }`}
               aria-controls="mobile-menu"
               aria-expanded="false"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
             >
               <span className="absolute -inset-0.5"></span>
               <span className="sr-only">Open main menu</span>
@@ -104,7 +108,7 @@ const Navbar = () => {
                     href="/"
                     style={{ textShadow: "2px 2px 4px rgba(255, 255, 0, 0.2)" }}
                     className={`text-gray-200 lg:h-auto lg:w-full ${
-                      isLoggedIn ? "md:h-6" : "md:h-9"
+                      session ? "md:h-6" : "md:h-9"
                     } hover:text-gray-200 rounded-md md:flex md:items-center justify-center px-3 py-2`}
                   >
                     Home
@@ -120,13 +124,13 @@ const Navbar = () => {
                     href="/properties"
                     style={{ textShadow: "2px 2px 4px rgba(255, 255, 0, 0.2)" }}
                     className={`text-gray-200 lg:h-auto lg:w-full ${
-                      isLoggedIn ? "md:h-6" : "md:h-9"
+                      session ? "md:h-6" : "md:h-9"
                     } hover:text-gray-200 rounded-md md:flex md:items-center justify-center px-3 py-2`}
                   >
                     Properties
                   </Link>
                 </div>
-                {isLoggedIn && (
+                {session && (
                   <div
                     className={`lg:flex lg:items-center lg:justify-center lg:w-1/3 text-center lg:outline-none outline-1 outline-[rgba(200,200,255,0.1)] linkactive linkhover linkactive2 rounded-md ${
                       pathname === "/properties/add" ? "linkanimation" : ""
@@ -148,19 +152,22 @@ const Navbar = () => {
           </div>
           {/*         <!-- Right Side Menu (Logged Out) -->
            */}{" "}
-          {!isLoggedIn && (
+          {!session && (
             <div className="hidden md:flex md:ml-3 lg:mr-auto -mr-5">
               <div className="flex items-center">
-                <button className="flex items-center cursor-pointer tracking-tight lg:tracking-normal text-sm text-gray-200 bg-gradient-to-b from-orange-400 via-amber-700 to-orange-400 shadow-[0_0_20px] shadow-neutral-800 linkhover linkactive linkactive2 hover:text-gray-200 rounded-md px-3 py-2 lg:mr-4 mr-2">
+                <Link
+                  href="/login"
+                  className="flex items-center cursor-pointer tracking-tight lg:tracking-normal text-sm text-gray-200 bg-gradient-to-b from-orange-400 via-amber-700 to-orange-400 shadow-[0_0_20px] shadow-neutral-800 linkhover linkactive linkactive2 hover:text-gray-200 rounded-md px-3 py-2 lg:mr-4 mr-2"
+                >
                   <FaGoogle className="mr-2" />
                   <span>Login / Register</span>
-                </button>
+                </Link>
               </div>
             </div>
           )}
           {/*         <!-- Right Side Menu (Logged In) -->
            */}{" "}
-          {isLoggedIn && (
+          {session && (
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
               <Link href="/messages" className="relative group">
                 <button
@@ -193,35 +200,40 @@ const Navbar = () => {
               {/*           <!-- Profile dropdown button -->
                */}{" "}
               <div className="relative ml-3">
-                <div>
-                  <button
-                    type="button"
-                    className={`relative flex rounded-full cursor-pointer shadow-[0_0_20px] shadow-neutral-800 hover:scale-105 bg-green-200 text-sm focus:outline-none ${
-                      isProfileMenuOpen
-                        ? "focus:ring-white focus:ring-3"
-                        : "ring-2 ring-gray-200"
-                    }`}
-                    id="user-menu-button"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                    onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-                  >
-                    <span className="absolute -inset-1.5"></span>
-                    <span className="sr-only">Open user menu</span>
-                    <Image
-                      className="h-8 w-8 rounded-full"
-                      src={profileDefault}
-                      alt=""
-                    />
-                  </button>
-                </div>
+                <div
+                  className={`${
+                    isProfileMenuOpen ? "block" : "hidden"
+                  } fixed inset-0 z-50 bg-black/20 `}
+                  onClick={() => setIsProfileMenuOpen(false)}
+                ></div>
+                <button
+                  type="button"
+                  className={`relative flex z-60 rounded-full cursor-pointer shadow-[0_0_20px] shadow-neutral-800 hover:scale-105 bg-green-200 text-sm focus:outline-none ${
+                    isProfileMenuOpen
+                      ? "focus:ring-white focus:ring-3"
+                      : "ring-2 ring-gray-200"
+                  }`}
+                  id="user-menu-button"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+                >
+                  <span className="absolute -inset-1.5"></span>
+                  <span className="sr-only">Open user menu</span>
+                  <Image
+                    className="h-8 w-8 rounded-full"
+                    src={profileDefault}
+                    alt=""
+                  />
+                </button>
                 {/*             <!-- Profile dropdown -->
                  */}{" "}
                 <div
                   id="user-menu"
                   className={`${
                     isProfileMenuOpen ? "block" : "hidden"
-                  } absolute right-0 z-10 mt-3 w-50 origin-top-right space-y-1 rounded-lg bg-gradient-to-b from-neutral-800 via-neutral-800 to-teal-950 py-1 shadow-[-3px_3px_20px_rgb(0,0,0,0.2)] shadow-teal-800 ring-1 ring-teal-950 ring-opacity-5 focus:outline-none`}
+                  } py-2 mt-6 z-70 flex text-center fixed left-0 w-full flex-col md:flex-none md:absolute md:left-auto md:right-0 md:w-60 md:origin-top-right space-y-2 rounded-b-lg md:rounded-lg
+                    bg-gradient-to-b from-neutral-900/99 via-neutral-800/98 to-teal-950/97 shadow-[-3px_3px_20px_rgb(0,0,0,0.2)] md:shadow-[-3px_3px_20px_rgb(0,0,0,0.2)] shadow-teal-800 ring-1 ring-teal-950 ring-opacity-5 focus:outline-none`}
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="user-menu-button"
@@ -246,7 +258,7 @@ const Navbar = () => {
                     Saved Properties
                   </Link>
                   <button
-                    className="block linkactive linkactive2 linkhover w-full text-left px-4 py-2 text-sm cursor-pointer text-gray-300"
+                    className="block linkactive linkactive2 linkhover w-full px-4 py-2 text-sm cursor-pointer text-gray-300"
                     role="menuitem"
                     tabIndex={-1}
                     id="user-menu-item-2"
@@ -262,51 +274,60 @@ const Navbar = () => {
       {/*     <!-- Mobile menu, show/hide based on menu state. -->
        */}{" "}
       <div
-        onBlur={handleBlur}
-        className={isMobileMenuOpen ? "block" : "hidden"}
-        ref={divref}
-        tabIndex={-1}
-        id="mobile-menu"
+        className={`${
+          isMobileMenuOpen ? "fixed inset-0 z-40 bg-black/20" : "hidden"
+        }`}
+        onClick={() => setIsMobileMenuOpen(false)}
       >
-        <div className="space-y-1 px-2 pb-3 pt-1">
-          <Link
-            href="/"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className={`text-gray-200 block linkactive linkactive2 linkhover leading-7 rounded-md px-3 py-2 text-center font-medium ${
-              pathname === "/" ? "linkanimation" : ""
-            }`}
-          >
-            Home
-          </Link>
-          <Link
-            href="/properties"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className={`text-gray-200 block linkactive linkactive2 linkhover leading-7 rounded-md px-3 py-2 text-center font-medium ${
-              pathname === "/properties" ? "linkanimation" : ""
-            }`}
-          >
-            Properties
-          </Link>
-          {isLoggedIn && (
+        <div
+          className={
+            isMobileMenuOpen
+              ? "absolute bg-gradient-to-b from-neutral-900/99 via-neutral-800/98 to-teal-950/97 shadow-[-3px_3px_20px_rgb(0,0,0,0.2)] md:shadow-[-3px_3px_20px_rgb(0,0,0,0.2)] shadow-teal-800 ring-1 rounded-b-md ring-teal-950 ring-opacity-5 py-1 border-teal-200 w-full top-20 z-50"
+              : "hidden"
+          }
+          id="mobile-menu"
+        >
+          <div className="space-y-1 px-2 text-sm">
             <Link
-              href="/properties/add"
+              href="/"
               onClick={() => setIsMobileMenuOpen(false)}
-              className={`text-gray-200 block linkactive linkactive2 linkhover leading-7 rounded-md px-3 py-2 text-center font-medium ${
-                pathname === "/properties/add" ? "linkanimation" : ""
+              className={`text-gray-200 block  linkactive linkactive2 linkhover leading-7 rounded-md px-3 py-2 text-center ${
+                pathname === "/" ? "linkanimation" : ""
               }`}
             >
-              Add Property
+              Home
             </Link>
-          )}
-          {!isLoggedIn && (
-            <button
+            <Link
+              href="/properties"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center w-full justify-center cursor-pointer tracking-wider leading-7 font-semibold linkactive linkactive2 linkhover text-gray-200 bg-gradient-to-b from-amber-500 via-amber-900 to-amber-600 hover:text-gray-200 rounded-md px-3 py-2 mt-5 mb-3"
+              className={`text-gray-200 block  linkactive linkactive2 linkhover leading-7 rounded-md px-3 py-2 text-center ${
+                pathname === "/properties" ? "linkanimation" : ""
+              }`}
             >
-              <FaGoogle className="mr-2" />
-              <span>Login or Register</span>
-            </button>
-          )}
+              Properties
+            </Link>
+            {session && (
+              <Link
+                href="/properties/add"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`text-gray-200 block  linkactive linkactive2 linkhover leading-7 rounded-md px-3 py-2 text-center ${
+                  pathname === "/properties/add" ? "linkanimation" : ""
+                }`}
+              >
+                Add Property
+              </Link>
+            )}
+            {!session && (
+              <Link
+                href="/login"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center  w-full justify-center cursor-pointer tracking-wider leading-7 font-semibold linkactive linkactive2 linkhover text-gray-200 bg-gradient-to-b from-amber-500 via-amber-900 to-amber-600 hover:text-gray-200 rounded-md px-3 py-2 mt-5 mb-3"
+              >
+                <FaGoogle className="mr-2" />
+                <span>Login or Register</span>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </nav>
