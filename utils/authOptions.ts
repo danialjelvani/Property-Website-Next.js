@@ -21,7 +21,7 @@ export const authOptions: AuthOptions = {
         const isValid = await compare(credentials!.password, user.password);
         if (!isValid) throw new Error("Invalid password");
 
-        return { id: user._id.toString(), email: user.email };
+        return { id: user._id.toString(), email: user.email, name: user.username };
       },
     }),
   ],

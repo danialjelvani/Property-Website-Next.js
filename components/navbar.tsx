@@ -8,7 +8,7 @@ import logo from "@/assets/images/logo-white.png";
 import profileDefault from "@/assets/images/profile.png";
 import { FaGoogle } from "react-icons/fa";
 import { useRef } from "react";
-import { signIn, signOut, getProviders, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 const Navbar = () => {
   const [isMounted, setIsMounted] = useState(false); // to check if component is mounted and prevent SSR mismatch
@@ -208,10 +208,10 @@ const Navbar = () => {
                 ></div>
                 <button
                   type="button"
-                  className={`relative flex z-60 rounded-full cursor-pointer shadow-[0_0_20px] shadow-neutral-800 hover:scale-105 bg-green-200 text-sm focus:outline-none ${
+                  className={`relative flex z-60 rounded-full cursor-pointer shadow-[0_0_20px] shadow-neutral-800 hover:scale-105 bg-orange-500 text-sm focus:outline-none ${
                     isProfileMenuOpen
-                      ? "focus:ring-white focus:ring-3"
-                      : "ring-2 ring-gray-200"
+                      ? "focus:ring-white focus:ring-2"
+                      : "ring-1 ring-gray-200"
                   }`}
                   id="user-menu-button"
                   aria-expanded="false"
@@ -225,6 +225,7 @@ const Navbar = () => {
                     src={profileDefault}
                     alt=""
                   />
+                  <span className="mx-1 p-1 text-sm text-white">{session.user?.name?.slice(0,5)}</span>
                 </button>
                 {/*             <!-- Profile dropdown -->
                  */}{" "}
@@ -258,6 +259,10 @@ const Navbar = () => {
                     Saved Properties
                   </Link>
                   <button
+                    onClick={() => {
+                      setIsProfileMenuOpen(false);
+                      signOut();
+                    }}
                     className="block linkactive linkactive2 linkhover w-full px-4 py-2 text-sm cursor-pointer text-gray-300"
                     role="menuitem"
                     tabIndex={-1}
