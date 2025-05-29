@@ -49,6 +49,7 @@ type AmenityType =
 const propertyAddForm = () => {
   const [mounted, setMounted] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const imagesInputRef = useRef<HTMLInputElement>(null);
 
   const [fields, setFields] = useState<PropertyFieldsType>({
     type: "Apartment",
@@ -128,6 +129,34 @@ const propertyAddForm = () => {
         return;
       }
 
+      // Prevent adding duplicate image files
+      for (const file of files) {
+        if (updatedImages.some((image) => image.name === file.name)) {
+          alert("You cannot upload duplicate files.");
+          e.target.value = "";
+          return;
+        }
+      }
+
+      // Prevent adding files that exceed 5MB
+      for (const file of files) {
+        if (file.size > 5 * 1024 * 1024) {
+          alert("File size must be less than 5MB.");
+          e.target.value = "";
+          return;
+        }
+      }
+
+      // Prevent adding files with invalid file types
+      for (const file of files) {
+        const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+        if (!allowedTypes.includes(file.type)) {
+          alert("Invalid file type. Please upload a JPEG, JPG, or PNG file.");
+          e.target.value = "";
+          return;
+        }
+      }
+
       for (const file of files) {
         updatedImages.push(file);
       }
@@ -136,8 +165,6 @@ const propertyAddForm = () => {
         ...prevFields,
         images: updatedImages,
       }));
-
-      e.target.value = "";
     }
   };
 
@@ -155,11 +182,55 @@ const propertyAddForm = () => {
     fileInputRef.current?.click();
   };
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (fields.images.length === 0) {
+      alert("Please select at least one image.");
+      return;
+    }
+
+    const formData = new FormData();
+
+    // Add images
+    fields.images.forEach((file) => {
+      formData.append("images", file);
+    });
+
+    // Add other form fields
+    const form = e.currentTarget;
+    const formElements = new FormData(form); // grabs other fields (title, description, etc.)
+
+    for (const [key, value] of formElements.entries()) {
+      if (key !== "images") {
+        formData.append(key, value);
+      }
+    }
+
+    try {
+      const response = await fetch("/api/properties", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        alert("Upload failed: " + errorText);
+        return;
+      }
+
+      alert("Form submitted successfully!");
+    } catch (err) {
+      console.error("Submit error:", err);
+      alert("Something went wrong!");
+    }
+  };
+
   useEffect(() => setMounted(true), []);
 
   return (
     mounted && (
-      <form>
+      <form onSubmit={handleSubmit}>
         <h2 className="text-3xl text-center font-bold font-Title2 mb-6">
           Add Property
         </h2>
@@ -565,7 +636,7 @@ const propertyAddForm = () => {
           <input
             type="text"
             id="seller_name"
-            name="seller_info.name."
+            name="seller_info.name"
             className="border rounded w-full py-2 px-3"
             placeholder="Name"
             value={fields.seller_info.name}
@@ -631,7 +702,6 @@ const propertyAddForm = () => {
               className="hidden"
               accept="image/*"
               multiple
-              required
               ref={fileInputRef}
               onChange={handleImageChange}
             />
@@ -643,6 +713,7 @@ const propertyAddForm = () => {
                 <li key={index}>
                   {file.name}{" "}
                   <button
+                    type="button"
                     className="cursor-pointer rounded-md ml-1 p-1 text-red-800 ring-1 hover:ring-2 active:ring-2"
                     onClick={() => handleDeleteImage(index)}
                   >
@@ -653,10 +724,9 @@ const propertyAddForm = () => {
             </ol>
           )}
         </div>
-
         <div>
           <button
-            className="linkbuttondark text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+            className="linkbuttondark text-white cursor-pointer font-bold py-2 px-4 rounded-full w-full"
             type="submit"
           >
             Add Property
