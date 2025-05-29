@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 type PropertyFieldsType = {
   type: string;
@@ -50,6 +51,7 @@ const propertyAddForm = () => {
   const [mounted, setMounted] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const imagesInputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const [fields, setFields] = useState<PropertyFieldsType>({
     type: "Apartment",
@@ -218,8 +220,9 @@ const propertyAddForm = () => {
         alert("Upload failed: " + errorText);
         return;
       }
-
-      alert("Form submitted successfully!");
+      const result = await response.json();
+      const propertyId = result._id;
+      router.push(`/properties/${propertyId}`);
     } catch (err) {
       console.error("Submit error:", err);
       alert("Something went wrong!");
