@@ -3,6 +3,8 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Image from "next/image";
+import Typewriter from "./typewriter";
 
 type PropertyFieldsType = {
   type: string;
@@ -55,9 +57,7 @@ type AmenityType =
 const propertyAddForm = () => {
   const [mounted, setMounted] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const imagesInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
-  const [uploadProgress, setUploadProgress] = useState<number>(0);
   const router = useRouter();
 
   const [fields, setFields] = useState<PropertyFieldsType>({
@@ -173,12 +173,6 @@ const propertyAddForm = () => {
         try {
           const res = await axios.post("/api/uploadImage", formData, {
             headers: { "Content-Type": "multipart/form-data" },
-            onUploadProgress: (progressEvent: any) => {
-              const percent = Math.round(
-                (progressEvent.loaded * 100) / progressEvent.total
-              );
-              setUploadProgress(percent);
-            },
           });
 
           const uploadedImage = {
@@ -195,7 +189,6 @@ const propertyAddForm = () => {
           console.error("Upload error", err);
         } finally {
           setUploading(false);
-          setUploadProgress(0);
         }
       }
     }
@@ -735,7 +728,7 @@ const propertyAddForm = () => {
             <span className="opacity-65">Click to add images ...</span>
             <p className="opacity-50 text-center text-sm">
               {" "}
-              You have selected {fields.images.length} image(s)
+              You have uploaded {fields.images.length} image(s)
             </p>
             <input
               type="file"
@@ -749,36 +742,59 @@ const propertyAddForm = () => {
             />
           </div>
 
-          {uploading && (
-            <div className="my-2 text-sm text-blue-700">
-              Uploading... {uploadProgress}%
-            </div>
-          )}
+          <div className="mx-auto w-fit">
+            {fields.images.length > 0 && (
+              <ol className="m-2 grid gap-2 place-items-center grid-cols-2 md:grid-cols-3 lg:grid-cols-4 text-gray-600 list-decimal">
+                {fields.images.map((img, index) => (
+                  <li
+                    key={index}
+                    className="w-40 h-40 flex flex-col justify-center items-center"
+                  >
+                    <a
+                      href={img.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline mr-1.5 text-xs text-gray-600"
+                    >
+                      {img.name.slice(0, 20)}
+                    </a>
+                    {img.url && (
+                      <div className="my-1 rounded-lg shadow-sm shadow-black ring-1 ring-orange-300 relative w-20 h-20">
+                        <Image
+                          src={img.url}
+                          alt={img.name || "image preview"}
+                          quality={2}
+                          fill
+                          sizes="100%"
+                          className="object-cover"
+                          placeholder="blur"
+                          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/w8AAn8B9y1y0nEAAAAASUVORK5CYII="
+                        />
+                      </div>
+                    )}
 
-          {fields.images.length > 0 && (
-            <ol className="m-2 text-gray-600 list-decimal space-y-2">
-              {fields.images.map((img, index) => (
-                <li key={index}>
-                  <a
-                    href={img.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline mr-1.5"
-                  >
-                    {img.name}
-                  </a>
-                  <button
-                    type="button"
-                    className="cursor-pointer text-sm rounded-md p-1 pr-1.5 pb-1.5 text-red-800 ring-1 hover:ring-2 active:ring-2"
-                    onClick={() => handleDeleteImage(index)}
-                  >
-                    ❌ Delete
-                  </button>
-                </li>
-              ))}
-            </ol>
-          )}
+                    <button
+                      type="button"
+                      className="cursor-pointer text-sm rounded-md mt-1 p-1 pr-1.5 pb-1.5 text-red-800 ring-1 hover:ring-2 active:ring-2"
+                      onClick={() => handleDeleteImage(index)}
+                    >
+                      ❌ Delete
+                    </button>
+                  </li>
+                ))}
+              </ol>
+            )}
+          </div>
         </div>
+        {uploading && (
+          <div className="w-full mx-auto m-2 h-7 bg-yellow-300 rounded-lg">
+            <div className="h-7 bg-yellow-400 rounded-lg animate-pulse w-full flex justify-center text-gray-700 text-shadow text-shadow-blue-950 font-semibold">
+              <div className="w-36">
+                <Typewriter text="Uploading image ..." speed={50} />
+              </div>
+            </div>
+          </div>
+        )}
         <div>
           <button
             className="linkbuttondark text-white cursor-pointer font-bold py-2 px-4 rounded-full w-full"
