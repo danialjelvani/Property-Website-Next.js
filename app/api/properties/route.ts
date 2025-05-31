@@ -3,6 +3,34 @@ import connectDB from "@/config/database";
 import Property from "@/models/Property";
 import { getSessionUser } from "@/utils/getSessionUser";
 
+interface IPropertyData {
+  type: FormDataEntryValue | null;
+  name: FormDataEntryValue | null;
+  description: FormDataEntryValue | null;
+  location: {
+    street: FormDataEntryValue | null;
+    city: FormDataEntryValue | null;
+    state: FormDataEntryValue | null;
+    zipcode: FormDataEntryValue | null;
+  };
+  beds: FormDataEntryValue | null;
+  baths: FormDataEntryValue | null;
+  square_feet: FormDataEntryValue | null;
+  amenities: FormDataEntryValue[] | null;
+  rates: {
+    nightly: FormDataEntryValue | null;
+    weekly: FormDataEntryValue | null;
+    monthly: FormDataEntryValue | null;
+  };
+  seller_info: {
+    name: FormDataEntryValue | null;
+    email: FormDataEntryValue | null;
+    phone: FormDataEntryValue | null;
+  };
+  owner: string;
+  images: FormDataEntryValue[];
+}
+
 // Get /api/properties
 export const GET = async (request: Request) => {
   try {
@@ -25,11 +53,9 @@ export const POST = async (request: Request) => {
 
     const formData = await request.formData();
     const amenities = formData.getAll("amenities");
-    const images = formData
-      .getAll("images")
-      .filter((image) => image instanceof File && image.name !== "");
+    const imageUrls = formData.getAll("images");
 
-    const propertyData = {
+    const propertyData: IPropertyData = {
       type: formData.get("type"),
       name: formData.get("name"),
       description: formData.get("description"),
@@ -54,17 +80,13 @@ export const POST = async (request: Request) => {
         phone: formData.get("seller_info.phone"),
       },
       owner: userId,
-      //images: images,
+      images: imageUrls,
     };
+
     console.log(propertyData);
     const newProperty = new Property(propertyData);
     await newProperty.save();
-    return NextResponse.json({ _id: newProperty._id });
-
-    /* return new Response(
-      JSON.stringify({ message: "Property added successfully" }),
-      { status: 200 }
-    ); */
+    return NextResponse.json({ _id: newProperty._id }, { status: 201 });
   } catch {
     return new Response("Failed to add property", { status: 500 });
   }

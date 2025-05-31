@@ -2,6 +2,7 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 type PropertyFieldsType = {
   type: string;
@@ -27,7 +28,11 @@ type PropertyFieldsType = {
     email: string;
     phone: string;
   };
-  images: File[];
+  images: {
+    name: string;
+    url: string;
+    public_id: string;
+  }[];
 };
 
 type AmenityType =
@@ -51,6 +56,8 @@ const propertyAddForm = () => {
   const [mounted, setMounted] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const imagesInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
   const router = useRouter();
 
   const [fields, setFields] = useState<PropertyFieldsType>({
@@ -119,10 +126,9 @@ const propertyAddForm = () => {
   };
 
   // Function to handle image changes
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const files: any = Array.from(e.target.files);
-      const updatedImages = [...fields.images];
 
       // Prevent adding more than 4 image files
       if (files.length + fields.images.length > 4) {
@@ -133,7 +139,7 @@ const propertyAddForm = () => {
 
       // Prevent adding duplicate image files
       for (const file of files) {
-        if (updatedImages.some((image) => image.name === file.name)) {
+        if (fields.images.some((image) => image.name === file.name)) {
           alert("You cannot upload duplicate files.");
           e.target.value = "";
           return;
@@ -160,27 +166,58 @@ const propertyAddForm = () => {
       }
 
       for (const file of files) {
-        updatedImages.push(file);
-      }
+        const formData = new FormData();
+        formData.append("file", file);
 
-      setFields((prevFields: any) => ({
-        ...prevFields,
-        images: updatedImages,
-      }));
+        setUploading(true);
+        try {
+          const res = await axios.post("/api/uploadImage", formData, {
+            headers: { "Content-Type": "multipart/form-data" },
+            onUploadProgress: (progressEvent: any) => {
+              const percent = Math.round(
+                (progressEvent.loaded * 100) / progressEvent.total
+              );
+              setUploadProgress(percent);
+            },
+          });
+
+          const uploadedImage = {
+            name: file.name,
+            url: res.data.secure_url,
+            public_id: res.data.public_id,
+          };
+
+          setFields((prev) => ({
+            ...prev,
+            images: [...prev.images, uploadedImage],
+          }));
+        } catch (err: any) {
+          console.error("Upload error", err);
+        } finally {
+          setUploading(false);
+          setUploadProgress(0);
+        }
+      }
     }
   };
 
   // Function to handle image deletion
-  const handleDeleteImage = (indexToDelete: number) => {
-    setFields((prevFields: any) => ({
-      ...prevFields,
-      images: prevFields.images.filter(
-        (_: any, index: number) => index !== indexToDelete
-      ),
-    }));
+  const handleDeleteImage = async (index: number) => {
+    const image = fields.images[index];
+    try {
+      await axios.post("/api/deleteImage", {
+        public_id: image.public_id,
+      });
+      const newImages = [...fields.images];
+      newImages.splice(index, 1);
+      setFields((prev) => ({ ...prev, images: newImages }));
+    } catch (err) {
+      console.error("Failed to delete image", err);
+    }
   };
 
   const handleClick = () => {
+    if (fields.images.length >= 4) return alert("Max 4 images allowed");
     fileInputRef.current?.click();
   };
 
@@ -194,11 +231,13 @@ const propertyAddForm = () => {
 
     const formData = new FormData();
 
-    // Add images
-    fields.images.forEach((file) => {
-      formData.append("images", file);
-    });
-
+    for (const image of fields.images) {
+      const metadata = JSON.stringify({
+        url: image.url,
+        public_id: image.public_id,
+      });
+      formData.append("images", metadata);
+    }
     // Add other form fields
     const form = e.currentTarget;
     const formElements = new FormData(form); // grabs other fields (title, description, etc.)
@@ -710,11 +749,24 @@ const propertyAddForm = () => {
             />
           </div>
 
+          {uploading && (
+            <div className="my-2 text-sm text-blue-700">
+              Uploading... {uploadProgress}%
+            </div>
+          )}
+
           {fields.images.length > 0 && (
             <ol className="m-2 text-gray-600 list-decimal space-y-2">
-              {fields.images.map((file, index) => (
+              {fields.images.map((img, index) => (
                 <li key={index}>
-                  {file.name}{" "}
+                  <a
+                    href={img.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline"
+                  >
+                    {img.url.split("/").pop()}
+                  </a>
                   <button
                     type="button"
                     className="cursor-pointer rounded-md ml-1 p-1 text-red-800 ring-1 hover:ring-2 active:ring-2"

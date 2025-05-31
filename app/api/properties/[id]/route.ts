@@ -3,13 +3,14 @@ import connectDB from "@/config/database";
 import Property from "@/models/Property";
 
 // Get /api/properties/{id}
-export const GET = async (
+export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
-) => {
+) {
+  const { id } = await params;
   try {
     await connectDB();
-    const property = await Property.findById(params.id);
+    const property = await Property.findById(id);
 
     if (!property) {
       return new Response("Property not found", { status: 404 });
@@ -18,4 +19,4 @@ export const GET = async (
   } catch (error) {
     return new Response("Database Error", { status: 500 });
   }
-};
+}
