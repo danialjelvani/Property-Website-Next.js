@@ -204,16 +204,16 @@ const propertyAddForm = () => {
   // Function to handle image deletion
   const handleDeleteImage = async (index: number) => {
     const image = fields.images[index];
-    try {
-      await axios.post("/api/deleteImage", {
-        public_id: image.public_id,
-      });
-      const newImages = [...fields.images];
-      newImages.splice(index, 1);
-      setFields((prev) => ({ ...prev, images: newImages }));
-    } catch (err) {
-      console.error("Failed to delete image", err);
-    }
+    const res = await fetch("/api/deleteImage", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ public_id: image.public_id }),
+    });
+    if (!res.ok) throw new Error("Failed to delete image");
+
+    const newImages = [...fields.images];
+    newImages.splice(index, 1);
+    setFields((prev) => ({ ...prev, images: newImages }));
   };
 
   const handleClick = () => {
@@ -763,13 +763,13 @@ const propertyAddForm = () => {
                     href={img.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline"
+                    className="underline mr-1.5"
                   >
-                    {img.url.split("/").pop()}
+                    {img.name}
                   </a>
                   <button
                     type="button"
-                    className="cursor-pointer rounded-md ml-1 p-1 text-red-800 ring-1 hover:ring-2 active:ring-2"
+                    className="cursor-pointer text-sm rounded-md p-1 pr-1.5 pb-1.5 text-red-800 ring-1 hover:ring-2 active:ring-2"
                     onClick={() => handleDeleteImage(index)}
                   >
                     ❌ Delete
