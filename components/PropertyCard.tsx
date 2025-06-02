@@ -1,7 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {FaBed, FaBath, FaRulerCombined,FaDollarSign,FaMapMarker} from 'react-icons/fa';
+import {
+  FaBed,
+  FaBath,
+  FaRulerCombined,
+  FaDollarSign,
+  FaMapMarker,
+} from "react-icons/fa";
 
 interface PropertyCardProps {
   property: Iproperty;
@@ -45,27 +51,28 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
     if (rates.weekly) return `${rates.weekly.toLocaleString()}/wk`;
     if (rates.nightly) return `${rates.nightly.toLocaleString()}/night`;
   }
+  const images = property.images.map((str) => JSON.parse(str));
 
   return (
     <div className="rounded-xl bg-[#2D1705]/70 shadow-[0_0_20px] shadow-black relative">
       <div className="relative">
-      <Image
-        src={`/images/properties/${property.images[0]}`}
-        alt=""
-        width={0}
-        height={0}
-        sizes="100vw"
-        placeholder="blur"
-        blurDataURL="data:image/jpeg;base64,/9j/2wCEAAIBAQEBAQEBAQECAgICAgQDAgICA..."
-        className="w-full h-auto [mask-image:linear-gradient(to_bottom,black_90%,transparent_100%)] shadow-lg shadow-black rounded-t-xl"
-      />
-      <div className="bg-gradient-to-b from-black/0 via-black/0 to-black/30 z-10 absolute top-0 left-0 w-full h-full"></div>
+        <Image
+          src={images[0].url}
+          alt=""
+          width={0}
+          height={0}
+          sizes="100vw"
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/2wCEAAIBAQEBAQEBAQECAgICAgQDAgICA..."
+          className="w-full h-auto [mask-image:linear-gradient(to_bottom,black_90%,transparent_100%)] shadow-lg shadow-black rounded-t-xl"
+        />
+        <div className="bg-gradient-to-b from-black/0 via-black/0 to-black/30 z-10 absolute top-0 left-0 w-full h-full"></div>
       </div>
 
       <div className="p-4">
         <div className="text-left md:text-center lg:text-left mb-4">
           <div className="text-yellow-500/80 mb-1">{property.type}</div>
-          <h3 style={{textShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)"}} className="text-xl text-teal-300 md:min-h-[60px] font-bold">
+          <h3 className="text-xl text-teal-300 text-shadow-sm text-shadow-black/60 md:min-h-[60px] font-bold">
             {property.name}
           </h3>
         </div>
@@ -76,14 +83,21 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
         <div className="flex justify-center gap-4 text-emerald-300 mb-4">
           <p>
             <FaBed className="inline -mt-1 mr-1" /> {property.beds}
-            <span className="md:hidden lg:inline"> {property.beds === 1 ? "Bed" : "Beds"}</span>
+            <span className="md:hidden lg:inline">
+              {" "}
+              {property.beds === 1 ? "Bed" : "Beds"}
+            </span>
           </p>
           <p>
-          <FaBath className="inline -mt-1 mr-1" /> {property.baths}
-            <span className="md:hidden lg:inline"> {property.baths === 1 ? "Bath" : "Baths"}</span>
+            <FaBath className="inline -mt-1 mr-1" /> {property.baths}
+            <span className="md:hidden lg:inline">
+              {" "}
+              {property.baths === 1 ? "Bath" : "Baths"}
+            </span>
           </p>
           <p>
-          <FaRulerCombined className="inline -mt-1 mr-1" /> {property.square_feet}
+            <FaRulerCombined className="inline -mt-1 mr-1" />{" "}
+            {property.square_feet}
             <span className="md:hidden lg:inline"> sqft</span>
           </p>
         </div>
@@ -91,17 +105,20 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
         <div className="flex justify-center gap-4 md:gap-3 text-emerald-300 text-sm mb-4">
           {rates.monthly && (
             <p>
-              <FaDollarSign className="inline -mt-1 mr-0.5 md:mr-0" />Monthly
+              <FaDollarSign className="inline -mt-1 mr-0.5 md:mr-0" />
+              Monthly
             </p>
           )}
           {rates.weekly && (
             <p>
-              <FaDollarSign className="inline -mt-1 mr-0.5 md:mr-0" />Weekly
+              <FaDollarSign className="inline -mt-1 mr-0.5 md:mr-0" />
+              Weekly
             </p>
           )}
           {rates.nightly && (
             <p>
-              <FaDollarSign className="inline -mt-1 mr-0.5 md:mr-0" />Nightly
+              <FaDollarSign className="inline -mt-1 mr-0.5 md:mr-0" />
+              Nightly
             </p>
           )}
         </div>
@@ -110,8 +127,10 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
 
         <div className="flex flex-col lg:flex-row justify-between mb-3">
           <div className="flex align-middle gap-2 mb-4 lg:mb-0">
-          <FaMapMarker className="inline mt-0.5 -mr-1 text-red-600" />
-            <span className="text-red-500">{property.location.city} {property.location.state}</span>
+            <FaMapMarker className="inline mt-0.5 -mr-1 text-red-600" />
+            <span className="text-red-500">
+              {property.location.city} {property.location.state}
+            </span>
           </div>
           <Link
             href={`/properties/${property._id}`}

@@ -9,6 +9,7 @@ import PropertyHeaderImage from "@/components/propertyHeaderImage";
 import { Iproperty } from "@/components/PropertyCard";
 import PropertyDetails from "@/components/propertyDetails";
 import LoadingSpinner from "@/app/loading";
+import PropertyImages from "@/components/propertyImages";
 
 const PropertyPage = () => {
   const { id } = useParams();
@@ -46,7 +47,9 @@ const PropertyPage = () => {
           {/*         go back button
            */}
 
-          <PropertyHeaderImage image={property.images[0]} />
+          <PropertyHeaderImage
+            image={property.images.map((str) => JSON.parse(str))[0].url}
+          />
 
           <section>
             <div
@@ -167,40 +170,10 @@ const PropertyPage = () => {
 
           {/*     <!-- Images -->
            */}
-          <section className="p-4 m-auto max-w-7xl">
-            <div className="mx-2">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="col-span-2">
-                  <img
-                    src="/images/properties/a1.jpg"
-                    alt=""
-                    className="object-cover h-[400px] w-full rounded-xl cursor-pointer"
-                  />
-                </div>
-                <div className="col-span-2">
-                  <img
-                    src="/images/properties/a2.jpg"
-                    alt=""
-                    className="object-cover h-[400px] w-full rounded-xl cursor-pointer"
-                  />
-                </div>
-                <div className="col-span-2">
-                  <img
-                    src="/images/properties/a3.jpg"
-                    alt=""
-                    className="object-cover h-[400px] w-full rounded-xl cursor-pointer"
-                  />
-                </div>
-                <div className="col-span-2">
-                  <img
-                    src="/images/properties/a4.jpg"
-                    alt=""
-                    className="object-cover h-[400px] w-full rounded-xl cursor-pointer"
-                  />
-                </div>
-              </div>
-            </div>
-          </section>
+
+          <PropertyImages
+            images={property.images.map((str) => JSON.parse(str).url)}
+          />
         </>
       )}
     </>
