@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
+import { getPlaiceholder } from "plaiceholder";
 import Typewriter from "./typewriter";
 
 type PropertyFieldsType = {
@@ -34,6 +35,7 @@ type PropertyFieldsType = {
     name: string;
     url: string;
     public_id: string;
+    blurDataURL: string;
   }[];
 };
 
@@ -59,9 +61,10 @@ const propertyAddForm = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [uploading, setUploading] = useState(false);
   const router = useRouter();
+  const [retryKey, setRetryKey] = useState(0);
 
   const [fields, setFields] = useState<PropertyFieldsType>({
-    type: "Apartment",
+    type: "",
     name: "",
     description: "",
     location: {
@@ -125,6 +128,11 @@ const propertyAddForm = () => {
     }
   };
 
+  // Function to generate blur URL using Cloudinary
+  const generateBlurUrl = (url: string) => {
+    return url.replace("/upload/", "/upload/w_100,c_scale,q_auto,f_auto/");
+  };
+
   // Function to handle image changes
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -175,10 +183,14 @@ const propertyAddForm = () => {
             headers: { "Content-Type": "multipart/form-data" },
           });
 
+          const secureUrl = res.data.secure_url;
+          const publicId = res.data.public_id;
+
           const uploadedImage = {
             name: file.name,
-            url: res.data.secure_url,
-            public_id: res.data.public_id,
+            url: secureUrl,
+            public_id: publicId,
+            blurDataURL: generateBlurUrl(secureUrl),
           };
 
           setFields((prev) => ({
@@ -214,6 +226,7 @@ const propertyAddForm = () => {
     fileInputRef.current?.click();
   };
 
+  // Function to handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -228,6 +241,7 @@ const propertyAddForm = () => {
       const metadata = JSON.stringify({
         url: image.url,
         public_id: image.public_id,
+        blurDataURL: image.blurDataURL,
       });
       formData.append("images", metadata);
     }
@@ -282,6 +296,9 @@ const propertyAddForm = () => {
             onChange={handleChange}
             value={fields.type}
           >
+            <option value="" disabled>
+              Select Type
+            </option>
             <option value="Apartment">Apartment</option>
             <option value="Condo">Condo</option>
             <option value="House">House</option>
@@ -728,7 +745,7 @@ const propertyAddForm = () => {
             <span className="opacity-65">Click to add images ...</span>
             <p className="opacity-50 text-center text-sm">
               {" "}
-              You have uploaded {fields.images.length} image(s)
+              You have successfully uploaded {fields.images.length} image(s)
             </p>
             <input
               type="file"
@@ -761,14 +778,24 @@ const propertyAddForm = () => {
                     {img.url && (
                       <div className="my-1 rounded-lg shadow-sm shadow-black ring-1 ring-orange-300 relative w-20 h-20">
                         <Image
-                          src={img.url}
-                          alt={img.name || "image preview"}
+                          key={retryKey}
+                          src={img.blurDataURL}
+                          alt={"image preview"}
                           quality={2}
-                          fill
-                          sizes="100%"
+                          fill={true}
+                          priority={false}
+                          loading="eager"
+                          sizes="(max-width: 640px) 50vw, (max-width: 768px) 30vw, 20vw"
                           className="object-cover"
+                          onError={() => {
+                            if (retryKey < 4) {
+                              setRetryKey((prev) => prev + 1);
+                            }
+                          }}
                           placeholder="blur"
-                          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/w8AAn8B9y1y0nEAAAAASUVORK5CYII="
+                          blurDataURL={
+                            "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOU/yBeDwAEAwGn+/WEEgAAAABJRU5ErkJggg=="
+                          }
                         />
                       </div>
                     )}
@@ -799,6 +826,7 @@ const propertyAddForm = () => {
           <button
             className="linkbuttondark text-white cursor-pointer font-bold py-2 px-4 rounded-full w-full"
             type="submit"
+            disabled={uploading}
           >
             Add Property
           </button>
