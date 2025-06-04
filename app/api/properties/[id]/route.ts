@@ -3,6 +3,7 @@ import connectDB from "@/config/database";
 import Property from "@/models/Property";
 import { getSessionUser } from "@/utils/getSessionUser";
 
+
 // Get /api/properties/{id}
 export async function GET(
   request: NextRequest,

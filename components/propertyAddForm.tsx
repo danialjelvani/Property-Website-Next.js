@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
-import { getPlaiceholder } from "plaiceholder";
+import { toast, Slide } from "react-toastify";
 import Typewriter from "./typewriter";
 
 type PropertyFieldsType = {
@@ -267,11 +267,30 @@ const propertyAddForm = () => {
         return;
       }
       const result = await response.json();
+      toast.success("Property added successfully", {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Slide,
+      });
       const propertyId = result._id;
       router.push(`/properties/${propertyId}`);
     } catch (err) {
       console.error("Submit error:", err);
-      alert("Something went wrong!");
+      toast.error("Something went wrong!", {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Slide,
+      });
     }
   };
 

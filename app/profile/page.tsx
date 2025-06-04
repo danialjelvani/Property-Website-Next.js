@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { toast } from "react-toastify";
+import { Slide } from "react-toastify";
 import profileDefault from "@/assets/images/profile.png";
 import LoadingPage from "@/app/loading";
 import { Iproperty } from "@/components/PropertyCard";
@@ -15,6 +17,7 @@ const ProfilePage = () => {
 
   const [loading, setLoading] = useState(true);
   const [properties, setProperties] = useState<Iproperty[]>([]);
+  const [retrykey, setRetryKey] = useState(0);
 
   useEffect(() => {
     const fetchUserProperties = async (userId: string) => {
@@ -51,9 +54,27 @@ const ProfilePage = () => {
       setProperties(
         properties.filter((property) => property._id !== propertyId)
       );
-      alert("Property deleted successfully");
+      toast.success("Property deleted successfully", {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Slide,
+      });
     } catch (error) {
-      alert("Failed to delete property");
+      toast.error("Failed to delete property", {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+        transition: Slide,
+      });
       console.log(error);
     }
   };
@@ -120,12 +141,18 @@ const ProfilePage = () => {
                         <Link href={`/properties/${property._id}`}>
                           <div className="relative lg:h-70 h-50 w-full">
                             <Image
+                              key={retrykey}
                               src={JSON.parse(property.images[0]).url}
                               className="shadow-[0_0_10px] shadow-yellow-200/60 rounded-lg object-cover"
                               fill={true}
                               alt="Property Image"
                               sizes="75vw"
                               priority={true}
+                              onError={() => {
+                                if (retrykey < 5) {
+                                  setRetryKey((prev) => prev + 1);
+                                }
+                              }}
                               placeholder="blur"
                               blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN899DREwAHMAJbOoc+7QAAAABJRU5ErkJggg=="
                             />
