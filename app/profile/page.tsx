@@ -36,7 +36,27 @@ const ProfilePage = () => {
     }
   }, [session]);
 
-  const handleDeleteProperty = (propertyId: string) => {};
+  const handleDeleteProperty = async (propertyId: string) => {
+    const confirmed = confirm("Are you sure you want to delete this property?");
+    if (!confirmed) {
+      return;
+    }
+    try {
+      const res = await fetch(`/api/properties/${propertyId}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) {
+        alert("Failed to delete property");
+      }
+      setProperties(
+        properties.filter((property) => property._id !== propertyId)
+      );
+      alert("Property deleted successfully");
+    } catch (error) {
+      alert("Failed to delete property");
+      console.log(error);
+    }
+  };
 
   return (
     <section className="bg-black/10">
@@ -90,19 +110,21 @@ const ProfilePage = () => {
                   <p>You have no properties yet.</p>
                 )}
                 {loading ? (
-                  <LoadingPage />
+                  <div className="md:top-1/2 md:left-3/5 md:-translate-y-1/2 fixed top-1/5 left-1/2 -translate-x-1/2">
+                    <LoadingPage />
+                  </div>
                 ) : (
                   <div className="space-y-10 snap-y">
                     {properties.map((property) => (
                       <div key={property._id} className="snap-center">
                         <Link href={`/properties/${property._id}`}>
-                          <div className="relative lg:h-70 h-50 w-auto">
+                          <div className="relative lg:h-70 h-50 w-full">
                             <Image
                               src={JSON.parse(property.images[0]).url}
                               className="shadow-[0_0_10px] shadow-yellow-200/60 rounded-lg object-cover"
                               fill={true}
                               alt="Property Image"
-                              sizes="100vw"
+                              sizes="75vw"
                               priority={true}
                               placeholder="blur"
                               blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN899DREwAHMAJbOoc+7QAAAABJRU5ErkJggg=="
