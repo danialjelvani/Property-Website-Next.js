@@ -225,7 +225,9 @@ const Navbar = () => {
                     src={profileDefault}
                     alt=""
                   />
-                  <span className="mx-1 p-1 text-sm text-white">{session.user?.name?.slice(0,5)}</span>
+                  <span className="mx-1 p-1 text-sm text-white">
+                    {session.user?.name?.slice(0, 5)}
+                  </span>
                 </button>
                 {/*             <!-- Profile dropdown -->
                  */}{" "}
@@ -246,6 +248,7 @@ const Navbar = () => {
                     role="menuitem"
                     tabIndex={-1}
                     id="user-menu-item-0"
+                    onClick={() => setIsProfileMenuOpen(false)}
                   >
                     Your Profile
                   </Link>
@@ -255,6 +258,7 @@ const Navbar = () => {
                     role="menuitem"
                     tabIndex={-1}
                     id="user-menu-item-1"
+                    onClick={() => setIsProfileMenuOpen(false)}
                   >
                     Saved Properties
                   </Link>
