@@ -127,5 +127,27 @@ select option {
   @apply bg-gradient-to-b from-red-400 via-red-800 to-red-500
   hover:bg-gradient-to-b hover:from-red-500 hover:via-red-800 hover:to-red-600
   active:bg-gradient-to-b active:from-red-500 active:via-red-800 active:to-red-600
-  active:scale-95 transition-all;
+  active:scale-95 transition-all cursor-pointer;
+}
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 10px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: none;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #00000077;
+    border-radius: 100vh;
+    border: none;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #ffffff88;
+  }
 }

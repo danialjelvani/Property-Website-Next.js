@@ -1,6 +1,8 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import {
   FaBed,
   FaBath,
@@ -45,6 +47,7 @@ export interface Iproperty {
 }
 
 const PropertyCard = ({ property }: PropertyCardProps) => {
+  const [retryKey, setRetryKey] = useState(0);
   const { rates } = property;
   function getrates() {
     if (rates.monthly) return `${rates.monthly.toLocaleString()}/mo`;
@@ -55,15 +58,20 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
 
   return (
     <div className="rounded-xl bg-[#2D1705]/70 shadow-[0_0_20px] shadow-black relative">
-      <div className="relative">
+      <div className="relative xl:h-75 lg:h-60 md:h-45 h-75 w-auto">
         <Image
+          key={retryKey}
           src={images[0].url}
-          alt=""
-          width={0}
-          height={0}
-          sizes="100vw"
+          alt="property image"
+          fill={true}
+          sizes="(max-width: 768px) 100vw, 50vw"
+          onError={() => {
+            if (retryKey < 5) {
+              setRetryKey(retryKey + 1);
+            }
+          }}
           placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/2wCEAAIBAQEBAQEBAQECAgICAgQDAgICA..."
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN899DREwAHMAJbOoc+7QAAAABJRU5ErkJggg=="
           className="w-full h-auto [mask-image:linear-gradient(to_bottom,black_90%,transparent_100%)] shadow-lg shadow-black rounded-t-xl"
         />
         <div className="bg-gradient-to-b from-black/0 via-black/0 to-black/30 z-10 absolute top-0 left-0 w-full h-full"></div>
