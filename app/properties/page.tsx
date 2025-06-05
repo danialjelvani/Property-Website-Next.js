@@ -1,11 +1,15 @@
 import React from "react";
 import PropertyCard from "@/components/PropertyCard";
-import {Iproperty} from "@/components/PropertyCard";
-import {fetchProperties} from "@/utils/requests";
+import { Iproperty } from "@/components/PropertyCard";
+import { fetchProperties } from "@/utils/requests";
+import ScrollRestorer from "@/components/scrollRestorer";
 
 const PropertiesPage = async () => {
   const properties = await fetchProperties();
-  properties.sort((a:Iproperty,b:Iproperty) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  properties.sort(
+    (a: Iproperty, b: Iproperty) =>
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
 
   return (
     <section className="px-4 py-6">
@@ -20,6 +24,7 @@ const PropertiesPage = async () => {
           </div>
         )}
       </div>
+      <ScrollRestorer />
     </section>
   );
 };

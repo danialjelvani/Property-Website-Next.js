@@ -12,6 +12,9 @@ import LoadingSpinner from "@/app/loading";
 import PropertyImages from "@/components/propertyImages";
 
 const PropertyPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { id } = useParams();
   const [property, setProperty] = useState<Iproperty | null>(null);
   const [loading, setLoading] = useState(true);
