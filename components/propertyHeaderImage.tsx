@@ -8,7 +8,7 @@ const propertyHeaderImage = ({ image }: { image: string }) => {
   return (
     <section>
       <div className="container-xl m-auto">
-        <div className="grid grid-cols-1 relative h-[500px] w-full justify-items-center">
+        <div className="grid grid-cols-1 relative h-100 md:h-[500px] w-full justify-items-center">
           <Image
             key={retrykey}
             src={image}
@@ -17,7 +17,7 @@ const propertyHeaderImage = ({ image }: { image: string }) => {
             fill={true}
             sizes="100vw"
             onError={() => {
-              if (retrykey < 6) {
+              if (retrykey < 15) {
                 setRetryKey((prev) => prev + 1);
               }
             }}

@@ -21,6 +21,18 @@ const PropertyPage = () => {
       if (!id) return;
       try {
         const property = await fetchPropertyById(id);
+
+        // Parse the database images array
+
+        if (property && property.images) {
+          const updatedImages: {}[] = [];
+          for (const str of property.images) {
+            const parsedStr = JSON.parse(str);
+            updatedImages.push(parsedStr.url);
+          }
+          property.images = updatedImages;
+        }
+
         setProperty(property);
       } catch (error) {
         console.log("Error Fetching Property:", error);
@@ -40,16 +52,11 @@ const PropertyPage = () => {
   }
 
   return (
-    <>
+    <div>
       {loading && <LoadingSpinner />}
       {property && !loading && (
-        <>
-          {/*         go back button
-           */}
-
-          <PropertyHeaderImage
-            image={property.images.map((str) => JSON.parse(str))[0].url}
-          />
+        <div>
+          <PropertyHeaderImage image={property.images[0]} />
 
           <section>
             <div
@@ -171,12 +178,10 @@ const PropertyPage = () => {
           {/*     <!-- Images -->
            */}
 
-          <PropertyImages
-            images={property.images.map((str) => JSON.parse(str).url)}
-          />
-        </>
+          <PropertyImages images={property.images} />
+        </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -54,27 +54,9 @@ const ProfilePage = () => {
       setProperties(
         properties.filter((property) => property._id !== propertyId)
       );
-      toast.success("Property deleted successfully", {
-        position: "top-right",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "colored",
-        transition: Slide,
-      });
+      toast.success("Property deleted successfully");
     } catch (error) {
-      toast.error("Failed to delete property", {
-        position: "top-right",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "colored",
-        transition: Slide,
-      });
+      toast.error("Failed to delete property");
       console.log(error);
     }
   };

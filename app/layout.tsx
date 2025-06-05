@@ -3,7 +3,7 @@ import "@/assets/styles/globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import AuthProvider from "@/components/authProvider";
-import { ToastContainer } from "react-toastify";
+import { Slide, ToastContainer } from "react-toastify";
 
 export const metadata = {
   title: "Isfahan Traditional Rentals",
@@ -35,7 +35,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
             <Navbar />
             <main className="flex-grow">{children}</main>
             <Footer />
-            <ToastContainer />
+            <ToastContainer transition={Slide} autoClose={4000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="colored"/>
           </div>
         </body>
       </html>

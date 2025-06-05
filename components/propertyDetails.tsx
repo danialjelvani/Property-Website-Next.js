@@ -10,7 +10,7 @@ import {
 
 const propertyDetails = ({ property }: any) => {
   return (
-    <main>
+    <section>
       <div className="bg-orange-400/90 p-6 rounded-xl shadow-md text-center md:text-left">
         <div className="text-gray-800 mb-4">{property.type}</div>
         <h1 className="text-3xl font-bold mb-4">{property.name}</h1>
@@ -99,7 +99,7 @@ const propertyDetails = ({ property }: any) => {
       <div className="bg-orange-400/90 p-6 rounded-lg shadow-md mt-6">
         <div id="map"></div>
       </div>
-    </main>
+    </section>
   );
 };
 

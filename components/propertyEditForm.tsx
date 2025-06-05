@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
 import { toast, Slide } from "react-toastify";
 import Typewriter from "./typewriter";
+import { fetchPropertyById } from "@/utils/requests";
 
 type PropertyFieldsType = {
   type: string;
@@ -32,10 +33,10 @@ type PropertyFieldsType = {
     phone: string;
   };
   images: {
-    name: string;
+    name?: string;
     url: string;
     public_id: string;
-    blurDataURL: string;
+    blurDataURL?: string;
   }[];
 };
 
@@ -56,12 +57,14 @@ type AmenityType =
   | "Smart TV"
   | "Coffee Maker";
 
-const propertyAddForm = () => {
+const PropertyEditForm = () => {
   const [mounted, setMounted] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [uploading, setUploading] = useState(false);
   const router = useRouter();
   const [retryKey, setRetryKey] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
 
   const [fields, setFields] = useState<PropertyFieldsType>({
     type: "",
@@ -179,6 +182,7 @@ const propertyAddForm = () => {
 
         setUploading(true);
         try {
+          // Upload image to cloudinary
           const res = await axios.post("/api/uploadImage", formData, {
             headers: { "Content-Type": "multipart/form-data" },
           });
@@ -197,6 +201,30 @@ const propertyAddForm = () => {
             ...prev,
             images: [...prev.images, uploadedImage],
           }));
+
+          // Upload image metadata to db
+          const imagesFormData = new FormData();
+
+          for (const image of [...fields.images, uploadedImage]) {
+            const imageMetadata = JSON.stringify({
+              url: image.url,
+              public_id: image.public_id,
+            });
+            imagesFormData.append("images", imageMetadata);
+          }
+          const res2 = await fetch(`/api/properties/${id}`, {
+            method: "PUT",
+            headers: {
+              "X-Request-Type": "imagesformdata", // Custom header to differentiate
+            },
+            body: imagesFormData,
+          });
+
+          if (!res2.ok) {
+            throw new Error("Failed to update image metadata");
+            toast.error("Failed to update images");
+          }
+          toast.success("Images updated successfully");
         } catch (err: any) {
           console.error("Upload error", err);
         } finally {
@@ -208,17 +236,42 @@ const propertyAddForm = () => {
 
   // Function to handle image deletion
   const handleDeleteImage = async (index: number) => {
+
+    // Delete image from cloudinary
     const image = fields.images[index];
     const res = await fetch("/api/deleteImage", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ public_id: image.public_id }),
     });
-    if (!res.ok) throw new Error("Failed to delete image");
+    if (!res.ok) throw new Error("Failed to delete image from cloudinary");
 
     const newImages = [...fields.images];
     newImages.splice(index, 1);
     setFields((prev) => ({ ...prev, images: newImages }));
+
+    // Delete image metadata from db
+    const imagesFormData = new FormData();
+    for (const image of newImages) {
+      const imageMetadata = JSON.stringify({
+        url: image.url,
+        public_id: image.public_id,
+      });
+      imagesFormData.append("images", imageMetadata);
+    }
+    const res2 = await fetch(`/api/properties/${id}`, {
+      method: "PUT",
+      headers: {
+        "X-Request-Type": "imagesformdata", // Custom header to differentiate
+      },
+      body: imagesFormData,
+    });
+
+    if (!res2.ok) {
+      throw new Error("Failed to update image metadata");
+      toast.error("Failed to update images");
+    }
+    toast.success("Images updated successfully");
   };
 
   const handleClick = () => {
@@ -255,33 +308,74 @@ const propertyAddForm = () => {
     }
 
     try {
-      const response = await fetch("/api/properties", {
-        method: "POST",
+      const response = await fetch(`/api/properties/${id}`, {
+        method: "PUT",
+        headers: {
+          "X-Request-Type": "formdata", // Custom header to differentiate
+        },
         body: formData,
       });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        alert("Upload failed: " + errorText);
-        return;
+      if (response.status === 200) {
+        toast.success("Property Updated successfully");
+        router.push(`/properties/${id}`);
+      } else if (response.status === 401 || response.status === 403) {
+        toast.error("Unauthorized");
+      } else {
+        toast.error("Something went wrong!");
       }
-      const result = await response.json();
-      toast.success("Property added successfully");
-      const propertyId = result._id;
-      router.push(`/properties/${propertyId}`);
     } catch (err) {
-      console.error("Submit error:", err);
+      console.error("Update error:", err);
       toast.error("Something went wrong!");
     }
   };
 
-  useEffect(() => setMounted(true), []);
+  // get property data to show in the form
+
+  useEffect(() => {
+    setMounted(true);
+    const fetchPropertyData = async () => {
+      try {
+        const propertyData = await fetchPropertyById(id);
+
+        // check if any value is null and replace with empty string
+
+        if (propertyData && propertyData.rates) {
+          const updatedRates = { ...propertyData.rates };
+          for (const key in updatedRates) {
+            if (updatedRates[key] === null) {
+              updatedRates[key] = "";
+            }
+          }
+          propertyData.rates = updatedRates;
+        }
+
+        // Parse the database images array
+
+        if (propertyData && propertyData.images) {
+          const updatedImages: {}[] = [];
+          for (const str of propertyData.images) {
+            updatedImages.push(JSON.parse(str));
+          }
+          propertyData.images = updatedImages;
+        }
+
+        setFields(propertyData);
+        console.log(propertyData);
+      } catch (error) {
+        console.error("Error fetching property data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPropertyData();
+  }, []);
 
   return (
     mounted && (
       <form onSubmit={handleSubmit}>
         <h2 className="text-3xl text-center font-bold font-Title2 mb-6">
-          Add Property
+          Edit Property
         </h2>
 
         <div className="mb-4">
@@ -773,13 +867,13 @@ const propertyAddForm = () => {
                       rel="noopener noreferrer"
                       className="underline mr-1.5 text-xs text-gray-600"
                     >
-                      {img.name.slice(0, 20)}
+                      {(img.name || img.url).slice(0, 20)}
                     </a>
                     {img.url && (
                       <div className="my-1 rounded-lg shadow-sm shadow-black ring-1 ring-orange-300 relative w-20 h-20">
                         <Image
                           key={retryKey}
-                          src={img.blurDataURL}
+                          src={img.url}
                           alt={"image preview"}
                           quality={2}
                           fill={true}
@@ -828,7 +922,7 @@ const propertyAddForm = () => {
             type="submit"
             disabled={uploading}
           >
-            Add Property
+            Update Property
           </button>
         </div>
       </form>
@@ -836,4 +930,4 @@ const propertyAddForm = () => {
   );
 };
 
-export default propertyAddForm;
+export default PropertyEditForm;
