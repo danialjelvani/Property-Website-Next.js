@@ -4,6 +4,8 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import AuthProvider from "@/components/authProvider";
 import { Slide, ToastContainer } from "react-toastify";
+import 'leaflet/dist/leaflet.css';
+
 
 export const metadata = {
   title: "Isfahan Traditional Rentals",

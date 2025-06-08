@@ -29,6 +29,8 @@ export interface IPropertyData {
   };
   owner: string;
   images: FormDataEntryValue[];
+  lat: FormDataEntryValue | null;
+  lng: FormDataEntryValue | null;
 }
 
 // Get /api/properties
@@ -81,10 +83,13 @@ export const POST = async (request: Request) => {
       },
       owner: userId,
       images: imageUrls,
+      lat: formData.get("lat"),
+      lng: formData.get("lng"),
     };
 
     console.log(propertyData);
     const newProperty = new Property(propertyData);
+    console.log(newProperty);
     await newProperty.save();
     return NextResponse.json({ _id: newProperty._id }, { status: 201 });
   } catch {

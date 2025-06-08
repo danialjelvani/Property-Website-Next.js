@@ -41,6 +41,8 @@ export interface Iproperty {
     phone: string;
   };
   images: string[];
+  lat: string;
+  lng: string;
   is_featured: boolean;
   createdAt: string;
   updatedAt: string;

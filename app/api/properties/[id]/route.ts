@@ -115,6 +115,8 @@ export const PUT = async (
           },
           owner: userId,
           images: imageUrls,
+          lat: formData.get("lat"),
+          lng: formData.get("lng"),
         };
 
         console.log(propertyData);

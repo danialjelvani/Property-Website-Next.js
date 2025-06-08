@@ -1,4 +1,5 @@
 import React from "react";
+import dynamic from "next/dynamic";
 import {
   FaBed,
   FaBath,
@@ -7,6 +8,10 @@ import {
   FaMapMarker,
   FaTimes,
 } from "react-icons/fa";
+
+const MapViewer = dynamic(() => import("@/components/mapViewer"), {
+  ssr: false, // Disable server-side rendering to fix window is not defined error
+});
 
 const propertyDetails = ({ property }: any) => {
   return (
@@ -74,31 +79,30 @@ const propertyDetails = ({ property }: any) => {
           </p>
           <p>
             <FaRulerCombined className="inline -mt-1 mr-2.5" />
-            {property.square_feet}<span className="hidden sm:inline"> sqft</span>
+            {property.square_feet}
+            <span className="hidden sm:inline"> sqft</span>
           </p>
         </div>
-        <p className="text-gray-800 mb-4">
-          {property.description}
-        </p>
+        <p className="text-gray-800 mb-4">{property.description}</p>
       </div>
 
       <div className="bg-orange-400/90 p-6 rounded-lg shadow-md mt-6">
         <h3 className="text-lg font-bold mb-6">Amenities</h3>
 
         <ul className="grid grid-cols-1 text-gray-800 space-y-2 md:grid-cols-2 lg:grid-cols-3 list-none">
-              {property.amenities.map((amenity: string, index: number) => (
-                <li key={index} className="flex items-center">
-                  <FaCheck className="mr-2" /> {amenity}
-                </li>
-              ))}
+          {property.amenities.map((amenity: string, index: number) => (
+            <li key={index} className="flex items-center">
+              <FaCheck className="mr-2" /> {amenity}
+            </li>
+          ))}
         </ul>
       </div>
 
-      {/*             <!-- Map -->
-       */}
-      <div className="bg-orange-400/90 p-6 rounded-lg shadow-md mt-6">
-        <div id="map"></div>
-      </div>
+
+      {property.lat && property.lng && (<div className="bg-orange-400/90 p-6 rounded-lg shadow-md mt-6 -mb-12">
+        <MapViewer lat={parseFloat(property.lat)} lng={parseFloat(property.lng)} />
+      </div>)}
+
     </section>
   );
 };

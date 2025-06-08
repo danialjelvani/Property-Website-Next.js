@@ -5,8 +5,17 @@ import { useRouter, useParams } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
 import { toast, Slide } from "react-toastify";
+import dynamic from "next/dynamic";
 import Typewriter from "./typewriter";
 import { fetchPropertyById } from "@/utils/requests";
+
+const LocationPicker = dynamic(() => import("@/components/locationPicker"), {
+  ssr: false, // Disable server-side rendering to fix window is not defined error
+});
+
+const MapViewer = dynamic(() => import("@/components/mapViewer"), {
+  ssr: false, // Disable server-side rendering to fix window is not defined error
+});
 
 type PropertyFieldsType = {
   type: string;
@@ -38,6 +47,8 @@ type PropertyFieldsType = {
     public_id: string;
     blurDataURL?: string;
   }[];
+  lat: string;
+  lng: string;
 };
 
 type AmenityType =
@@ -65,6 +76,10 @@ const PropertyEditForm = () => {
   const [retryKey, setRetryKey] = useState(0);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
+  const [location, setLocation] = useState<{ lat: number; lng: number } | null>(
+    null
+  );
+  const [mapEdit, setMapEdit] = useState(false);
 
   const [fields, setFields] = useState<PropertyFieldsType>({
     type: "",
@@ -91,6 +106,8 @@ const PropertyEditForm = () => {
       phone: "",
     },
     images: [],
+    lat: "",
+    lng: "",
   });
 
   // Function to handle input changes
@@ -113,6 +130,17 @@ const PropertyEditForm = () => {
       }));
     }
   };
+
+  // function to handle geo change
+  useEffect(() => {
+    if (location) {
+      setFields((prevFields) => ({
+        ...prevFields,
+        lat: location.lat.toString(),
+        lng: location.lng.toString(),
+      }));
+    }
+  }, [location]);
 
   // Function to handle amenities changes
   const handleAmenitiesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -236,7 +264,6 @@ const PropertyEditForm = () => {
 
   // Function to handle image deletion
   const handleDeleteImage = async (index: number) => {
-
     // Delete image from cloudinary
     const image = fields.images[index];
     const res = await fetch("/api/deleteImage", {
@@ -288,6 +315,8 @@ const PropertyEditForm = () => {
       return;
     }
 
+    if (!location) return toast.error("Please select a location.");
+
     const formData = new FormData();
 
     for (const image of fields.images) {
@@ -306,6 +335,9 @@ const PropertyEditForm = () => {
         formData.append(key, value);
       }
     }
+
+    formData.append("lat", fields.lat);
+    formData.append("lng", fields.lng);
 
     try {
       const response = await fetch(`/api/properties/${id}`, {
@@ -361,6 +393,10 @@ const PropertyEditForm = () => {
         }
 
         setFields(propertyData);
+        setLocation({
+          lat: parseFloat(propertyData.lat),
+          lng: parseFloat(propertyData.lng),
+        });
         console.log(propertyData);
       } catch (error) {
         console.error("Error fetching property data:", error);
@@ -475,6 +511,22 @@ const PropertyEditForm = () => {
             onChange={handleChange}
             value={fields.location.zipcode}
           />
+          {!mapEdit && location && (
+            <div
+              onClick={() => setMapEdit(true)}
+              className="border border-black rounded p-4"
+            >
+              <p className="text-center -mt-1 mb-2 text-sm md:text-base">
+                If you wish to change the location, click on the map
+              </p>
+              <MapViewer lat={location.lat} lng={location.lng} />
+            </div>
+          )}
+          {mapEdit && (
+            <LocationPicker
+              onLocationSelect={(coords) => setLocation(coords)}
+            />
+          )}
         </div>
 
         <div className="mb-4 flex flex-wrap">
@@ -831,15 +883,26 @@ const PropertyEditForm = () => {
             className="block text-gray-700 font-bold mb-2"
           >
             Images (Select up to 4 images)
+            <br />
+            <span className="text-red-800 text-sm">
+              Note: Changes to images (additions and removals) are saved
+              automatically.
+            </span>
           </label>
           <div
             onClick={handleClick}
-            className="border rounded w-full py-2 px-3 cursor-pointer"
+            className="border rounded-lg w-full py-2 px-3 cursor-pointer linkbuttondark"
           >
-            <span className="opacity-65">Click to add images ...</span>
-            <p className="opacity-50 text-center text-sm">
+            <p className="opacity-75 text-white text-center mb-1 font-semibold">
+              Click to add images
+            </p>
+            <p className="opacity-60 text-center text-sm text-white">
               {" "}
-              You have successfully uploaded {fields.images.length} image(s)
+              <Typewriter
+                text={`You have successfully uploaded ${fields.images.length} image(s)`}
+                key={fields.images.length}
+                speed={50}
+              />
             </p>
             <input
               type="file"

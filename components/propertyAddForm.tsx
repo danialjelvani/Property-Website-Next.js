@@ -4,8 +4,13 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
-import { toast, Slide } from "react-toastify";
+import { toast } from "react-toastify";
+import dynamic from "next/dynamic";
 import Typewriter from "./typewriter";
+
+const LocationPicker = dynamic(() => import("@/components/locationPicker"), {
+  ssr: false, // Disable server-side rendering to fix window is not defined error
+});
 
 type PropertyFieldsType = {
   type: string;
@@ -37,6 +42,8 @@ type PropertyFieldsType = {
     public_id: string;
     blurDataURL: string;
   }[];
+  lat: string;
+  lng: string;
 };
 
 type AmenityType =
@@ -62,6 +69,9 @@ const propertyAddForm = () => {
   const [uploading, setUploading] = useState(false);
   const router = useRouter();
   const [retryKey, setRetryKey] = useState(0);
+  const [location, setLocation] = useState<{ lat: number; lng: number } | null>(
+    null
+  );
 
   const [fields, setFields] = useState<PropertyFieldsType>({
     type: "",
@@ -88,6 +98,8 @@ const propertyAddForm = () => {
       phone: "",
     },
     images: [],
+    lat: "",
+    lng: "",
   });
 
   // Function to handle input changes
@@ -110,6 +122,17 @@ const propertyAddForm = () => {
       }));
     }
   };
+
+  // function to handle geo change
+  useEffect(() => {
+    if (location) {
+      setFields((prevFields) => ({
+        ...prevFields,
+        lat: location.lat.toString(),
+        lng: location.lng.toString(),
+      }));
+    }
+  }, [location]);
 
   // Function to handle amenities changes
   const handleAmenitiesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -140,7 +163,7 @@ const propertyAddForm = () => {
 
       // Prevent adding more than 4 image files
       if (files.length + fields.images.length > 4) {
-        alert("You can only upload up to 4 files.");
+        toast.error("You can only upload up to 4 files.");
         e.target.value = "";
         return;
       }
@@ -148,7 +171,7 @@ const propertyAddForm = () => {
       // Prevent adding duplicate image files
       for (const file of files) {
         if (fields.images.some((image) => image.name === file.name)) {
-          alert("You cannot upload duplicate files.");
+          toast.error("You cannot upload duplicate files.");
           e.target.value = "";
           return;
         }
@@ -157,7 +180,7 @@ const propertyAddForm = () => {
       // Prevent adding files that exceed 5MB
       for (const file of files) {
         if (file.size > 5 * 1024 * 1024) {
-          alert("File size must be less than 5MB.");
+          toast.error("File size must be less than 5MB.");
           e.target.value = "";
           return;
         }
@@ -167,7 +190,9 @@ const propertyAddForm = () => {
       for (const file of files) {
         const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
         if (!allowedTypes.includes(file.type)) {
-          alert("Invalid file type. Please upload a JPEG, JPG, or PNG file.");
+          toast.error(
+            "Invalid file type. Please upload a JPEG, JPG, or PNG file."
+          );
           e.target.value = "";
           return;
         }
@@ -182,7 +207,11 @@ const propertyAddForm = () => {
           const res = await axios.post("/api/uploadImage", formData, {
             headers: { "Content-Type": "multipart/form-data" },
           });
-
+          if (!res.data) {
+            throw new Error("Image upload failed");
+            toast.error("Image upload failed");
+          }
+          toast.success("Image uploaded successfully");
           const secureUrl = res.data.secure_url;
           const publicId = res.data.public_id;
 
@@ -214,7 +243,11 @@ const propertyAddForm = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ public_id: image.public_id }),
     });
-    if (!res.ok) throw new Error("Failed to delete image");
+    if (!res.ok) {
+      throw new Error("Failed to delete image");
+      toast.error("Failed to delete image");
+    }
+    toast.success("Image deleted successfully");
 
     const newImages = [...fields.images];
     newImages.splice(index, 1);
@@ -222,7 +255,7 @@ const propertyAddForm = () => {
   };
 
   const handleClick = () => {
-    if (fields.images.length >= 4) return alert("Max 4 images allowed");
+    if (fields.images.length >= 4) return toast.error("Max 4 images allowed");
     fileInputRef.current?.click();
   };
 
@@ -231,9 +264,11 @@ const propertyAddForm = () => {
     e.preventDefault();
 
     if (fields.images.length === 0) {
-      alert("Please select at least one image.");
+      toast.error("Please select at least one image.");
       return;
     }
+
+    if (!location) return toast.error("Please select a location.");
 
     const formData = new FormData();
 
@@ -253,6 +288,9 @@ const propertyAddForm = () => {
         formData.append(key, value);
       }
     }
+
+    formData.append("lat", fields.lat);
+    formData.append("lng", fields.lng);
 
     try {
       const response = await fetch("/api/properties", {
@@ -381,6 +419,7 @@ const propertyAddForm = () => {
             onChange={handleChange}
             value={fields.location.zipcode}
           />
+          <LocationPicker onLocationSelect={(coords) => setLocation(coords)} />
         </div>
 
         <div className="mb-4 flex flex-wrap">
@@ -740,12 +779,18 @@ const propertyAddForm = () => {
           </label>
           <div
             onClick={handleClick}
-            className="border rounded w-full py-2 px-3 cursor-pointer"
+            className="border rounded-lg w-full py-2 px-3 cursor-pointer linkbuttondark"
           >
-            <span className="opacity-65">Click to add images ...</span>
-            <p className="opacity-50 text-center text-sm">
+            <p className="opacity-75 text-white text-center mb-1 font-semibold">
+              Click to add images
+            </p>
+            <p className="opacity-60 text-center text-sm text-white">
               {" "}
-              You have successfully uploaded {fields.images.length} image(s)
+              <Typewriter
+                text={`You have successfully uploaded ${fields.images.length} image(s)`}
+                key={fields.images.length}
+                speed={50}
+              />
             </p>
             <input
               type="file"
