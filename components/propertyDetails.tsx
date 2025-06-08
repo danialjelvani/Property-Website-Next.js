@@ -99,7 +99,7 @@ const propertyDetails = ({ property }: any) => {
       </div>
 
 
-      {property.lat && property.lng && (<div className="bg-orange-400/90 p-6 rounded-lg shadow-md mt-6 -mb-12">
+      {property.lat && property.lng && (<div className="bg-orange-400/90 p-6 rounded-lg shadow-md mt-6 -mb-2 md:-mb-12">
         <MapViewer lat={parseFloat(property.lat)} lng={parseFloat(property.lng)} />
       </div>)}
 

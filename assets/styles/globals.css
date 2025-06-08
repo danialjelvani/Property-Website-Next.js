@@ -130,6 +130,13 @@ select option {
   active:scale-95 transition-all cursor-pointer;
 }
 
+.linkbuttonsky {
+  @apply bg-gradient-to-b from-sky-400 via-sky-800 to-sky-500
+  hover:bg-gradient-to-b hover:from-sky-500 hover:via-sky-800 hover:to-sky-600
+  active:bg-gradient-to-b active:from-sky-500 active:via-sky-800 active:to-sky-600
+  active:scale-95 transition-all cursor-pointer;
+}
+
 @layer utilities {
   .scrollbar::-webkit-scrollbar {
     width: 6px;

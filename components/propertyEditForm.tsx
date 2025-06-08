@@ -8,6 +8,7 @@ import { toast, Slide } from "react-toastify";
 import dynamic from "next/dynamic";
 import Typewriter from "./typewriter";
 import { fetchPropertyById } from "@/utils/requests";
+import LoadingSpinner from '@/app/loading';
 
 const LocationPicker = dynamic(() => import("@/components/locationPicker"), {
   ssr: false, // Disable server-side rendering to fix window is not defined error
@@ -161,7 +162,7 @@ const PropertyEditForm = () => {
 
   // Function to generate blur URL using Cloudinary
   const generateBlurUrl = (url: string) => {
-    return url.replace("/upload/", "/upload/w_100,c_scale,q_auto,f_auto/");
+    return url.replace("/upload/", "/upload/w_200,c_scale,q_auto,f_auto/");
   };
 
   // Function to handle image changes
@@ -407,7 +408,7 @@ const PropertyEditForm = () => {
     fetchPropertyData();
   }, []);
 
-  return (
+  return loading ? <LoadingSpinner /> : (
     mounted && (
       <form onSubmit={handleSubmit}>
         <h2 className="text-3xl text-center font-bold font-Title2 mb-6">
@@ -885,7 +886,7 @@ const PropertyEditForm = () => {
             Images (Select up to 4 images)
             <br />
             <span className="text-red-800 text-sm">
-              Note: Changes to images (additions and removals) are saved
+              Note: Changes to images (additions or removals) are saved
               automatically.
             </span>
           </label>

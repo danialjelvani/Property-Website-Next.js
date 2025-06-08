@@ -13,10 +13,12 @@ import PropertyImages from "@/components/propertyImages";
 import BookmarkButton from "@/components/bookmarkButton";
 import ShareButtons from "@/components/shareButtons";
 import PropertyContactForm from "@/components/propertyContactForm";
+
 const PropertyPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   const { id } = useParams();
   const [property, setProperty] = useState<Iproperty | null>(null);
   const [loading, setLoading] = useState(true);
@@ -70,6 +72,7 @@ const PropertyPage = () => {
             >
               <Link
                 href="/properties"
+                scroll={false}
                 className="text-teal-200 hover:text-yellow-600 w-full xl:ml-20
                 active:text-shadow-2xs active:text-shadow-yellow-200 active:transition-all active:duration-200"
               >
