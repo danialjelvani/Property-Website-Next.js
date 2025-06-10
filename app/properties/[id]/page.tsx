@@ -52,7 +52,7 @@ const PropertyPage = () => {
 
   if (!property && !loading) {
     return (
-      <h1 className="font-bold text-center text-2xl mt-10">
+      <h1 className="font-bold text-teal-200 text-shadow-md text-shadow-white/30 text-center text-2xl mt-10">
         Property Not Found
       </h1>
     );

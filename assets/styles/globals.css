@@ -85,7 +85,7 @@
 }
 
 select option {
-  @apply bg-teal-300;
+  @apply bg-black/80;
 }
 
 .linkbuttonemerald {

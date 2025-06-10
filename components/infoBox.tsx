@@ -21,9 +21,9 @@ const infoBox = ({
 }: IinfoBoxProps) => {
   return (
     <div
-      className={`${backgroundColor} ${textColor} p-6 rounded-lg shadow-[0_0_30px] shadow-neutral-800`}
+      className={`${backgroundColor} ${textColor} p-6 text-sm md:text-base rounded-lg shadow-[0_0_30px] shadow-neutral-800`}
     >
-      <h2 className="text-2xl font-bold">{title}</h2>
+      <h2 className="md:text-2xl text-xl font-bold">{title}</h2>
       <p className="mt-2 mb-4">{children}</p>
       <Link
         href={buttonInfo.link}

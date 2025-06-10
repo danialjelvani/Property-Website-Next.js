@@ -6,19 +6,21 @@ const ScrollRestorer = () => {
   const pathname = usePathname();
   // Save the scroll position when the page is being unloaded (before navigation)
   useEffect(() => {
-    // Check if client-side
-    if (typeof window !== "undefined") {
-      // Save the scroll position before the page is unloaded
-      const handleBeforeUnload = () => {
-        sessionStorage.setItem("scrollPosition", window.scrollY.toString());
-      };
+    // Check if client-side inside a timeout
+    setTimeout(() => {
+      if (typeof window !== "undefined") {
+        // Save the scroll position before the page is unloaded
+        const handleBeforeUnload = () => {
+          sessionStorage.setItem("scrollPosition", window.scrollY.toString());
+        };
 
-      window.addEventListener("beforeunload", handleBeforeUnload);
+        window.addEventListener("beforeunload", handleBeforeUnload);
 
-      return () => {
-        window.removeEventListener("beforeunload", handleBeforeUnload);
-      };
-    }
+        return () => {
+          window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+      }
+    }, 1000);
   }, []);
 
   useEffect(() => {

@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import PropertyCard from "@/components/PropertyCard";
 import { Iproperty } from "@/components/PropertyCard";
-import {fetchProperties} from "@/utils/requests";
+import { fetchProperties } from "@/utils/requests";
 
 const homeProperties = async () => {
   const properties = await fetchProperties();
@@ -12,12 +12,9 @@ const homeProperties = async () => {
 
   return (
     <>
-      <section className="px-4 py-6">
+      <section className="px-4">
         <div className="container m-auto">
-          <h2
-            style={{ textShadow: "0px 0px 10px rgba(0, 0, 0, 0.9)" }}
-            className="text-4xl font-Title2 tracking-wider font-extrabold text-teal-300 mt-8 mb-12 text-center"
-          >
+          <h2 className="xl:text-4xl lg:text-3xl text-2xl text-shadow-[0_0_2px] text-shadow-white font-Title2 tracking-wider font-extrabold text-teal-300 mt-6 mb-8 text-center">
             Properties
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

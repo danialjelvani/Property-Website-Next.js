@@ -60,7 +60,7 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
 
   return (
     <div className="rounded-xl bg-[#2D1705]/70 shadow-[0_0_20px] shadow-black relative">
-      <div className="relative xl:h-75 lg:h-60 md:h-45 h-75 w-auto">
+      <div className="relative xl:h-75 lg:h-60 md:h-45 h-60 w-auto">
         <Image
           key={retryKey}
           src={images[0].url}
