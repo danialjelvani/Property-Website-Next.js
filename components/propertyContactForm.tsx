@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import { FaPaperPlane, FaCheckCircle } from "react-icons/fa";
+import { FaPaperPlane, FaCheckCircle, FaExclamationCircle  } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { useSession } from "next-auth/react";
 import { Iproperty } from "@/components/PropertyCard";
 
 const PropertyContactForm = ({ property }: { property: Iproperty }) => {
@@ -12,6 +13,7 @@ const PropertyContactForm = ({ property }: { property: Iproperty }) => {
   const [message, setMessage] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [wasSubmitted, setWasSubmitted] = useState<boolean>(false);
+  const { data: session } = useSession();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,7 +60,12 @@ const PropertyContactForm = ({ property }: { property: Iproperty }) => {
   return (
     <div className="bg-orange-400/90 p-6 rounded-lg shadow-md">
       <h3 className="text-xl font-bold mb-6">Contact Property Manager</h3>
-      {wasSubmitted ? (
+      {!session ? (
+        <div className="text-teal-200 flex justify-around items-center gap-2 text-shadow-[0_0_3px] text-shadow-white/90 mb-4">
+          <FaExclamationCircle className="shrink-0 block w-8 text-gray-700 text-lg mt-1" />
+          <p className="">You must be logged in to send a message</p>
+        </div>
+      ) : wasSubmitted ? (
         <div className="text-teal-200 flex justify-around items-center gap-2 text-shadow-[0_0_3px] text-shadow-white/90 mb-4">
           <FaCheckCircle className="shrink-0 block w-8 text-gray-700 text-lg mt-1" />
           <p className="">Your message's been sent successfully!</p>

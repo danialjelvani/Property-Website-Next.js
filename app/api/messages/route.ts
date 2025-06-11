@@ -4,6 +4,34 @@ import { getSessionUser } from "@/utils/getSessionUser";
 
 export const dynamic = "force-dynamic";
 
+
+export const GET = async () => {
+  try {
+    await connectDB();
+
+    const sessionUser = await getSessionUser();
+
+    if (!sessionUser || !sessionUser.userId) {
+      return new Response(
+        JSON.stringify("Unauthorized"),
+        { status: 401 }
+      );
+    }
+
+    const { userId } = sessionUser;
+
+    const messages = await Message.find({ recipient: userId })
+    .populate("sender", "username")
+    .populate("property", "name");
+
+    return new Response(JSON.stringify(messages), { status: 200 });
+
+  } catch (error) {
+    console.log(error);
+    return new Response("Database Error", { status: 500 });
+  }
+}
+
 export const POST = async (request: Request) => {
   try {
     await connectDB();

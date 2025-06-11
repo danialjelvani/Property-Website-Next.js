@@ -172,7 +172,7 @@ const Navbar = () => {
               <Link href="/messages" className="relative group">
                 <button
                   type="button"
-                  className="relative rounded-full cursor-pointer bg-gradient-to-b from-orange-400 via-amber-900 to-orange-400 shadow-[0_0_20px] shadow-neutral-800 p-1 text-gray-200 linkactive linkactive2 linkhover focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-700"
+                  className="relative rounded-full cursor-pointer bg-gradient-to-b from-orange-400 via-amber-900 to-orange-400 shadow-[0_0_20px] shadow-neutral-800 p-1 text-gray-200 linkactive linkactive2 linkhover"
                 >
                   <span className="absolute -inset-1.5"></span>
                   <span className="sr-only">View notifications</span>
