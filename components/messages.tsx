@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import LoadingSpinner from "@/app/loading";
 import Message from "@/components/message";
 import { Date } from "mongoose";
+import { useMessageContext } from "@/context/messageContext";
 
 interface IMessage {
   _id: string;
@@ -28,6 +29,7 @@ interface IMessage {
 const Messages = () => {
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState<IMessage[]>([]);
+  const { messageCount, setMessageCount } = useMessageContext();
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -35,6 +37,7 @@ const Messages = () => {
         const response = await fetch("/api/messages");
         if (response.status === 200) {
           const data = await response.json();
+          setMessageCount(data.length);
           setMessages(data);
         }
       } catch (error) {
@@ -44,7 +47,7 @@ const Messages = () => {
       }
     };
     fetchMessages();
-  }, []);
+  }, [messageCount]);
 
   return loading ? (
     <LoadingSpinner />
@@ -55,8 +58,8 @@ const Messages = () => {
           <h1 className="md:text-3xl text-2xl text-teal-200 text-shadow-[0_0_10px] text-shadow-white/30 text-center font-bold md:mb-10 mb-6">
             Your Messages
             <span className="text-xs md:text-sm md:-mb-5 block md:mt-3 mt-2 -mb-2 font-normal">
-              You have {messages.length} message
-              {messages.length === 1 ? "" : "s"}
+              You have {messageCount} message
+              {messageCount === 1 ? "" : "s"}
             </span>
           </h1>
 
@@ -67,12 +70,11 @@ const Messages = () => {
               </p>
             ) : (
               messages.map((message) => (
-                <React.Fragment key={message._id}>
-                  <div className=" text-white/70 z-10 relative text-right top-10 py-1 px-3 rounded-tl-lg rounded-tr-lg text-xs bg-black/55">
-                    Message # {messages.indexOf(message) + 1}
-                  </div>
-                  <Message message={message} />
-                </React.Fragment>
+                <Message
+                  message={message}
+                  key={message._id}
+                  messageNumber={messages.indexOf(message) + 1}
+                />
               ))
             )}
           </div>
