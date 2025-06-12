@@ -13,7 +13,7 @@ const Message = ({
   messageNumber: number;
 }) => {
   const [isRead, setIsRead] = useState(message.read);
-  const { messageCount, setMessageCount } = useMessageContext();
+  const { messageCount, setMessageCount, setUnreadCount } = useMessageContext();
 
   const handleReadClick = async () => {
     try {
@@ -25,8 +25,10 @@ const Message = ({
         setIsRead(read);
         if (!read) {
           toast.success("Message marked as new");
+          setUnreadCount((prev: number) => prev + 1);
         } else {
           toast.success("Message marked as read");
+          setUnreadCount((prev: number) => prev - 1);
         }
       }
     } catch (error) {
@@ -44,6 +46,7 @@ const Message = ({
       if (res.status === 200) {
         setMessageCount(messageCount - 1);
         toast.success("Message deleted successfully");
+        setUnreadCount((prev: number) => prev - 1);
       }
     } catch (error) {
       console.log(error);

@@ -3,16 +3,21 @@ import { createContext, useContext, useState, ReactNode } from "react";
 
 type MessageContextType = {
   messageCount: number;
-  setMessageCount: (count: number) => void;
+  setMessageCount: any;
+  unreadCount: number;
+  setUnreadCount: any;
 };
 
 const MessageContext = createContext<MessageContextType | undefined>(undefined);
 
 export const MessageProvider = ({ children }: { children: ReactNode }) => {
   const [messageCount, setMessageCount] = useState<number>(0);
+  const [unreadCount, setUnreadCount] = useState<number>(0);
 
   return (
-    <MessageContext.Provider value={{ messageCount, setMessageCount }}>
+    <MessageContext.Provider
+      value={{ messageCount, setMessageCount, unreadCount, setUnreadCount }}
+    >
       {children}
     </MessageContext.Provider>
   );

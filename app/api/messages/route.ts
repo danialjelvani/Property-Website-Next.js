@@ -4,7 +4,6 @@ import { getSessionUser } from "@/utils/getSessionUser";
 
 export const dynamic = "force-dynamic";
 
-
 export const GET = async () => {
   try {
     await connectDB();
@@ -12,25 +11,35 @@ export const GET = async () => {
     const sessionUser = await getSessionUser();
 
     if (!sessionUser || !sessionUser.userId) {
-      return new Response(
-        JSON.stringify("Unauthorized"),
-        { status: 401 }
-      );
+      return new Response(JSON.stringify("Unauthorized"), { status: 401 });
     }
 
     const { userId } = sessionUser;
 
-    const messages = await Message.find({ recipient: userId })
-    .populate("sender", "username")
-    .populate("property", "name");
+    const unreadMessages = await Message.find({
+      recipient: userId,
+      read: false,
+    })
+      .sort({ createdAt: -1 })
+      .populate("sender", "username")
+      .populate("property", "name");
+
+    const readMessages = await Message.find({
+      recipient: userId,
+      read: true,
+    })
+      .sort({ createdAt: -1 })
+      .populate("sender", "username")
+      .populate("property", "name");
+
+    const messages = [...unreadMessages, ...readMessages];
 
     return new Response(JSON.stringify(messages), { status: 200 });
-
   } catch (error) {
     console.log(error);
     return new Response("Database Error", { status: 500 });
   }
-}
+};
 
 export const POST = async (request: Request) => {
   try {

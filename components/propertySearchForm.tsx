@@ -16,7 +16,10 @@ const PropertySearchForm = () => {
       // If both fields are empty, redirect to the properties page
       router.push("/properties");
     } else {
-      const query = `?location=${location}&propertyType=${propertyType}`;
+      const query = `?location=${encodeURIComponent(
+        location
+      )}&propertyType=${encodeURIComponent(propertyType)}`;
+
       router.push(`/properties/search-results${query}`);
     }
   };
@@ -54,7 +57,7 @@ const PropertySearchForm = () => {
           <option value="Studio">Studio</option>
           <option value="Condo">Condo</option>
           <option value="House">House</option>
-          <option value="Cabin Or Cottage">Cabin or Cottage</option>
+          <option value="CabinOrCottage">Cabin or Cottage</option>
           <option value="Loft">Loft</option>
           <option value="Room">Room</option>
           <option value="Other">Other</option>
