@@ -6,16 +6,21 @@ import ScrollRestorer from "@/components/scrollRestorer";
 import { Iproperty } from "@/components/PropertyCard";
 import LoadingSpinner from "@/app/loading";
 import Pagination from "@/components/pagination";
+import { useSearchParams } from "next/navigation";
 
 const Properties = () => {
   const [properties, setProperties] = useState<Iproperty[]>([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(6);
   const [total, setTotal] = useState(0);
+
+  const pageSize = 6;
+
+  const searchParams = useSearchParams();
+  const page = parseInt(searchParams.get("page") || "1", 10);
 
   useEffect(() => {
     const fetchProperties = async () => {
+      setLoading(true);
       try {
         const res = await fetch(
           `/api/properties?page=${page}&pageSize=${pageSize}`
@@ -38,10 +43,6 @@ const Properties = () => {
     fetchProperties();
   }, [page, pageSize]);
 
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage)
-  }
-
   return loading ? (
     <LoadingSpinner />
   ) : (
@@ -58,7 +59,7 @@ const Properties = () => {
             ))}
           </div>
         )}
-        <Pagination page={page} pageSize={pageSize} total={total} onPageChange={handlePageChange} />
+        <Pagination page={page} pageSize={pageSize} total={total} />
       </div>
       <ScrollRestorer />
     </section>

@@ -1,22 +1,26 @@
+"use client";
 import React from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Pagination = ({
   page,
   pageSize,
   total,
-  onPageChange,
 }: {
   page: number;
   pageSize: number;
   total: number;
-  onPageChange: (page: number) => void;
 }) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const totalpages = Math.ceil(total / pageSize);
 
   const handlePageChange = (newPage: number) => {
     if (newPage >= 1 && newPage <= totalpages) {
-      onPageChange(newPage);
-      window.scrollTo(0, 85);
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("page", newPage.toString());
+      router.push(`?${params.toString()}`);
     }
   };
 
@@ -35,7 +39,7 @@ const Pagination = ({
       </span>
 
       <button
-        disabled={page === totalpages}
+        disabled={page >= totalpages}
         className="ml-2 px-2 py-1 linkbuttonamber rounded-md cursor-pointer w-20"
         onClick={() => handlePageChange(page + 1)}
       >

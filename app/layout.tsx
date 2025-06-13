@@ -6,6 +6,7 @@ import AuthProvider from "@/components/authProvider";
 import { Slide, ToastContainer } from "react-toastify";
 import "leaflet/dist/leaflet.css";
 import { MessageProvider } from "@/context/messageContext";
+import "photoswipe/dist/photoswipe.css";
 
 export const metadata = {
   title: "Isfahan Traditional Rentals",

@@ -16,11 +16,15 @@ const PropertySearchForm = () => {
       // If both fields are empty, redirect to the properties page
       router.push("/properties");
     } else {
-      const query = `?location=${encodeURIComponent(
-        location
-      )}&propertyType=${encodeURIComponent(propertyType)}`;
+      const query = new URLSearchParams();
+      if (location) query.set("location", encodeURIComponent(location));
+      if (propertyType && propertyType !== "All")
+        query.set("propertyType", encodeURIComponent(propertyType));
 
-      router.push(`/properties/search-results${query}`);
+      query.set("page", "1"); // Always go to page 1
+      query.set("pageSize", "6");
+
+      router.push(`/properties/search-results?${query.toString()}`);
     }
   };
 

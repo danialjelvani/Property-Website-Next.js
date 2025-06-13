@@ -9,25 +9,36 @@ import PropertyCard from "@/components/PropertyCard";
 import { FaArrowLeft } from "react-icons/fa";
 import ScrollRestorer from "@/components/scrollRestorer";
 import PropertySearchForm from "@/components/propertySearchForm";
+import Pagination from "@/components/pagination";
 
 const SearchResultsPage = () => {
-  const searchParams = useSearchParams();
-
   const [loading, setLoading] = useState(true);
   const [properties, setProperties] = useState<Iproperty[]>([]);
+  const [total, setTotal] = useState(0);
 
-  const location = searchParams.get("location");
-  const propertyType = searchParams.get("propertyType");
+  const searchParams = useSearchParams();
+
+  const location = searchParams.get("location") || "";
+  const propertyType = searchParams.get("propertyType") || "All";
+  const page = parseInt(searchParams.get("page") || "1", 10);
+  const pageSize = parseInt(searchParams.get("pageSize") || "6", 10);
 
   useEffect(() => {
     const fetchSearchResults = async () => {
+      setLoading(true);
+      const query = new URLSearchParams({
+        location,
+        propertyType,
+        page: page.toString(),
+        pageSize: pageSize.toString(),
+      });
+
       try {
-        const res = await fetch(
-          `/api/properties/search?location=${location}&propertyType=${propertyType}`
-        );
+        const res = await fetch(`/api/properties/search?${query.toString()}`);
         if (res.status === 200) {
           const data = await res.json();
-          setProperties(data);
+          setProperties(data.properties);
+          setTotal(data.total);
         } else {
           console.log(res.statusText);
           setProperties([]);
@@ -39,7 +50,7 @@ const SearchResultsPage = () => {
       }
     };
     fetchSearchResults();
-  }, [location, propertyType]);
+  }, [location, propertyType, page, pageSize]);
 
   return (
     <>
@@ -66,7 +77,7 @@ const SearchResultsPage = () => {
                       flex items-center"
               >
                 <FaArrowLeft className="inline w-5 m-2 mt-1" />{" "}
-                <span className="md:mb-0 mb-1.5">Back to Properties</span>
+                <span className="md:mb-0 mb-1.5">Back to Properties Page</span>
               </Link>
             </div>{" "}
             <h1
@@ -76,8 +87,7 @@ const SearchResultsPage = () => {
               Search Results
             </h1>
             <p className="text-xs md:text-sm text-white text-center">
-              {properties.length} result{properties.length === 1 ? "" : "s"}{" "}
-              found
+              {total} result{total === 1 ? "" : "s"} found
             </p>
           </div>
           <section className="px-4 -mt-18">
@@ -93,6 +103,7 @@ const SearchResultsPage = () => {
                   ))}
                 </div>
               )}
+              <Pagination page={page} pageSize={pageSize} total={total} />
             </div>
             <ScrollRestorer />
           </section>
