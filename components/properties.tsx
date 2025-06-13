@@ -5,18 +5,25 @@ import PropertyCard from "@/components/PropertyCard";
 import ScrollRestorer from "@/components/scrollRestorer";
 import { Iproperty } from "@/components/PropertyCard";
 import LoadingSpinner from "@/app/loading";
+import Pagination from "@/components/pagination";
 
 const Properties = () => {
   const [properties, setProperties] = useState<Iproperty[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(6);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const res = await fetch("/api/properties");
+        const res = await fetch(
+          `/api/properties?page=${page}&pageSize=${pageSize}`
+        );
         if (res.status === 200) {
           const data = await res.json();
-          setProperties(data);
+          setProperties(data.properties);
+          setTotal(data.total);
         } else {
           console.log(res.statusText);
           setProperties([]);
@@ -29,7 +36,11 @@ const Properties = () => {
       }
     };
     fetchProperties();
-  }, []);
+  }, [page, pageSize]);
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage)
+  }
 
   return loading ? (
     <LoadingSpinner />
@@ -47,6 +58,7 @@ const Properties = () => {
             ))}
           </div>
         )}
+        <Pagination page={page} pageSize={pageSize} total={total} onPageChange={handlePageChange} />
       </div>
       <ScrollRestorer />
     </section>

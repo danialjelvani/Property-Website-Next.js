@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/config/database";
 import Property from "@/models/Property";
 import { getSessionUser } from "@/utils/getSessionUser";
@@ -34,11 +34,27 @@ export interface IPropertyData {
 }
 
 // Get /api/properties
-export const GET = async (request: Request) => {
+export const GET = async (request: NextRequest) => {
   try {
     await connectDB();
-    const properties = await Property.find({});
-    return new Response(JSON.stringify(properties), { status: 200 });
+
+    const page = request.nextUrl.searchParams.get("page") || 1;
+    const pageSize = request.nextUrl.searchParams.get("pageSize") || 6;
+
+    const skip = (Number(page) - 1) * Number(pageSize);
+
+    const properties = await Property.find({})
+      .skip(skip)
+      .limit(Number(pageSize));
+
+    const total = await Property.countDocuments();
+
+    const result = {
+      properties,
+      total,
+    };
+
+    return new Response(JSON.stringify(result), { status: 200 });
   } catch (error) {
     return new Response("Database Error", { status: 500 });
   }

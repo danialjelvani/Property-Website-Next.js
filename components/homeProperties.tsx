@@ -5,8 +5,8 @@ import { Iproperty } from "@/components/PropertyCard";
 import { fetchProperties } from "@/utils/requests";
 
 const homeProperties = async () => {
-  const properties = await fetchProperties();
-  const randomProperties = properties
+  const data = await fetchProperties();
+  const randomProperties = data.properties
     .sort(() => Math.random() - Math.random())
     .slice(0, 3);
 

@@ -76,7 +76,7 @@ const PropertyPage = () => {
                 className="text-teal-200 hover:text-yellow-600 w-full xl:ml-20
                 active:text-shadow-2xs active:text-shadow-yellow-200 active:transition-all active:duration-200"
               >
-                <FaArrowLeft className="inline m-2 mt-1" /> Back to Properties
+                <FaArrowLeft className="inline m-2 mt-1" /> Back to Properties Page
               </Link>
             </div>
           </section>

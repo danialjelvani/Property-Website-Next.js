@@ -8,7 +8,7 @@ import { toast, Slide } from "react-toastify";
 import dynamic from "next/dynamic";
 import Typewriter from "./typewriter";
 import { fetchPropertyById } from "@/utils/requests";
-import LoadingSpinner from '@/app/loading';
+import LoadingSpinner from "@/app/loading";
 
 const LocationPicker = dynamic(() => import("@/components/locationPicker"), {
   ssr: false, // Disable server-side rendering to fix window is not defined error
@@ -408,7 +408,9 @@ const PropertyEditForm = () => {
     fetchPropertyData();
   }, []);
 
-  return loading ? <LoadingSpinner /> : (
+  return loading ? (
+    <LoadingSpinner />
+  ) : (
     mounted && (
       <form onSubmit={handleSubmit}>
         <h2 className="text-3xl text-center font-bold font-Title2 mb-6">
@@ -900,7 +902,9 @@ const PropertyEditForm = () => {
             <p className="opacity-60 text-center text-sm text-white">
               {" "}
               <Typewriter
-                text={`You have successfully uploaded ${fields.images.length} image(s)`}
+                text={`You have successfully uploaded ${
+                  fields.images.length
+                } image${fields.images.length === 1 ? "" : "s"}`}
                 key={fields.images.length}
                 speed={50}
               />

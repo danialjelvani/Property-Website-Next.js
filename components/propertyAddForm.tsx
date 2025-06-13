@@ -787,7 +787,9 @@ const propertyAddForm = () => {
             <p className="opacity-60 text-center text-sm text-white">
               {" "}
               <Typewriter
-                text={`You have successfully uploaded ${fields.images.length} image(s)`}
+                text={`You have successfully uploaded ${
+                  fields.images.length
+                } image${fields.images.length === 1 ? "" : "s"}`}
                 key={fields.images.length}
                 speed={50}
               />
