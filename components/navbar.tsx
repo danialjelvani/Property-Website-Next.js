@@ -35,7 +35,7 @@ const Navbar = () => {
   if (!isMounted) return null;
 
   return (
-    <nav className="bg-gradient-to-b from-emerald-900/30 via-[#1D1C15]/40 to-[#1D1C15]/30">
+    <nav className="bg-gradient-to-b from-emerald-900/50 via-[#1D1C15]/50 to-[#1D1C15]/50">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-20 items-center justify-between">
           <div className="absolute left-0 flex items-center md:hidden">

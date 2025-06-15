@@ -123,6 +123,18 @@ select option {
   active:scale-95 transition-all;
 }
 
+.linkbuttonteal {
+  @apply bg-gradient-to-b from-teal-900/70 via-gray-800/50 to-gray-600/30;
+}
+
+.linkbuttonskygray {
+  @apply bg-gradient-to-b from-sky-700/70 via-gray-700/30 to-gray-600/10;
+}
+
+.linkbuttongreen {
+  @apply bg-gradient-to-b from-green-500/70 via-green-500/30 to-green-500/10;
+}
+
 .linkbuttonred {
   @apply bg-gradient-to-b from-red-400 via-red-800 to-red-500
   hover:bg-gradient-to-b hover:from-red-500 hover:via-red-800 hover:to-red-600

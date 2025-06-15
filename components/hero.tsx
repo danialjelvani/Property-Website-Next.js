@@ -3,7 +3,7 @@ import PropertySearchForm from "./propertySearchForm";
 const hero = () => {
   return (
     <div>
-      <section className="bg-[#1D1C15]/40 md:py-20 py-7 mb-4">
+      <section className="linkbuttongreen md:py-20 py-7 mb-4 [mask-image:linear-gradient(to_bottom,black_90%,transparent_100%)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
           <div className="text-center">
             <h1 className="text-3xl font-black font-Title2 text-teal-200 sm:text-4xl md:text-5xl lg:text-6xl">

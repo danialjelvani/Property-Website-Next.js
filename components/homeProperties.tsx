@@ -12,9 +12,9 @@ const homeProperties = async () => {
 
   return (
     <>
-      <section className="px-4">
-        <div className="container m-auto">
-          <h2 className="xl:text-4xl lg:text-3xl text-2xl text-shadow-[0_0_2px] text-shadow-white font-Title2 tracking-wider font-extrabold text-teal-300 mt-6 mb-8 text-center">
+      <section className="px-4 pt-2 pb-10 linkbuttonskygray [mask-image:linear-gradient(to_bottom,black_90%,transparent_100%)]">
+        <div className="container m-auto ">
+          <h2 className="xl:text-4xl lg:text-3xl text-2xl text-shadow-[0_0_2px] text-shadow-white font-Title2 tracking-wider font-extrabold text-teal-300 mt-6 mb-10 text-center">
             Properties
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

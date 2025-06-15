@@ -3,6 +3,7 @@ import Hero from "@/components/hero";
 import InfoBoxes from "@/components/infoBoxes";
 import HomeProperties from "@/components/homeProperties";
 import LoadingPage from "@/app/loading";
+import FeaturedProperties from "@/components/featuredProperties";
 
 const HomePage = () => {
   return (
@@ -10,6 +11,7 @@ const HomePage = () => {
       <Hero />
       <InfoBoxes />
       <Suspense fallback={<LoadingPage />}>
+        <FeaturedProperties />
         <HomeProperties />
       </Suspense>
     </>

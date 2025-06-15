@@ -1,7 +1,13 @@
 const apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN || null;
 
+interface IFetchProperties {
+  showFeatured?: boolean;
+}
+
 // Fetch all properties
-export async function fetchProperties() {
+export async function fetchProperties({
+  showFeatured = false,
+}: IFetchProperties = {}) {
   try {
     // handle the case where the domain is not set
     if (!apiDomain) {
@@ -9,7 +15,10 @@ export async function fetchProperties() {
       return [];
     }
 
-    const res = await fetch(`${apiDomain}/properties`, {cache: "no-store"});
+    const res = await fetch(
+      `${apiDomain}/properties${showFeatured ? "/featured" : ""}`,
+      { cache: "no-store" }
+    );
 
     if (!res.ok) {
       throw new Error("Failed to fetch properties");
@@ -39,4 +48,5 @@ export async function fetchPropertyById(id: any) {
   } catch (error) {
     console.log(error);
     return null;
-}}
+  }
+}
