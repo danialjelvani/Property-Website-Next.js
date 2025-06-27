@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import logo from "@/assets/images/logo-white.png";
 import profileDefault from "@/assets/images/profile.png";
 import { FaGoogle } from "react-icons/fa";
@@ -16,6 +16,7 @@ const Navbar = () => {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const pathname = usePathname();
   const { data: session, status } = useSession();
+  const router = useRouter();
   console.log(session, status); // helps to see if user is logged in
 
   useEffect(() => setIsMounted(true), []);
@@ -262,7 +263,8 @@ const Navbar = () => {
                   <button
                     onClick={() => {
                       setIsProfileMenuOpen(false);
-                      signOut();
+                      signOut({ redirect: false });
+                      router.push("/");
                     }}
                     className="block linkactive linkactive2 linkhover w-full px-4 py-2 text-sm cursor-pointer text-gray-300"
                     role="menuitem"

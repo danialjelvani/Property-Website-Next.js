@@ -1,11 +1,10 @@
 "use client";
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useMessageContext } from "@/context/messageContext";
 
 const UnreadMessageCount = ({ session }: any) => {
-
-const { unreadCount, setUnreadCount } = useMessageContext();
+  const { unreadCount, setUnreadCount } = useMessageContext();
 
   useEffect(() => {
     if (!session) return;
