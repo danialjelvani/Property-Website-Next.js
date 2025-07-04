@@ -3,7 +3,7 @@ import User from "@/models/User";
 import Property from "@/models/Property";
 import { getSessionUser } from "@/utils/getSessionUser";
 
-export const dyncamic = "force-dynamic";
+// export const dyncamic = "force-dynamic";
 
 export const GET = async (request: Request) => {
   try {
