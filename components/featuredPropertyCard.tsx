@@ -42,7 +42,7 @@ const FeaturedPropertyCard = ({ property }: { property: Iproperty }) => {
           className="w-full h-auto [mask-image:linear-gradient(to_bottom,black_90%,transparent_100%)] shadow-lg shadow-black
               rounded-t-xl"
         />
-        <h3 className="absolute inline-block top-3 right-3 bg-black/70 px-4 py-2 rounded-lg text-blue-500 font-bold text-center">
+        <h3 className="absolute inline-block top-3 right-3 bg-black/80 px-4 py-2 rounded-lg text-blue-300 font-bold text-center">
           ${getrates()}
         </h3>
         <div className="bg-gradient-to-b from-black/0 via-black/0 to-black/30 z-10 absolute top-0 left-0 w-full h-full"></div>

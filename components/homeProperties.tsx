@@ -12,12 +12,12 @@ const homeProperties = async () => {
 
   return (
     <>
-      <section className="px-4 pt-2 pb-10 linkbuttonskygray [mask-image:linear-gradient(to_bottom,black_90%,transparent_100%)]">
-        <div className="container m-auto ">
+      <section className="px-4 pt-2 pb-10 linkbuttonskygray">
+        <div className="container m-auto">
           <h2 className="xl:text-4xl lg:text-3xl text-2xl text-shadow-[0_0_2px] text-shadow-white font-Title2 tracking-wider font-extrabold text-teal-300 mt-6 mb-10 text-center">
             Properties
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="md:p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:overflow-y-hidden md:h-125 lg:h-auto">
             {randomProperties.length === 0 ? (
               <p>No properties found.</p>
             ) : (

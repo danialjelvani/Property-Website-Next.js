@@ -12,7 +12,7 @@ const footer = () => {
         </div>
         <div>
           <p className="text-sm text-gray-500 mt-2 md:mt-0">
-            &copy; {currentYear} Iran Traditional Rentals. All rights reserved.
+            &copy; {currentYear} Isfahan Rentals. All rights reserved.
           </p>
         </div>
       </div>

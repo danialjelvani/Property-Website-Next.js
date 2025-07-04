@@ -36,7 +36,7 @@ const Navbar = () => {
   if (!isMounted) return null;
 
   return (
-    <nav className="bg-gradient-to-b from-emerald-900/50 via-[#1D1C15]/50 to-[#1D1C15]/50">
+    <nav className="sticky z-1000 inset-0 bg-gradient-to-b from-emerald-900/88 via-[#1D1C15]/90 to-[#1D1C15]/85">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-20 items-center justify-between">
           <div className="absolute left-0 flex items-center md:hidden">
@@ -86,8 +86,7 @@ const Navbar = () => {
               />
 
               <span
-                style={{ textShadow: "0px 0px 80px rgba(255, 255, 255)" }}
-                className={`hidden md:block leading-7 ${myFont.className} bg-gradient-to-b from-gray-300 via-teal-100 to-gray-400 bg-clip-text text-transparent text-3xl ml-3 lg:-mr-5 md:mr-2`}
+                className={`hidden md:block leading-7 ${myFont.className} text-shadow-[0px_0px_80px_rgba(100,255,100)] bg-gradient-to-b from-gray-300 via-teal-200 to-gray-400 bg-clip-text text-transparent text-3xl ml-3 lg:-mr-5 md:mr-2`}
               >
                 Isfahan Rentals
               </span>

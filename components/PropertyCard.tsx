@@ -82,7 +82,7 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
       <div className="p-4 container">
         <div className="text-left md:text-center lg:text-left mb-4">
           <div className="text-yellow-500/80 mb-1">{property.type}</div>
-          <h3 className="text-xl text-teal-300 text-shadow-sm text-shadow-black/60 md:min-h-[60px] font-bold">
+          <h3 className="text-xl text-teal-300 text-shadow-sm text-shadow-black/60 font-bold">
             {property.name}
           </h3>
         </div>
