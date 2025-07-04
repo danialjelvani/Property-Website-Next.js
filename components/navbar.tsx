@@ -9,6 +9,7 @@ import profileDefault from "@/assets/images/profile.png";
 import { FaGoogle } from "react-icons/fa";
 import { signOut, useSession } from "next-auth/react";
 import UnreadMessageCount from "./unreadMessageCount";
+import { myFont } from "./fonts";
 
 const Navbar = () => {
   const [isMounted, setIsMounted] = useState(false); // to check if component is mounted and prevent SSR mismatch
@@ -17,7 +18,6 @@ const Navbar = () => {
   const pathname = usePathname();
   const { data: session, status } = useSession();
   const router = useRouter();
-  console.log(session, status); // helps to see if user is logged in
 
   useEffect(() => setIsMounted(true), []);
 
@@ -82,18 +82,14 @@ const Navbar = () => {
               <Image
                 className="h-10 w-auto lg:mr-4"
                 src={logo}
-                alt="Isfahan Traditional Rentals"
+                alt="Isfahan Rentals"
               />
 
               <span
                 style={{ textShadow: "0px 0px 80px rgba(255, 255, 255)" }}
-                className="hidden md:block leading-7 font-Title2 bg-gradient-to-b from-gray-300 via-teal-100 to-gray-400 bg-clip-text text-transparent font-bold text-[26px] ml-3 lg:-mr-5 md:mr-2"
+                className={`hidden md:block leading-7 ${myFont.className} bg-gradient-to-b from-gray-300 via-teal-100 to-gray-400 bg-clip-text text-transparent text-3xl ml-3 lg:-mr-5 md:mr-2`}
               >
-                Iran{" "}
-                <p className="inline font-Title font-black text-[36px] bg-gradient-to-l from-gray-400 via-white to-gray-200 bg-clip-text text-transparent ">
-                  &nbsp;T
-                </p>
-                <span className="font-Title2">raditional&nbsp;</span> Rentals
+                Isfahan Rentals
               </span>
             </Link>
             {/*           <!-- Desktop Menu Hidden below md screens -->

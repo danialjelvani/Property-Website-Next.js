@@ -103,9 +103,7 @@ export const POST = async (request: Request) => {
       lng: formData.get("lng"),
     };
 
-    console.log(propertyData);
     const newProperty = new Property(propertyData);
-    console.log(newProperty);
     await newProperty.save();
     return NextResponse.json({ _id: newProperty._id }, { status: 201 });
   } catch {

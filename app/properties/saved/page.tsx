@@ -33,8 +33,6 @@ const SavedProperties = () => {
     fetchSavedProperties();
   }, []);
 
-  console.log(properties);
-
   return loading ? (
     <LoadingSpinner />
   ) : (

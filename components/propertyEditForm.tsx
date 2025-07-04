@@ -398,7 +398,6 @@ const PropertyEditForm = () => {
           lat: parseFloat(propertyData.lat),
           lng: parseFloat(propertyData.lng),
         });
-        console.log(propertyData);
       } catch (error) {
         console.error("Error fetching property data:", error);
       } finally {

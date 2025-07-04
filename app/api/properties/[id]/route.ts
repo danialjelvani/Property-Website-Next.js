@@ -119,8 +119,6 @@ export const PUT = async (
           lng: formData.get("lng"),
         };
 
-        console.log(propertyData);
-
         const updatedProperty = await Property.findByIdAndUpdate(
           id,
           propertyData
