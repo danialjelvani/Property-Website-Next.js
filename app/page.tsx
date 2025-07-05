@@ -5,6 +5,8 @@ import HomeProperties from "@/components/homeProperties";
 import LoadingPage from "@/app/loading";
 import FeaturedProperties from "@/components/featuredProperties";
 
+export const dynamic = 'force-dynamic';
+
 const HomePage = () => {
   return (
     <>

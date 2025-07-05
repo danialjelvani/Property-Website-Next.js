@@ -1,13 +1,14 @@
 import connectDB from "@/config/database";
 import Message from "@/models/Message";
 import { getSessionUser } from "@/utils/getSessionUser";
+import { NextRequest } from "next/server";
 
 export const dynamic = "force-dynamic";
 
 // toggle read message
 export const PUT = async (
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: { params: Promise<any> }
 ) => {
   try {
     await connectDB();
@@ -18,7 +19,7 @@ export const PUT = async (
       return new Response("Unauthorized", { status: 401 });
     }
 
-    const { id } = await params;
+    const { id } = await context.params;
 
     const message = await Message.findById(id);
 
@@ -26,15 +27,15 @@ export const PUT = async (
       return new Response("Message not found", { status: 404 });
     } else if (message.recipient.toString() !== sessionUser.userId) {
       return new Response("Unauthorized", { status: 401 });
+    } else {
+      // upadate message read status
+
+      message.read = !message.read;
+
+      await message.save();
+
+      return new Response(JSON.stringify(message), { status: 200 });
     }
-
-    // upadate message read status
-
-    message.read = !message.read;
-
-    await message.save();
-
-    return new Response(JSON.stringify(message), { status: 200 });
   } catch (error) {
     console.log(error);
     return new Response("Database Error", { status: 500 });
@@ -43,8 +44,8 @@ export const PUT = async (
 
 // DELETE message
 export const DELETE = async (
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  { params }: { params: Promise<any> }
 ) => {
   try {
     await connectDB();
@@ -63,11 +64,11 @@ export const DELETE = async (
       return new Response("Message not found", { status: 404 });
     } else if (message.recipient.toString() !== sessionUser.userId) {
       return new Response("Unauthorized", { status: 401 });
+    } else {
+      await message.deleteOne();
+
+      return new Response("Message deleted", { status: 200 });
     }
-
-    await message.deleteOne();
-
-    return new Response("Message deleted", { status: 200 });
   } catch (error) {
     console.log(error);
     return new Response("Database Error", { status: 500 });

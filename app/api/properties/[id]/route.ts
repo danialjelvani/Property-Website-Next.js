@@ -7,7 +7,7 @@ import { IPropertyData } from "@/app/api/properties/route";
 // Get /api/properties/{id}
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<any> }
 ) {
   const { id } = await params;
   try {
@@ -26,7 +26,7 @@ export async function GET(
 // delete /api/properties/{id}
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<any> }
 ) {
   try {
     const { id } = await params;
@@ -60,7 +60,7 @@ export async function DELETE(
 // Put /api/properties/{id}
 export const PUT = async (
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<any> }
 ) => {
   try {
     await connectDB();

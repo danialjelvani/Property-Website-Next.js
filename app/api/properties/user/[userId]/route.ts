@@ -5,7 +5,7 @@ import User from "@/models/User";
 // Get /api/properties/user/{userId}
 export const GET = async (
   request: Request,
-  { params }: { params: { userId: string } }
+  { params }: { params: Promise<any> }
 ) => {
   try {
     await connectDB();
@@ -24,7 +24,7 @@ export const GET = async (
 // Delete /api/properties/user/{userId}
 export const DELETE = async (
   request: Request,
-  { params }: { params: { userId: string } }
+  { params }: { params: Promise<any> }
 ) => {
   try {
     await connectDB();

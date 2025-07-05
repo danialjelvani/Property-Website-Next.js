@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 // count unread messages
 export const GET = async (
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<any> }
 ) => {
   try {
     await connectDB();
