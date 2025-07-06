@@ -17,11 +17,12 @@ export async function fetchProperties({
 
     const res = await fetch(
       `${apiDomain}/properties${showFeatured ? "/featured" : ""}`,
-      { cache: 'no-store' }
+      { cache: "no-store" }
     );
 
     if (!res.ok) {
-      throw new Error("Failed to fetch properties");
+      console.log(res.statusText);
+      return [];
     }
     return res.json();
   } catch (error) {

@@ -41,7 +41,7 @@ const PropertySearchForm = () => {
           type="text"
           id="location"
           placeholder="Enter Property Name or Location"
-          className="w-full px-4 py-2 rounded-lg bg-black/50 text-gray-100 focus:outline-none focus:ring-2 focus:ring-amber-400"
+          className="w-full placeholder:text-sm placeholder:lg:text-base placeholder:text-center px-4 h-9 lg:h-11 rounded-lg bg-black/50 text-gray-100 focus:outline-none focus:ring-2 focus:ring-amber-400"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         />
@@ -52,7 +52,7 @@ const PropertySearchForm = () => {
         </label>
         <select
           id="property-type"
-          className="w-full px-4 py-2 rounded-lg bg-black/50 text-gray-100 focus:outline-none focus:ring-2 focus:ring-amber-400"
+          className="w-full placeholder:text-sm text-sm lg:text-base px-4 h-9 lg:h-11 rounded-lg bg-black/50 text-gray-100 focus:outline-none focus:ring-2 focus:ring-amber-400"
           value={propertyType}
           onChange={(e) => setPropertyType(e.target.value)}
         >
@@ -69,7 +69,7 @@ const PropertySearchForm = () => {
       </div>
       <button
         type="submit"
-        className="md:ml-4 mt-2 md:mt-0 w-full md:w-auto px-6 py-2 rounded-lg text-white linkbuttonamber focus:outline-none focus:ring focus:ring-white/50"
+        className="md:ml-4 text-sm lg:text-base mt-2 md:mt-0 w-full md:w-auto px-6 h-9 lg:h-11 rounded-lg text-white linkbuttonamber focus:outline-none focus:ring focus:ring-white/50"
       >
         Search
       </button>

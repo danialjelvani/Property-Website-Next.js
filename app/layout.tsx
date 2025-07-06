@@ -7,11 +7,11 @@ import { Slide, ToastContainer } from "react-toastify";
 import "leaflet/dist/leaflet.css";
 import { MessageProvider } from "@/context/messageContext";
 import "photoswipe/dist/photoswipe.css";
-
+import ScreenInfo from "@/components/screenInfo";
 
 export const metadata = {
-  title: "Isfahan Traditional Rentals",
-  description: "find traditional property rentals in Isfahan",
+  title: "Isfahan Rentals",
+  description: "find property rentals in Isfahan",
   keywords: [
     "rental",
     "apartment",
@@ -34,6 +34,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
           style={{ backgroundImage: "url('/images/background.webp')" }}
         >
           <MessageProvider>
+            <ScreenInfo />
             <div className="fixed inset-0 bg-gradient-to-b from-neutral-800/70 via-neutral-800/60 to-neutral-800/40 opacity-98"></div>
 
             <div className="relative z-10 min-h-screen flex flex-col">

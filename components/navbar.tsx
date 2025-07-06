@@ -36,9 +36,9 @@ const Navbar = () => {
   if (!isMounted) return null;
 
   return (
-    <nav className="sticky z-1000 inset-0 bg-gradient-to-b from-emerald-900/88 via-[#1D1C15]/90 to-[#1D1C15]/85">
+    <nav className="sticky z-1000 inset-0 h-15 bg-gradient-to-b from-emerald-900/88 via-[#1D1C15]/90 to-[#1D1C15]/85">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className="relative flex h-20 items-center justify-between">
+        <div className="relative flex h-15 items-center justify-between">
           <div className="absolute left-0 flex items-center md:hidden">
             {/*           <!-- Mobile menu button-->
              */}{" "}
@@ -57,7 +57,7 @@ const Navbar = () => {
               <span className="absolute -inset-0.5"></span>
               <span className="sr-only">Open main menu</span>
               <svg
-                className="block h-6 w-6"
+                className="block h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
@@ -80,7 +80,7 @@ const Navbar = () => {
               href="/"
             >
               <Image
-                className="h-10 w-auto lg:mr-4"
+                className="h-9 w-auto lg:mr-4"
                 src={logo}
                 alt="Isfahan Rentals"
               />
@@ -155,7 +155,6 @@ const Navbar = () => {
                   href="/login"
                   className="flex items-center cursor-pointer tracking-tight lg:tracking-normal text-sm text-gray-200 bg-gradient-to-b from-orange-400 via-amber-700 to-orange-400 shadow-[0_0_20px] shadow-neutral-800 linkhover linkactive linkactive2 hover:text-gray-200 rounded-md px-3 py-2 lg:mr-4 mr-2"
                 >
-                  <FaGoogle className="mr-2" />
                   <span>Login / Register</span>
                 </Link>
               </div>
@@ -173,7 +172,7 @@ const Navbar = () => {
                   <span className="absolute -inset-1.5"></span>
                   <span className="sr-only">View notifications</span>
                   <svg
-                    className="h-6 w-6"
+                    className="h-5 w-5 lg:h-6 lg:w-6"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
@@ -214,11 +213,11 @@ const Navbar = () => {
                   <span className="absolute -inset-1.5"></span>
                   <span className="sr-only">Open user menu</span>
                   <Image
-                    className="h-8 w-8 rounded-full"
+                    className="h-6 w-6 lg:h-7 lg:w-7 rounded-full"
                     src={profileDefault}
                     alt=""
                   />
-                  <span className="mx-1 p-1 text-sm text-white">
+                  <span className="mx-1 lg:p-0.5 text-xs pt-0.75 lg:text-sm text-white">
                     {session.user?.name?.slice(0, 5)}
                   </span>
                 </button>
@@ -228,7 +227,7 @@ const Navbar = () => {
                   id="user-menu"
                   className={`${
                     isProfileMenuOpen ? "block" : "hidden"
-                  } py-2 mt-6 z-70 flex text-center fixed left-0 w-full flex-col md:flex-none md:absolute md:left-auto md:right-0 md:w-60 md:origin-top-right space-y-2 rounded-b-lg md:rounded-lg
+                  } py-2 top-14 z-70 flex text-center fixed left-0 w-full flex-col md:flex-none md:left-auto md:right-2 xl:right-20 md:w-60 space-y-2 rounded-b-lg md:rounded-lg
                     bg-gradient-to-b from-neutral-900/99 via-neutral-800/98 to-teal-950/97 shadow-[-3px_3px_20px_rgb(0,0,0,0.2)] md:shadow-[-3px_3px_20px_rgb(0,0,0,0.2)] shadow-teal-800 ring-1 ring-teal-950 ring-opacity-5 focus:outline-none`}
                   role="menu"
                   aria-orientation="vertical"
@@ -285,7 +284,7 @@ const Navbar = () => {
         <div
           className={
             isMobileMenuOpen
-              ? "absolute bg-gradient-to-b from-neutral-900/99 via-neutral-800/98 to-teal-950/97 shadow-[-3px_3px_20px_rgb(0,0,0,0.2)] md:shadow-[-3px_3px_20px_rgb(0,0,0,0.2)] shadow-teal-800 ring-1 rounded-b-md ring-teal-950 ring-opacity-5 py-1 border-teal-200 w-full top-20 z-50"
+              ? "fixed bg-gradient-to-b from-neutral-900/99 via-neutral-800/98 to-teal-950/97 shadow-[-3px_3px_20px_rgb(0,0,0,0.2)] md:shadow-[-3px_3px_20px_rgb(0,0,0,0.2)] shadow-teal-800 ring-1 rounded-b-md ring-teal-950 ring-opacity-5 py-1 border-teal-200 w-full top-14 z-50"
               : "hidden"
           }
           id="mobile-menu"
@@ -326,7 +325,6 @@ const Navbar = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="flex items-center  w-full justify-center cursor-pointer tracking-wider leading-7 font-semibold linkactive linkactive2 linkhover text-gray-200 bg-gradient-to-b from-amber-500 via-amber-900 to-amber-600 hover:text-gray-200 rounded-md px-3 py-2 mt-5 mb-3"
               >
-                <FaGoogle className="mr-2" />
                 <span>Login or Register</span>
               </Link>
             )}
