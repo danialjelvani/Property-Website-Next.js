@@ -9,6 +9,7 @@ import dynamic from "next/dynamic";
 import Typewriter from "./typewriter";
 import { fetchPropertyById } from "@/utils/requests";
 import LoadingSpinner from "@/app/loading";
+import { myFont } from "./fonts";
 
 const LocationPicker = dynamic(() => import("@/components/locationPicker"), {
   ssr: false, // Disable server-side rendering to fix window is not defined error
@@ -412,12 +413,14 @@ const PropertyEditForm = () => {
   ) : (
     mounted && (
       <form onSubmit={handleSubmit}>
-        <h2 className="text-3xl text-center font-bold font-Title2 mb-6">
+        <h2
+          className={`text-3xl lg:text-4xl text-center tracking-wide ${myFont.className} mb-4`}
+        >
           Edit Property
         </h2>
 
         <div className="mb-4">
-          <label htmlFor="type" className="block text-gray-700 font-bold mb-2">
+          <label htmlFor="type" className="block text-gray-800 font-bold mb-2">
             Property Type
           </label>
           <select
@@ -441,7 +444,7 @@ const PropertyEditForm = () => {
           </select>
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">
+          <label className="block text-gray-800 font-bold mb-2">
             Listing Name
           </label>
           <input
@@ -458,7 +461,7 @@ const PropertyEditForm = () => {
         <div className="mb-4">
           <label
             htmlFor="description"
-            className="block text-gray-700 font-bold mb-2"
+            className="block text-gray-800 font-bold mb-2"
           >
             Description
           </label>
@@ -474,7 +477,7 @@ const PropertyEditForm = () => {
         </div>
 
         <div className="mb-4 bg-amber-600 p-4 rounded-lg">
-          <label className="block text-gray-700 font-bold mb-2">Location</label>
+          <label className="block text-gray-800 font-bold mb-2">Location</label>
           <input
             type="text"
             id="street"
@@ -535,7 +538,7 @@ const PropertyEditForm = () => {
           <div className="w-full sm:w-1/3 pr-2">
             <label
               htmlFor="beds"
-              className="block text-gray-700 font-bold mb-2"
+              className="block text-gray-800 font-bold mb-2"
             >
               Beds
             </label>
@@ -552,7 +555,7 @@ const PropertyEditForm = () => {
           <div className="w-full sm:w-1/3 px-2">
             <label
               htmlFor="baths"
-              className="block text-gray-700 font-bold mb-2"
+              className="block text-gray-800 font-bold mb-2"
             >
               Baths
             </label>
@@ -569,7 +572,7 @@ const PropertyEditForm = () => {
           <div className="w-full sm:w-1/3 pl-2">
             <label
               htmlFor="square_feet"
-              className="block text-gray-700 font-bold mb-2"
+              className="block text-gray-800 font-bold mb-2"
             >
               Square Feet
             </label>
@@ -586,7 +589,7 @@ const PropertyEditForm = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">
+          <label className="block text-gray-800 font-bold mb-2">
             Amenities
           </label>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2 accent-black">
@@ -780,7 +783,7 @@ const PropertyEditForm = () => {
         </div>
 
         <div className="mb-4 bg-amber-600 p-4 rounded-lg">
-          <label className="block text-gray-700 font-bold mb-2">
+          <label className="block text-gray-800 font-bold mb-2">
             Rates (Leave blank if not applicable)
           </label>
           <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
@@ -829,7 +832,7 @@ const PropertyEditForm = () => {
         <div className="mb-4">
           <label
             htmlFor="seller_name"
-            className="block text-gray-700 font-bold mb-2"
+            className="block text-gray-800 font-bold mb-2"
           >
             Seller Name
           </label>
@@ -846,7 +849,7 @@ const PropertyEditForm = () => {
         <div className="mb-4">
           <label
             htmlFor="seller_email"
-            className="block text-gray-700 font-bold mb-2"
+            className="block text-gray-800 font-bold mb-2"
           >
             Seller Email
           </label>
@@ -864,7 +867,7 @@ const PropertyEditForm = () => {
         <div className="mb-4">
           <label
             htmlFor="seller_phone"
-            className="block text-gray-700 font-bold mb-2"
+            className="block text-gray-800 font-bold mb-2"
           >
             Seller Phone
           </label>
@@ -882,7 +885,7 @@ const PropertyEditForm = () => {
         <div className="mb-4">
           <label
             htmlFor="images"
-            className="block text-gray-700 font-bold mb-2"
+            className="block text-gray-800 font-bold mb-2"
           >
             Images (Select up to 4 images)
             <br />
@@ -976,7 +979,7 @@ const PropertyEditForm = () => {
         </div>
         {uploading && (
           <div className="w-full mx-auto m-2 h-7 bg-yellow-300 rounded-lg">
-            <div className="h-7 bg-yellow-400 rounded-lg animate-pulse w-full flex justify-center text-gray-700 text-shadow text-shadow-blue-950 font-semibold">
+            <div className="h-7 bg-yellow-400 rounded-lg animate-pulse w-full flex justify-center text-gray-800 text-shadow text-shadow-blue-950 font-semibold">
               <div className="w-36">
                 <Typewriter text="Uploading image ..." speed={50} />
               </div>

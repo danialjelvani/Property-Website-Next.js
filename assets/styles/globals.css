@@ -88,6 +88,14 @@ select option {
   @apply bg-black/80 text-teal-200;
 }
 
+input::placeholder {
+  @apply text-teal-200;
+}
+
+textarea::placeholder {
+  @apply text-teal-200;
+}
+
 .linkbuttonemerald {
   @apply bg-gradient-to-b from-emerald-400 via-emerald-700 to-emerald-500
   hover:bg-gradient-to-b hover:from-emerald-500 hover:via-emerald-800 hover:to-emerald-600
@@ -193,4 +201,68 @@ select option {
 
 .pswp__bullet--active {
   background: rgb(229, 130, 0);
+}
+
+@theme {
+  --breakpoint-md: 45rem;
+}
+
+.bg1 {
+  background-color: #589771;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='20' viewBox='0 0 16 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23636e14' fill-opacity='0.16' fill-rule='evenodd'%3E%3Cpath d='M8 0v20L0 10M16 0v10L8 0M16 10v10H8'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.bg2 {
+  background-color: #004d37;
+  background-image: url("https://www.transparenttextures.com/patterns/leather.png");
+}
+
+.bg3 {
+  background-color: #4a9900;
+  background-image: url("https://www.transparenttextures.com/patterns/dotnoise-light-grey.png");
+}
+
+.bg4 {
+  background-color: #1c0807;
+  background-image: url("https://www.transparenttextures.com/patterns/mooning.png");
+}
+
+.bg5 {
+  background-color: #1c1312;
+  background-image: url("https://www.transparenttextures.com/patterns/fabric-of-squares.png");
+}
+
+.bg6 {
+  background-color: #1c1312bb;
+  background-image: url("https://www.transparenttextures.com/patterns/iron-grip.png");
+}
+
+.bg7 {
+  background-color: #1c0807;
+  background-image: url("https://www.transparenttextures.com/patterns/snow.png");
+}
+
+.bg8 {
+  background-color: #080202;
+  background-image: url("https://www.transparenttextures.com/patterns/vichy.png");
+}
+
+.bg9 {
+  background-color: #080202;
+  background-image: url("https://www.transparenttextures.com/patterns/white-texture.png");
+}
+
+.bg10 {
+  background-color: #022115;
+  background-image: url("https://www.transparenttextures.com/patterns/white-texture.png");
+}
+
+.bg11 {
+    background-color: #1c1312;
+  background-image: url("@/public/images/bg.png");
+}
+
+.bg12 {
+    background-color: #1c1312bb;
+  background-image: url("@/public/images/nav.png");
 }

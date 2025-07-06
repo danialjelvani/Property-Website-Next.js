@@ -41,7 +41,7 @@ const PropertySearchForm = () => {
           type="text"
           id="location"
           placeholder="Enter Property Name or Location"
-          className="w-full placeholder:text-sm placeholder:lg:text-base placeholder:text-center px-4 h-9 lg:h-11 rounded-lg bg-black/50 text-gray-100 focus:outline-none focus:ring-2 focus:ring-amber-400"
+          className="w-full placeholder:text-white/60! placeholder:text-sm placeholder:lg:text-base placeholder:text-center px-4 h-9 lg:h-11 rounded-lg bg-black/50 text-gray-100 focus:outline-none focus:ring-2 focus:ring-amber-400"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         />

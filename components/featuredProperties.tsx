@@ -1,6 +1,7 @@
 import React from "react";
 import { fetchProperties } from "@/utils/requests";
 import FeaturedPropertiesScroll from "./featuredPropertiesScroll";
+import { myFont } from "./fonts";
 
 const FeaturedProperties = async () => {
   const properties = await fetchProperties({ showFeatured: true });
@@ -17,7 +18,7 @@ const FeaturedProperties = async () => {
     properties.length > 0 && (
       <section className="pt-6 pb-10">
         <div className="linkbuttonteal py-2 container-xl lg:container m-auto">
-          <h2 className="xl:text-4xl text-3xl font-Title2 tracking-wider font-extrabold text-teal-300 mt-6 mb-8 text-center">
+          <h2 className={`xl:text-4xl text-3xl ${myFont.className} tracking-wider text-teal-300 mt-6 mb-7 text-center`}>
             Featured Properties
           </h2>
           <FeaturedPropertiesScroll properties={randomProperties} />

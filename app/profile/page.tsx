@@ -87,13 +87,13 @@ const ProfilePage = () => {
 
   return (
     <section className="bg-black/10">
-      <div className="container max-w-7xl m-auto md:py-8">
-        <div className="bg-orange-500/85 px-6 py-8 mb-4 shadow-[0_0_10px] shadow-amber-300 rounded-xl m-4">
-          <h1 className="text-2xl md:text-3xl font-bold text-white text-shadow-[0_0_10px] text-shadow-white/30 text-center md:text-left -mt-2 md:mt-6 md:ml-10">
+      <div className="container max-w-7xl flex items-center justify-center min-h-[80vh] m-auto">
+        <div className="bg-orange-500/85 p-6 shadow-[0_0_10px] shadow-amber-300 rounded-xl m-2">
+          <h1 className="text-2xl md:text-3xl font-bold text-white text-shadow-[0_0_10px] text-shadow-white/30 text-center md:ml-3 lg:ml-10 md:text-left -mt-2 md:mt-6">
             Your Profile
           </h1>
-          <div className="md:flex md:flex-row">
-            <div className="md:w-1/5 md:mx-20 md:flex-col gap-8 flex flex-row mt-8 md:mt-10">
+          <div className="md:flex md:gap-5 lg:gap-10 md:flex-row">
+            <div className="md:w-1/6 md:ml md:mr-15 md:ml-6 lg:ml-10 md:flex-col gap-8 flex flex-row mt-6 md:mt-10">
               <div className="md:mb-3 mb-6 shadow-md -mt-2 md:mt-0 md:w-[100px] md:h-[100px] w-20 h-20 mx-auto md:mx-0 rounded-full shadow-white/60">
                 <Image
                   className="rounded-full mx-auto md:mx-0"
@@ -110,13 +110,13 @@ const ProfilePage = () => {
                   <span className="font-bold text-md md:text-xl text-shadow-[0_0_10px] text-shadow-white/30 text-white">
                     Name:{" "}
                   </span>{" "}
-                  {profileName}
+                  <span className="md:block">{profileName}</span>
                 </h2>
                 <h2 className="text-md md:text-lg md:mb-6">
                   <span className="font-bold text-md md:text-xl text-shadow-[0_0_10px] text-shadow-white/30 text-white">
                     Email:{" "}
                   </span>{" "}
-                  {profileEmail}
+                  <span className="md:block">{profileEmail}</span>
                 </h2>
 
                 <button
@@ -128,7 +128,7 @@ const ProfilePage = () => {
               </div>
             </div>
 
-            <div className="md:w-4/5 md:pl-4 md:-mt-6">
+            <div className="md:w-[400px] lg:w-[600px] xl:w-[700px] grow md:-mt-6">
               <h2 className="text-xl md:text-2xl font-semibold text-shadow-[0_0_10px] text-shadow-black/20 text-white mb-3 md:mb-6">
                 Your Listings{" "}
                 <span className="text-sm">

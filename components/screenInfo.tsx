@@ -25,7 +25,7 @@ const ScreenInfo = () => {
   if (!mounted || process.env.NODE_ENV !== "development") return null;
 
   return (
-    <div className="fixed inset-0 z-[10000] bg-black/40 rounded text-teal-200 text-sm w-25 h-5">
+    <div className="fixed inset-0 z-[10000] bg-black/40 text-center rounded text-teal-200 text-sm w-29 h-5">
       {`W: ${dimensions.width} H: ${dimensions.height}`}
     </div>
   );

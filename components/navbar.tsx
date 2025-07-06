@@ -36,7 +36,7 @@ const Navbar = () => {
   if (!isMounted) return null;
 
   return (
-    <nav className="sticky z-1000 inset-0 h-15 bg-gradient-to-b from-emerald-900/88 via-[#1D1C15]/90 to-[#1D1C15]/85">
+    <nav className="sticky z-1000 inset-0 h-15 bg12">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-15 items-center justify-between">
           <div className="absolute left-0 flex items-center md:hidden">
@@ -86,7 +86,7 @@ const Navbar = () => {
               />
 
               <span
-                className={`hidden md:block leading-7 ${myFont.className} text-shadow-[0px_0px_80px_rgba(100,255,100)] bg-gradient-to-b from-gray-300 via-teal-200 to-gray-400 bg-clip-text text-transparent text-3xl ml-3 lg:-mr-5 md:mr-2`}
+                className={`hidden md:block leading-7 ${myFont.className} text-shadow-[0px_0px_80px_rgba(100,255,100)] bg-gradient-to-b from-gray-300 via-teal-200 to-gray-400 bg-clip-text text-transparent md:text-2xl lg:text-3xl ml-3 lg:-mr-5 md:mr-2`}
               >
                 Isfahan Rentals
               </span>
@@ -94,9 +94,9 @@ const Navbar = () => {
             {/*           <!-- Desktop Menu Hidden below md screens -->
              */}{" "}
             <div className="hidden lg:ml-6 md:flex md:items-center md:flex-1">
-              <div className="lg:flex-row md:flex md:flex-[0.3_1.6_80%] md:flex-col lg:mx-2 ml-2 -mr-18 lg:space-x-2">
+              <div className="flex flex-[0.3_1.6_90%] lg:mx-2 ml-2 -mr-18 lg:space-x-2">
                 <div
-                  className={`lg:flex lg:justify-center lg:items-center lg:w-1/3 xl:ml-8 text-center lg:outline-none outline-1 outline-[rgba(200,200,255,0.1)] linkactive linkhover linkactive2 rounded-md ${
+                  className={`flex justify-center items-center w-1/3 xl:ml-8 text-center linkactive linkhover linkactive2 rounded-md ${
                     pathname === "/" ? "linkanimation" : ""
                   }`}
                 >
@@ -111,15 +111,15 @@ const Navbar = () => {
                   </Link>
                 </div>
                 <div
-                  className={`lg:flex lg:items-center lg:justify-center text-center lg:outline-none outline-1 outline-[rgba(200,200,255,0.1)] 
-                 linkhover linkactive linkactive2 rounded-md lg:w-1/3 ${
+                  className={`flex items-center justify-center text-center] 
+                 linkhover linkactive linkactive2 rounded-md w-1/3 ${
                    pathname === "/properties" ? "linkanimation" : ""
                  }`}
                 >
                   <Link
                     href="/properties"
                     style={{ textShadow: "2px 2px 4px rgba(255, 255, 0, 0.2)" }}
-                    className={`text-gray-200 lg:h-auto lg:w-full ${
+                    className={`text-gray-200 h-auto w-full ${
                       session ? "md:h-6" : "md:h-9"
                     } hover:text-gray-200 rounded-md md:flex md:items-center justify-center px-3 py-2`}
                   >
@@ -128,7 +128,7 @@ const Navbar = () => {
                 </div>
                 {session && (
                   <div
-                    className={`lg:flex lg:items-center lg:justify-center lg:w-1/3 text-center lg:outline-none outline-1 outline-[rgba(200,200,255,0.1)] linkactive linkhover linkactive2 rounded-md ${
+                    className={`flex items-center justify-center w-1/3 text-center linkactive linkhover linkactive2 rounded-md ${
                       pathname === "/properties/add" ? "linkanimation" : ""
                     }`}
                   >
@@ -137,7 +137,7 @@ const Navbar = () => {
                       style={{
                         textShadow: "2px 2px 4px rgba(255, 255, 0, 0.2)",
                       }}
-                      className="text-gray-200 lg:h-auto lg:w-full md:h-6 md:-mx-2.5 hover:text-gray-200 rounded-md md:flex md:items-center justify-center px-3 py-2"
+                      className="text-gray-200 h-auto w-full hover:text-gray-200 rounded-md flex items-center justify-center px-2 lg:px-3 py-2"
                     >
                       Add Property
                     </Link>

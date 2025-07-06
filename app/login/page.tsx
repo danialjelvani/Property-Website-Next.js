@@ -26,17 +26,17 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="container m-auto mt-10 lg:mt-20 max-w-2xl">
-      <div className="flex flex-col items-center bg-orange-500/85 px-1 md:px-5 py-8 shadow-[0_0_10px] shadow-amber-300 rounded-xl m-4">
-        <div className="p-2 self-start ml-10 text-3xl font-semibold text-teal-200 text-shadow-[0_0_6px] text-shadow-white/50 mt-4">
+    <div className="container flex items-center justify-center mx-auto min-h-[75vh] max-w-xl">
+      <div className="flex flex-col items-center bg-orange-500/85 px-1 md:px-5 py-7 shadow-[0_0_10px] shadow-amber-300 rounded-xl m-4">
+        <div className="p-2 self-start ml-10 text-2xl lg:text-3xl font-semibold text-white text-shadow-[0_0_6px] text-shadow-white/50 mt-2">
           Welcome Back!
         </div>
-        <div className="p-2 self-start ml-10 mt-4 text-teal-200">
+        <div className="p-2 self-start mx-10 mt-1 text-white">
           Sign in to manage your listings, favorites, and more all in one place.
         </div>
         <form
           onSubmit={handleSubmit}
-          className="m-8 flex flex-col justify-center max-w-xs gap-4 text-white"
+          className="m-4 flex flex-col justify-center max-w-xs gap-3 text-white"
         >
           <input
             value={email}
@@ -58,13 +58,13 @@ export default function LoginPage() {
             Login
           </button>
         </form>
-        <div className="self-start ml-10 p-2 text-teal-200 mb-2">
+        <div className="self-start mx-10 p-2 text-white mb-2">
           If you dont have an account, it only takes a minute to get started.
         </div>
 
         <Link
           href="/login/signup"
-          className="linkbuttonamber text-white font-bold py-3 px-6 rounded-md"
+          className="linkbuttonamber text-white font-bold py-2 px-8 rounded-md"
         >
           Sign Up
         </Link>

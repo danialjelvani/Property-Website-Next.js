@@ -7,6 +7,7 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import dynamic from "next/dynamic";
 import Typewriter from "./typewriter";
+import { myFont } from "./fonts";
 
 const LocationPicker = dynamic(() => import("@/components/locationPicker"), {
   ssr: false, // Disable server-side rendering to fix window is not defined error
@@ -318,18 +319,20 @@ const propertyAddForm = () => {
   return (
     mounted && (
       <form onSubmit={handleSubmit}>
-        <h2 className="text-3xl text-center font-bold font-Title2 mb-6">
+        <h2
+          className={`text-3xl lg:text-4xl text-center tracking-wide ${myFont.className} mb-4`}
+        >
           Add Property
         </h2>
 
         <div className="mb-4">
-          <label htmlFor="type" className="block text-gray-700 font-bold mb-2">
+          <label htmlFor="type" className="block text-gray-800 font-bold mb-2">
             Property Type
           </label>
           <select
             id="type"
             name="type"
-            className="border rounded w-full py-2 px-3"
+            className="border border-black rounded w-full py-2 px-3 text-teal-200"
             required
             onChange={handleChange}
             value={fields.type}
@@ -347,7 +350,7 @@ const propertyAddForm = () => {
           </select>
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">
+          <label className="block text-gray-800 font-bold mb-2">
             Listing Name
           </label>
           <input
@@ -364,7 +367,7 @@ const propertyAddForm = () => {
         <div className="mb-4">
           <label
             htmlFor="description"
-            className="block text-gray-700 font-bold mb-2"
+            className="block text-gray-800 font-bold mb-2"
           >
             Description
           </label>
@@ -380,7 +383,7 @@ const propertyAddForm = () => {
         </div>
 
         <div className="mb-4 bg-amber-600 p-4 rounded-lg">
-          <label className="block text-gray-700 font-bold mb-2">Location</label>
+          <label className="block text-gray-800 font-bold mb-2">Location</label>
           <input
             type="text"
             id="street"
@@ -426,7 +429,7 @@ const propertyAddForm = () => {
           <div className="w-full sm:w-1/3 pr-2">
             <label
               htmlFor="beds"
-              className="block text-gray-700 font-bold mb-2"
+              className="block text-gray-800 font-bold mb-2"
             >
               Beds
             </label>
@@ -443,7 +446,7 @@ const propertyAddForm = () => {
           <div className="w-full sm:w-1/3 px-2">
             <label
               htmlFor="baths"
-              className="block text-gray-700 font-bold mb-2"
+              className="block text-gray-800 font-bold mb-2"
             >
               Baths
             </label>
@@ -460,7 +463,7 @@ const propertyAddForm = () => {
           <div className="w-full sm:w-1/3 pl-2">
             <label
               htmlFor="square_feet"
-              className="block text-gray-700 font-bold mb-2"
+              className="block text-gray-800 font-bold mb-2"
             >
               Square Feet
             </label>
@@ -477,7 +480,7 @@ const propertyAddForm = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">
+          <label className="block text-gray-800 font-bold mb-2">
             Amenities
           </label>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2 accent-black">
@@ -671,7 +674,7 @@ const propertyAddForm = () => {
         </div>
 
         <div className="mb-4 bg-amber-600 p-4 rounded-lg">
-          <label className="block text-gray-700 font-bold mb-2">
+          <label className="block text-gray-800 font-bold mb-2">
             Rates (Leave blank if not applicable)
           </label>
           <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
@@ -720,7 +723,7 @@ const propertyAddForm = () => {
         <div className="mb-4">
           <label
             htmlFor="seller_name"
-            className="block text-gray-700 font-bold mb-2"
+            className="block text-gray-800 font-bold mb-2"
           >
             Seller Name
           </label>
@@ -737,7 +740,7 @@ const propertyAddForm = () => {
         <div className="mb-4">
           <label
             htmlFor="seller_email"
-            className="block text-gray-700 font-bold mb-2"
+            className="block text-gray-800 font-bold mb-2"
           >
             Seller Email
           </label>
@@ -755,7 +758,7 @@ const propertyAddForm = () => {
         <div className="mb-4">
           <label
             htmlFor="seller_phone"
-            className="block text-gray-700 font-bold mb-2"
+            className="block text-gray-800 font-bold mb-2"
           >
             Seller Phone
           </label>
@@ -773,7 +776,7 @@ const propertyAddForm = () => {
         <div className="mb-4">
           <label
             htmlFor="images"
-            className="block text-gray-700 font-bold mb-2"
+            className="block text-gray-800 font-bold mb-2"
           >
             Images (Select up to 4 images)
           </label>
@@ -862,7 +865,7 @@ const propertyAddForm = () => {
         </div>
         {uploading && (
           <div className="w-full mx-auto m-2 h-7 bg-yellow-300 rounded-lg">
-            <div className="h-7 bg-yellow-400 rounded-lg animate-pulse w-full flex justify-center text-gray-700 text-shadow text-shadow-blue-950 font-semibold">
+            <div className="h-7 bg-yellow-400 rounded-lg animate-pulse w-full flex justify-center text-gray-800 text-shadow text-shadow-blue-950 font-semibold">
               <div className="w-36">
                 <Typewriter text="Uploading image ..." speed={50} />
               </div>
@@ -871,7 +874,7 @@ const propertyAddForm = () => {
         )}
         <div>
           <button
-            className="linkbuttondark text-white cursor-pointer font-bold py-2 px-4 rounded-full w-full"
+            className="linkbuttondark text-white cursor-pointer font-bold mt-2 py-2 px-4 rounded-full w-full"
             type="submit"
             disabled={uploading}
           >

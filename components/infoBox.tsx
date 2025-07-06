@@ -27,7 +27,7 @@ const infoBox = ({
       <p className="mt-2 mb-4">{children}</p>
       <Link
         href={buttonInfo.link}
-        className={`md:inline-block block min-w-41 text-center ${buttonInfo.backgroundColor} ${buttonInfo.textColor} rounded-lg px-4 py-1 h-8 md:py-2 md:h-10`}
+        className={`md:inline-block block min-w-41 text-center ${buttonInfo.backgroundColor} ${buttonInfo.textColor} rounded-lg px-4 py-1.5 h-8 md:py-2 md:h-10`}
       >
         {buttonInfo.text}
       </Link>

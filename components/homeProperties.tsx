@@ -3,6 +3,8 @@ import Link from "next/link";
 import PropertyCard from "@/components/PropertyCard";
 import { Iproperty } from "@/components/PropertyCard";
 import { fetchProperties } from "@/utils/requests";
+import { myFont } from "./fonts";
+
 
 const homeProperties = async () => {
   const data = await fetchProperties();
@@ -19,7 +21,7 @@ const homeProperties = async () => {
     <>
       <section className="px-4 pt-2 pb-10 linkbuttonskygray">
         <div className="container m-auto">
-          <h2 className="xl:text-4xl text-3xl font-Title2 tracking-wider font-extrabold text-teal-300 mt-6 mb-10 text-center">
+          <h2 className={`xl:text-4xl text-3xl ${myFont.className} tracking-wider text-teal-300 mt-6 mb-8 text-center`}>
             Properties
           </h2>
           <div className="md:p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:overflow-y-hidden md:h-125 lg:h-auto">
@@ -36,7 +38,7 @@ const homeProperties = async () => {
       <section className="mx-auto max-w-lg -mt-4 mb-6 px-6">
         <Link
           href="/properties"
-          className="block linkbuttongray text-white text-center text-sm lg:text-base py-2 lg:py-3 px-6 rounded-xl"
+          className="block linkbuttongray text-white text-center text-sm lg:text-base py-2.5 lg:py-3 px-6 rounded-xl"
         >
           View All Properties
         </Link>
