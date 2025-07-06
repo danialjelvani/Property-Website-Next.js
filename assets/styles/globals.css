@@ -259,10 +259,10 @@ textarea::placeholder {
 
 .bg11 {
     background-color: #1c1312;
-  background-image: url("@/public/images/bg.png");
+  background-image: url("/images/bg.png");
 }
 
 .bg12 {
     background-color: #1c1312bb;
-  background-image: url("@/public/images/nav.png");
+  background-image: url("/images/nav.png");
 }
