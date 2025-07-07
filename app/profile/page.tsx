@@ -92,7 +92,7 @@ const ProfilePage = () => {
     </div>
   ) : (
     <section className="bg-black/10 text-black">
-      <div className="container max-w-6xl flex items-center justify-center min-h-[80vh] mx-auto">
+      <div className="container max-w-6xl flex justify-center min-h-[80vh] mx-auto">
         <div className="bg-orange-500/85 p-4 grow shadow-[0_0_10px] shadow-amber-300 rounded-xl m-2">
           <h1 className={`text-3xl md:text-4xl ${myFont.className} text-gray-800 text-center md:ml-3 lg:ml-10 md:text-left md:mt-6`}>
             My Profile
