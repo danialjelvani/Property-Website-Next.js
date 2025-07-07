@@ -59,7 +59,7 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
   const images = property.images.map((str) => JSON.parse(str));
 
   return (
-    <div className="rounded-xl bg-[#2D1705]/70 shadow-[0_0_20px] shadow-black relative">
+    <div className="rounded-xl bg-white/60 shadow-[0_0_20px] shadow-black relative">
       <div className="relative xl:h-75 lg:h-60 md:h-45 h-60 w-auto">
         <Image
           key={retryKey}
@@ -80,17 +80,18 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
       </div>
 
       <div className="p-4 container">
-        <div className="text-left md:text-center lg:text-left mb-4">
-          <div className="text-yellow-500/80 mb-1">{property.type}</div>
-          <h3 className="text-xl text-teal-300 text-shadow-sm text-shadow-black/60 font-bold">
+        <div className="text-left md:text-center lg:text-left mb-1">
+          <h3 className="text-lg lg:text-xl text-black font-bold mb-1">
             {property.name}
           </h3>
+          <div className="text-gray-700">{property.type}</div>
+          
         </div>
-        <h3 className="absolute top-[10px] right-[10px] bg-black/70 px-4 py-2 rounded-lg text-yellow-500 font-bold text-right md:text-center lg:text-right">
+        <h3 className="absolute top-[10px] right-[10px] bg-black/80 px-2.5 py-1.5 text-sm rounded-lg text-yellow-500 font-bold text-right md:text-center lg:text-right">
           ${getrates()}
         </h3>
 
-        <div className="flex justify-center gap-4 text-emerald-300 mb-4">
+        <div className="flex justify-center gap-4 text-gray-600 mb-2 text-sm lg:text-base">
           <p>
             <FaBed className="inline -mt-1 mr-1" /> {property.beds}
             <span className="md:hidden lg:inline">
@@ -112,11 +113,11 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
           </p>
         </div>
 
-        <div className="flex justify-center gap-4 md:gap-3 text-emerald-300 text-sm mb-4">
-          {rates.monthly && (
+        <div className="flex justify-center gap-2 md:gap-3 text-rose-600 text-sm mb-2">
+          {rates.nightly && (
             <p>
               <FaDollarSign className="inline -mt-1 mr-0.5 md:mr-0" />
-              Monthly
+              Nightly
             </p>
           )}
           {rates.weekly && (
@@ -125,18 +126,18 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
               Weekly
             </p>
           )}
-          {rates.nightly && (
+          {rates.monthly && (
             <p>
               <FaDollarSign className="inline -mt-1 mr-0.5 md:mr-0" />
-              Nightly
+              Monthly
             </p>
           )}
         </div>
 
-        <div className="border border-black/70 mb-5"></div>
+        <div className="border border-gray-300 mb-2"></div>
 
-        <div className="flex flex-col lg:flex-row justify-between mb-3">
-          <div className="flex align-middle gap-2 mb-4 lg:mb-0">
+        <div className="flex flex-col lg:flex-row justify-between mb-1">
+          <div className="flex align-middle gap-2 mb-3 lg:mb-0 text-sm lg:text-base">
             <FaMapMarker className="inline mt-0.5 -mr-1 text-red-600" />
             <span className="text-red-500">
               {property.location.city} {property.location.state}
@@ -144,7 +145,7 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
           </div>
           <Link
             href={`/properties/${property._id}`}
-            className="h-[36px] bg-[#A55406] w-[140px] text-teal-100 rounded-md px-4 py-2 text-center text-sm active:scale-95 transition duration-200 ease-in-out"
+            className="h-[36px] bg-orange-500 hover:bg-orange-600 text-white rounded-lg px-13 py-2 text-center text-sm active:bg-orange-600 active:scale-95 transition-transform"
           >
             Details
           </Link>

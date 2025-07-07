@@ -19,7 +19,7 @@ const ShareButtons = ({ property }: { property: Iproperty }) => {
   return (
     <>
       <div className="linkbuttonslate flex flex-col gap-3 p-2 rounded-lg">
-        <h3 className="text-center text-lg font-bold text-teal-200">
+        <h3 className="text-center text-lg font-bold text-white">
           Share This Property
         </h3>
         <div className="flex gap-6 justify-center mb-1">

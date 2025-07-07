@@ -32,7 +32,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
         <body className="bg11">
           <MessageProvider>
             <ScreenInfo />
-            <div className="relative z-10 min-h-screen flex flex-col">
+            <div className="relative z-10 min-h-screen flex flex-col text-white">
               <Navbar />
               <main className="flex-grow">{children}</main>
               <Footer />

@@ -52,7 +52,7 @@ const PropertyPage = () => {
 
   if (!property && !loading) {
     return (
-      <h1 className="font-bold text-teal-200 text-shadow-md text-shadow-white/30 text-center text-2xl mt-10">
+      <h1 className="font-bold text-white text-shadow-md text-shadow-white/30 text-center text-2xl mt-10">
         Property Not Found
       </h1>
     );
@@ -73,7 +73,7 @@ const PropertyPage = () => {
               <Link
                 href="/properties"
                 scroll={false}
-                className="text-teal-200 hover:text-yellow-600 w-full xl:ml-20
+                className="text-white hover:text-yellow-600 w-full xl:ml-20
                 active:text-shadow-2xs active:text-shadow-yellow-200 active:transition-all active:duration-200"
               >
                 <FaArrowLeft className="inline m-2 mt-1" /> Back to Properties Page

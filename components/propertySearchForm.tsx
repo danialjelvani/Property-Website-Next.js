@@ -31,9 +31,9 @@ const PropertySearchForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mt-4 md:mt-6 mx-auto max-w-2xl w-full flex flex-col md:flex-row items-center -mb-3"
+      className="mt-2 mx-auto max-w-2xl w-full flex flex-col md:flex-row items-center -mb-3"
     >
-      <div className="w-full md:w-3/5 md:pr-2 mb-1.5 md:mb-0">
+      <div className="w-full md:w-3/5 md:pr-2 mb-1 md:mb-0">
         <label htmlFor="location" className="sr-only">
           Location
         </label>
@@ -52,7 +52,7 @@ const PropertySearchForm = () => {
         </label>
         <select
           id="property-type"
-          className="w-full placeholder:text-sm text-sm lg:text-base px-4 h-9 lg:h-11 rounded-lg bg-black/50 text-gray-100 focus:outline-none focus:ring-2 focus:ring-amber-400"
+          className="w-full placeholder:text-sm text-sm lg:text-base px-4 h-9 lg:h-11 rounded-lg bg-black/50 text-gray-300/90 focus:outline-none focus:ring-2 focus:ring-amber-400"
           value={propertyType}
           onChange={(e) => setPropertyType(e.target.value)}
         >
@@ -69,7 +69,7 @@ const PropertySearchForm = () => {
       </div>
       <button
         type="submit"
-        className="md:ml-4 text-sm lg:text-base mt-2 md:mt-0 w-full md:w-auto px-6 h-9 lg:h-11 rounded-lg text-white linkbuttonamber focus:outline-none focus:ring focus:ring-white/50"
+        className="md:ml-4 text-sm lg:text-base mt-1 md:mt-0 w-full md:w-auto px-6 h-9 lg:h-11 rounded-lg text-white/90 linkbuttonskygray focus:outline-none focus:ring focus:ring-white/50"
       >
         Search
       </button>

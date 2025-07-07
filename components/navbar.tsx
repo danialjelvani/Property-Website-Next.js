@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import logo from "@/assets/images/logo-white.png";
+import logo from "@/assets/images/logo2.png";
 import profileDefault from "@/assets/images/profile.png";
 import { FaGoogle } from "react-icons/fa";
 import { signOut, useSession } from "next-auth/react";
@@ -80,7 +80,7 @@ const Navbar = () => {
               href="/"
             >
               <Image
-                className="h-9 w-auto lg:mr-4"
+                className="h-9 w-auto lg:mr-"
                 src={logo}
                 alt="Isfahan Rentals"
               />
@@ -94,7 +94,7 @@ const Navbar = () => {
             {/*           <!-- Desktop Menu Hidden below md screens -->
              */}{" "}
             <div className="hidden lg:ml-6 md:flex md:items-center md:flex-1">
-              <div className="flex flex-[0.3_1.6_90%] lg:mx-2 ml-2 -mr-18 lg:space-x-2">
+              <div className="flex flex-[0.3_1.6_90%] text-sm lg:text-base lg:mx-2 ml-2 -mr-18 lg:space-x-2">
                 <div
                   className={`flex justify-center items-center w-1/3 xl:ml-8 text-center linkactive linkhover linkactive2 rounded-md ${
                     pathname === "/" ? "linkanimation" : ""
@@ -323,7 +323,7 @@ const Navbar = () => {
               <Link
                 href="/login"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center  w-full justify-center cursor-pointer tracking-wider leading-7 font-semibold linkactive linkactive2 linkhover text-gray-200 bg-gradient-to-b from-amber-500 via-amber-900 to-amber-600 hover:text-gray-200 rounded-md px-3 py-2 mt-5 mb-3"
+                className="flex items-center w-full justify-center cursor-pointer tracking-wider font-semibold linkactive linkactive2 linkhover text-gray-200 bg-gradient-to-b from-amber-600 via-amber-800 to-amber-700 hover:text-gray-200 rounded-md px-3 py-2 mb-1"
               >
                 <span>Login or Register</span>
               </Link>

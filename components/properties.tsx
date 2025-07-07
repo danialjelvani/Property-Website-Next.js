@@ -49,7 +49,7 @@ const Properties = () => {
     <section className="px-4 py-6">
       <div className="container-xl lg:container m-auto px-4 py-6">
         {properties.length === 0 ? (
-          <p className="text-teal-200 text-shadow-md text-shadow-white/30 text-center">
+          <p className="text-white text-shadow-md text-shadow-white/30 text-center">
             No properties found.
           </p>
         ) : (

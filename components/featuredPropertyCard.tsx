@@ -42,16 +42,16 @@ const FeaturedPropertyCard = ({ property }: { property: Iproperty }) => {
           className="w-full h-auto [mask-image:linear-gradient(to_bottom,black_90%,transparent_100%)] shadow-lg shadow-black
               rounded-t-xl"
         />
-        <h3 className="absolute inline-block top-3 right-3 bg-black/80 px-4 py-2 rounded-lg text-blue-300 font-bold text-center">
+        <h3 className="absolute inline-block top-3 right-3 text-sm bg-black/80 px-2.5 py-1.5 rounded-lg text-blue-300 font-bold text-center">
           ${getrates()}
         </h3>
         <div className="bg-gradient-to-b from-black/0 via-black/0 to-black/30 z-10 absolute top-0 left-0 w-full h-full"></div>
       </div>
-      <div className="p-6 flex flex-col">
-        <h3 className="text-xl font-bold">{property.name}</h3>
-        <div className="text-gray-600 mb-4">{property.type}</div>
+      <div className="p-5 flex flex-col">
+        <h3 className="text-black text-lg lg:text-xl font-bold mb-1">{property.name}</h3>
+        <div className="text-gray-700 mb-1">{property.type}</div>
 
-        <div className="flex justify-center gap-4 text-gray-600 mb-4">
+        <div className="flex justify-center gap-4 text-sm lg:text-base text-gray-600 mb-2">
           <p>
             <FaBed className="inline-block mb-0.5 mr-0.5" /> {property.beds}{" "}
             <span className="md:hidden lg:inline">Beds</span>
@@ -66,26 +66,26 @@ const FeaturedPropertyCard = ({ property }: { property: Iproperty }) => {
             <span className="md:hidden lg:inline">sqft</span>
           </p>
         </div>
-        <div className="flex justify-center gap-4 text-green-900 text-sm mb-4">
+        <div className="flex justify-center gap-2 text-rose-600 text-sm mb-2">
           {rates.nightly && (
             <p>
-              <FaDollarSign className="inline-block mb-1.5" /> Nightly
+              <FaDollarSign className="inline-block mb-1.5" />Nightly
             </p>
           )}
           {rates.weekly && (
             <p>
-              <FaDollarSign className="inline-block mb-1.5" /> Weekly
+              <FaDollarSign className="inline-block mb-1.5" />Weekly
             </p>
           )}
           {rates.monthly && (
             <p>
-              <FaDollarSign className="inline-block mb-1.5" /> Weekly
+              <FaDollarSign className="inline-block mb-1.5" />Monthly
             </p>
           )}
         </div>
-        <div className="border border-gray-200 mb-5"></div>
-        <div className="flex flex-col lg:flex-row justify-between">
-          <div className="flex align-middle gap-2 mb-4 lg:mb-0">
+        <div className="border border-gray-300 mb-2"></div>
+        <div className="flex flex-col lg:flex-row justify-between text-sm lg:text-base">
+          <div className="flex align-middle gap-2 mb-3 lg:mb-0">
             <FaMapMarker className="inline-block mt-1 text-orange-700" />
             <span className="text-orange-700">
               {" "}
@@ -94,7 +94,7 @@ const FeaturedPropertyCard = ({ property }: { property: Iproperty }) => {
           </div>
           <Link
             href={`/properties/${property._id}`}
-            className="h-[36px] bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-center text-sm"
+            className="h-[36px] bg-blue-500 hover:bg-blue-600 active:bg-blue-600 active:scale-95 transition-transform text-white px-13 py-2 rounded-lg text-center text-sm"
           >
             Details
           </Link>

@@ -14,7 +14,7 @@ const NotFoundPage = () => {
             <FaExclamationTriangle className="text-6xl text-yellow-400"></FaExclamationTriangle>
           </div>
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-teal-200 tracking-wider mt-4 mb-2">Dear Visitor</h1>
+            <h1 className="text-2xl font-bold text-white tracking-wider mt-4 mb-2">Dear Visitor</h1>
             <p className="text-teal-500 md:text-lg text-md  mb-10">
               The page you are looking for does not exist.
             </p>

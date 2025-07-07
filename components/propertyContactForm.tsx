@@ -61,12 +61,12 @@ const PropertyContactForm = ({ property }: { property: Iproperty }) => {
     <div className="bg-orange-400/90 p-6 rounded-lg shadow-md">
       <h3 className="text-xl font-bold mb-6">Contact Property Manager</h3>
       {!session ? (
-        <div className="text-teal-200 flex justify-around items-center gap-2 text-shadow-[0_0_3px] text-shadow-white/90 mb-4">
+        <div className="text-white flex justify-around items-center gap-2 text-shadow-[0_0_3px] text-shadow-white/90 mb-4">
           <FaExclamationCircle className="shrink-0 block w-8 text-gray-700 text-lg mt-1" />
           <p className="">You must be logged in to send a message</p>
         </div>
       ) : wasSubmitted ? (
-        <div className="text-teal-200 flex justify-around items-center gap-2 text-shadow-[0_0_3px] text-shadow-white/90 mb-4">
+        <div className="text-white flex justify-around items-center gap-2 text-shadow-[0_0_3px] text-shadow-white/90 mb-4">
           <FaCheckCircle className="shrink-0 block w-8 text-gray-700 text-lg mt-1" />
           <p className="">Your message's been sent successfully!</p>
         </div>

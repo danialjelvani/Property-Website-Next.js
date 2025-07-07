@@ -45,7 +45,7 @@ const SavedProperties = () => {
           <Link
             href="/profile"
             scroll={false}
-            className="text-teal-200 hover:text-yellow-600 xl:ml-20 md:inline-block mt-2 text-xs md:text-base
+            className="text-white hover:text-yellow-600 xl:ml-20 md:inline-block mt-2 text-xs md:text-base
                     active:text-shadow-2xs active:text-shadow-yellow-200 active:transition-all active:duration-200
                     flex items-center"
           >
@@ -55,7 +55,7 @@ const SavedProperties = () => {
         </div>{" "}
         <h1
           className="xl:text-3xl md:text-2xl text-base text-center text-shadow-md text-shadow-white/30
-           text-teal-300 tracking-wide font-Title2 col-start-2 "
+           text-white tracking-wide font-Title2 col-start-2 "
         >
           Saved properties
         </h1>

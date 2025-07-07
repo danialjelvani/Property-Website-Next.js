@@ -31,7 +31,7 @@ export default function FeaturedPropertiesScroll({ properties }: Props) {
   return (
     <div
       ref={parentRef}
-      className="overflow-x-auto scrollbar snap-x snap-mandatory h-140 w-full px-6 py-2 flex gap-2"
+      className="overflow-x-auto scrollbar snap-x snap-mandatory h-130 w-full px-6 py-2 flex md:gap-2"
     >
       {properties.map((property, index) => (
         <div

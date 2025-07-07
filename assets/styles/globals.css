@@ -136,7 +136,14 @@ textarea::placeholder {
 }
 
 .linkbuttonskygray {
-  @apply bg-gradient-to-b from-sky-700/70 via-gray-700/30 to-gray-600/10;
+  @apply bg-gradient-to-b from-sky-700/50 via-gray-700/30 to-sky-700/50
+  hover:bg-gradient-to-b hover:from-sky-700/60 hover:via-sky-800/40 hover:to-sky-700/60
+  active:bg-gradient-to-b active:from-sky-700/60 active:via-sky-800/40 active:to-sky-700/60
+  active:scale-95 transition-all cursor-pointer;
+}
+
+.linkbuttonskygray2 {
+  @apply bg-gradient-to-b from-orange-400/40 via-gray-700/30 to-transparent;
 }
 
 .linkbuttongreen {
@@ -258,11 +265,11 @@ textarea::placeholder {
 }
 
 .bg11 {
-    background-color: #1c1312;
+  background-color: #1c1312;
   background-image: url("/images/bg.png");
 }
 
 .bg12 {
-    background-color: #1c1312bb;
+  background-color: #1c1312bb;
   background-image: url("/images/nav.png");
 }

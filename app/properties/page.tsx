@@ -6,7 +6,7 @@ const PropertiesPage = async () => {
   return (
     <>
       {" "}
-      <section className="px-4 md:h-10">
+      <section className="px-4 md:h-10 -mb-8">
         <div>
           <PropertySearchForm />
         </div>

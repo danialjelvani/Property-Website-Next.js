@@ -72,7 +72,7 @@ const SearchResultsPage = () => {
               <Link
                 href="/properties"
                 scroll={false}
-                className="text-teal-200 hover:text-yellow-600 xl:ml-20 md:inline-block mt-2 text-xs md:text-base
+                className="text-white hover:text-yellow-600 xl:ml-20 md:inline-block mt-2 text-xs md:text-base
                       active:text-shadow-2xs active:text-shadow-yellow-200 active:transition-all active:duration-200
                       flex items-center"
               >
@@ -82,7 +82,7 @@ const SearchResultsPage = () => {
             </div>{" "}
             <h1
               className="xl:text-3xl md:text-2xl text-base text-center text-shadow-md text-shadow-white/30
-             text-teal-300 tracking-wide font-Title2 col-start-2"
+             text-white tracking-wide font-Title2 col-start-2"
             >
               Search Results
             </h1>
@@ -93,7 +93,7 @@ const SearchResultsPage = () => {
           <section className="px-4 -mt-18">
             <div className="container-xl lg:container m-auto px-4 py-6 mt-17">
               {properties.length === 0 ? (
-                <p className="text-teal-200 text-shadow-md text-shadow-white/30 text-center">
+                <p className="text-white text-shadow-md text-shadow-white/30 text-center">
                   No search results found
                 </p>
               ) : (
