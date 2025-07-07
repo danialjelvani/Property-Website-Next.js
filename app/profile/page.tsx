@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import profileDefault from "@/assets/images/profile.png";
 import LoadingPage from "@/app/loading";
 import { Iproperty } from "@/components/PropertyCard";
+import { myFont } from "@/components/fonts";
 
 const ProfilePage = () => {
   const { data: session } = useSession();
@@ -91,10 +92,10 @@ const ProfilePage = () => {
     </div>
   ) : (
     <section className="bg-black/10 text-black">
-      <div className="container max-w-6xl flex items-center justify-center min-h-[80vh] m-auto">
+      <div className="container max-w-6xl flex items-center justify-center min-h-[80vh] mx-auto">
         <div className="bg-orange-500/85 p-4 grow shadow-[0_0_10px] shadow-amber-300 rounded-xl m-2">
-          <h1 className="text-2xl md:text-3xl font-bold text-white text-shadow-[0_0_10px] text-shadow-white/30 text-center md:ml-3 lg:ml-10 md:text-left -mt-2 md:mt-6">
-            Your Profile
+          <h1 className={`text-3xl md:text-4xl ${myFont.className} text-gray-800 text-center md:ml-3 lg:ml-10 md:text-left md:mt-6`}>
+            My Profile
           </h1>
           <div className="md:flex md:gap-5 lg:gap-10 md:flex-row">
             <div className="md:w-1/6 md:ml md:mr-15 md:ml-6 lg:ml-10 md:flex-col gap-8 flex flex-row mt-6 md:mt-10">
@@ -111,13 +112,13 @@ const ProfilePage = () => {
 
               <div className="flex flex-2/3 flex-col -mt-2 md:flex-none justify-around">
                 <h2 className="text-md md:text-lg md:mb-6">
-                  <span className="font-bold text-md md:text-xl text-shadow-[0_0_10px] text-shadow-white/30 text-white">
+                  <span className="font-bold text-md md:text-xl text-gray-200">
                     Name:{" "}
                   </span>{" "}
                   <span className="md:block">{profileName}</span>
                 </h2>
                 <h2 className="text-md md:text-lg md:mb-6">
-                  <span className="font-bold text-md md:text-xl text-shadow-[0_0_10px] text-shadow-white/30 text-white">
+                  <span className="font-bold text-md md:text-xl text-gray-200">
                     Email:{" "}
                   </span>{" "}
                   <span className="md:block">{profileEmail}</span>

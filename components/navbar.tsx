@@ -242,7 +242,7 @@ const Navbar = () => {
                     id="user-menu-item-0"
                     onClick={() => setIsProfileMenuOpen(false)}
                   >
-                    Your Profile
+                    My Profile
                   </Link>
                   <Link
                     href="/properties/saved"
