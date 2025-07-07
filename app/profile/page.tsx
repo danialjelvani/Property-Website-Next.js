@@ -92,12 +92,14 @@ const ProfilePage = () => {
     </div>
   ) : (
     <section className="bg-black/10 text-black">
-      <div className="container max-w-6xl flex justify-center min-h-[80vh] mx-auto">
-        <div className="bg-orange-500/85 p-4 grow shadow-[0_0_10px] shadow-amber-300 rounded-xl m-2">
-          <h1 className={`text-3xl md:text-4xl ${myFont.className} text-gray-800 text-center md:ml-3 lg:ml-10 md:text-left md:mt-6`}>
+      <div className="container max-w-6xl flex justify-center items-center lg:min-h-[80vh] m-auto">
+        <div className="bg-orange-500/85 p-4 pb-8 md:pb-4 grow shadow-[0_0_10px] shadow-amber-300 rounded-xl m-2">
+          <h1
+            className={`text-3xl md:text-4xl ${myFont.className} text-gray-800 text-center md:ml-3 lg:ml-10 md:text-left md:mt-6`}
+          >
             My Profile
           </h1>
-          <div className="md:flex md:gap-5 lg:gap-10 md:flex-row">
+          <div className="md:flex  md:gap-5 lg:gap-10 md:flex-row">
             <div className="md:w-1/6 md:ml md:mr-15 md:ml-6 lg:ml-10 md:flex-col gap-8 flex flex-row mt-6 md:mt-10">
               <div className="md:mb-3 mb-6 -mt-2 md:mt-0 md:w-[100px] md:h-[100px] w-20 h-20 mx-auto md:mx-0 rounded-full">
                 <Image
