@@ -318,7 +318,7 @@ const propertyAddForm = () => {
 
   return (
     mounted && (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="text-gray-800">
         <h2
           className={`text-3xl lg:text-4xl text-center tracking-wide ${myFont.className} mb-4`}
         >
@@ -425,11 +425,11 @@ const propertyAddForm = () => {
           <LocationPicker onLocationSelect={(coords) => setLocation(coords)} />
         </div>
 
-        <div className="mb-4 flex flex-wrap">
-          <div className="w-full sm:w-1/3 pr-2">
+        <div className="mb-4 flex flex-col md:flex-row">
+          <div className="w-full md:w-1/3 px-2">
             <label
               htmlFor="beds"
-              className="block text-gray-800 font-bold mb-2"
+              className="block text-gray-800 font-bold mb-1"
             >
               Beds
             </label>
@@ -437,16 +437,16 @@ const propertyAddForm = () => {
               type="number"
               id="beds"
               name="beds"
-              className="border rounded w-full py-2 px-3"
+              className="border rounded w-full mb-2 py-2 px-2"
               required
               onChange={handleChange}
               value={fields.beds}
             />
           </div>
-          <div className="w-full sm:w-1/3 px-2">
+          <div className="w-full md:w-1/3 px-2">
             <label
               htmlFor="baths"
-              className="block text-gray-800 font-bold mb-2"
+              className="block text-gray-800 font-bold mb-1"
             >
               Baths
             </label>
@@ -454,16 +454,16 @@ const propertyAddForm = () => {
               type="number"
               id="baths"
               name="baths"
-              className="border rounded w-full py-2 px-3"
+              className="border rounded w-full mb-2 py-2 px-3"
               required
               onChange={handleChange}
               value={fields.baths}
             />
           </div>
-          <div className="w-full sm:w-1/3 pl-2">
+          <div className="w-full md:w-1/3 px-2">
             <label
               htmlFor="square_feet"
-              className="block text-gray-800 font-bold mb-2"
+              className="block text-gray-800 font-bold mb-1"
             >
               Square Feet
             </label>
@@ -471,7 +471,7 @@ const propertyAddForm = () => {
               type="number"
               id="square_feet"
               name="square_feet"
-              className="border rounded w-full py-2 px-3"
+              className="border rounded w-full mb-1 py-2 px-3"
               required
               onChange={handleChange}
               value={fields.square_feet}
@@ -649,14 +649,14 @@ const propertyAddForm = () => {
             <div>
               <input
                 type="checkbox"
-                id="amenity_smart_tv"
+                id="amenity_mdart_tv"
                 name="amenities"
                 value="Smart TV"
                 className="mr-2"
                 onChange={handleAmenitiesChange}
                 checked={fields.amenities.includes("Smart TV")}
               />
-              <label htmlFor="amenity_smart_tv">Smart TV</label>
+              <label htmlFor="amenity_mdart_tv">Smart TV</label>
             </div>
             <div>
               <input
@@ -677,34 +677,34 @@ const propertyAddForm = () => {
           <label className="block text-gray-800 font-bold mb-2">
             Rates (Leave blank if not applicable)
           </label>
-          <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+          <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4">
             <div className="flex items-center">
-              <label htmlFor="nightly_rate" className="mr-2">
+              <label htmlFor="nightly_rate" className="mr-4 md:mr-2">
                 Nightly
               </label>
               <input
                 type="number"
                 id="nightly_rate"
                 name="rates.nightly"
-                className="border rounded w-full py-2 px-3"
+                className="border rounded w-full py-2 px-2"
                 value={fields.rates.nightly}
                 onChange={handleChange}
               />
             </div>
             <div className="flex items-center">
-              <label htmlFor="weekly_rate" className="mr-2">
+              <label htmlFor="weekly_rate" className="mr-4 md:mr-2">
                 Weekly
               </label>
               <input
                 type="number"
                 id="weekly_rate"
                 name="rates.weekly"
-                className="border rounded w-full py-2 px-3"
+                className="border rounded w-full py-2 px-2"
                 value={fields.rates.weekly}
                 onChange={handleChange}
               />
             </div>
-            <div className="flex items-center">
+            <div className="flex justify-center items-center">
               <label htmlFor="monthly_rate" className="mr-2">
                 Monthly
               </label>
@@ -712,7 +712,7 @@ const propertyAddForm = () => {
                 type="number"
                 id="monthly_rate"
                 name="rates.monthly"
-                className="border rounded w-full py-2 px-3"
+                className="border rounded w-full py-2 px-2"
                 value={fields.rates.monthly}
                 onChange={handleChange}
               />
@@ -787,7 +787,7 @@ const propertyAddForm = () => {
             <p className="opacity-75 text-white text-center mb-1 font-semibold">
               Click to add images
             </p>
-            <p className="opacity-60 text-center text-sm text-white">
+            <p className="opacity-60 text-center text-sm md:text-base text-white">
               {" "}
               <Typewriter
                 text={`You have successfully uploaded ${
@@ -826,7 +826,7 @@ const propertyAddForm = () => {
                       {img.name.slice(0, 20)}
                     </a>
                     {img.url && (
-                      <div className="my-1 rounded-lg shadow-sm shadow-black ring-1 ring-orange-300 relative w-20 h-20">
+                      <div className="my-1 rounded-lg shadow-md shadow-black ring-1 ring-orange-300 relative w-20 h-20">
                         <Image
                           key={retryKey}
                           src={img.blurDataURL}
@@ -852,7 +852,7 @@ const propertyAddForm = () => {
 
                     <button
                       type="button"
-                      className="cursor-pointer text-sm rounded-md mt-1 p-1 pr-1.5 pb-1.5 text-red-800 ring-1 hover:ring-2 active:ring-2"
+                      className="cursor-pointer text-md rounded-md mt-1 p-1 pr-1.5 pb-1.5 text-red-800 ring-1 hover:ring-2 active:ring-2"
                       onClick={() => handleDeleteImage(index)}
                     >
                       ❌ Delete

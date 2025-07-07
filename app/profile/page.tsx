@@ -85,16 +85,20 @@ const ProfilePage = () => {
     }
   };
 
-  return (
-    <section className="bg-black/10">
-      <div className="container max-w-7xl flex items-center justify-center min-h-[80vh] m-auto">
-        <div className="bg-orange-500/85 p-6 shadow-[0_0_10px] shadow-amber-300 rounded-xl m-2">
+  return loading ? (
+    <div className="flex justify-center items-center">
+      <LoadingPage />
+    </div>
+  ) : (
+    <section className="bg-black/10 text-black">
+      <div className="container max-w-6xl flex items-center justify-center min-h-[80vh] m-auto">
+        <div className="bg-orange-500/85 p-4 grow shadow-[0_0_10px] shadow-amber-300 rounded-xl m-2">
           <h1 className="text-2xl md:text-3xl font-bold text-white text-shadow-[0_0_10px] text-shadow-white/30 text-center md:ml-3 lg:ml-10 md:text-left -mt-2 md:mt-6">
             Your Profile
           </h1>
           <div className="md:flex md:gap-5 lg:gap-10 md:flex-row">
             <div className="md:w-1/6 md:ml md:mr-15 md:ml-6 lg:ml-10 md:flex-col gap-8 flex flex-row mt-6 md:mt-10">
-              <div className="md:mb-3 mb-6 shadow-md -mt-2 md:mt-0 md:w-[100px] md:h-[100px] w-20 h-20 mx-auto md:mx-0 rounded-full shadow-white/60">
+              <div className="md:mb-3 mb-6 -mt-2 md:mt-0 md:w-[100px] md:h-[100px] w-20 h-20 mx-auto md:mx-0 rounded-full">
                 <Image
                   className="rounded-full mx-auto md:mx-0"
                   src={profileDefault}
@@ -120,7 +124,7 @@ const ProfilePage = () => {
                 </h2>
 
                 <button
-                  className="linkbuttondark rounded-md cursor-pointer w-35 h-8 md:h-10 text-sm md:text-base block text-shadow-[0_0_10px] text-shadow-white/30 text-white mb-4 mt-4 md:mb-2"
+                  className="linkbuttondark rounded-md cursor-pointer w-35 h-8 md:h-10 text-sm md:text-base block text-shadow-[0_0_10px] text-shadow-white/30 text-white mb-4 mt-2 md:mb-2"
                   onClick={handleDeleteUser}
                 >
                   Delete Account
@@ -128,8 +132,8 @@ const ProfilePage = () => {
               </div>
             </div>
 
-            <div className="md:w-[400px] lg:w-[600px] xl:w-[700px] grow md:-mt-6">
-              <h2 className="text-xl md:text-2xl font-semibold text-shadow-[0_0_10px] text-shadow-black/20 text-white mb-3 md:mb-6">
+            <div className="md:w-[400px] lg:w-[600px] xl:w-[700px] grow -mt-2 md:-mt-6">
+              <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4 md:mb-6">
                 Your Listings{" "}
                 <span className="text-sm">
                   ({" "}
@@ -143,62 +147,56 @@ const ProfilePage = () => {
                 {!loading && properties.length === 0 && (
                   <p>You have no properties yet.</p>
                 )}
-                {loading ? (
-                  <div className="md:top-1/2 md:left-3/5 md:-translate-y-1/2 fixed top-1/5 left-1/2 -translate-x-1/2">
-                    <LoadingPage />
-                  </div>
-                ) : (
-                  <div className="space-y-10 snap-y">
-                    {properties.map((property) => (
-                      <div key={property._id} className="snap-center">
-                        <Link href={`/properties/${property._id}`}>
-                          <div className="relative md:h-70 h-50 w-full">
-                            <Image
-                              key={retrykey}
-                              src={JSON.parse(property.images[0]).url}
-                              className="shadow-[0_0_10px] shadow-yellow-200/60 rounded-lg object-cover"
-                              fill={true}
-                              alt="Property Image"
-                              sizes="75vw"
-                              priority={true}
-                              onError={() => {
-                                if (retrykey < 5) {
-                                  setRetryKey((prev) => prev + 1);
-                                }
-                              }}
-                              placeholder="blur"
-                              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN899DREwAHMAJbOoc+7QAAAABJRU5ErkJggg=="
-                            />
-                          </div>
-                        </Link>
-                        <div className="mt-2">
-                          <p className="text-lg font-semibold">
-                            {property.name}
-                          </p>
-                          <p className="text-gray-700">
-                            Address: {property.location.street}{" "}
-                            {property.location.city} {property.location.state}
-                          </p>
+
+                <div className="space-y-10 snap-y">
+                  {properties.map((property) => (
+                    <div key={property._id} className="snap-center">
+                      <Link href={`/properties/${property._id}`}>
+                        <div className="relative md:h-70 h-50 w-full">
+                          <Image
+                            key={retrykey}
+                            src={JSON.parse(property.images[0]).url}
+                            className="shadow-[0_0_10px] shadow-yellow-200/60 rounded-lg object-cover"
+                            fill={true}
+                            alt="Property Image"
+                            sizes="75vw"
+                            priority={true}
+                            onError={() => {
+                              if (retrykey < 5) {
+                                setRetryKey((prev) => prev + 1);
+                              }
+                            }}
+                            placeholder="blur"
+                            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN899DREwAHMAJbOoc+7QAAAABJRU5ErkJggg=="
+                          />
                         </div>
-                        <div className="mt-2 flex justify-start">
-                          <Link
-                            href={`/properties/${property._id}/edit`}
-                            className="linkbuttonamber w-25 h-10 text-center text-white px-3 py-2 rounded-md mr-2"
-                          >
-                            Edit
-                          </Link>
-                          <button
-                            className="linkbuttonred w-25 h-10 text-white px-3 py-2 rounded-md"
-                            type="button"
-                            onClick={() => handleDeleteProperty(property._id)}
-                          >
-                            Delete
-                          </button>
-                        </div>
+                      </Link>
+                      <div className="mt-3">
+                        <p className="md:text-lg mb-1.5 font-semibold">
+                          {property.name}
+                        </p>
+                        <p className="text-gray-800 text-sm md:text-base">
+                          Address: {property.location.street}{" "}
+                          {property.location.city} {property.location.state}
+                        </p>
                       </div>
-                    ))}
-                  </div>
-                )}
+                      <div className="mt-4 flex justify-start">
+                        <Link href={`/properties/${property._id}/edit`}>
+                          <button className="text-center linkbuttonamber text-white rounded-md mr-2 text-sm md:text-base w-25 h-9">
+                            Edit
+                          </button>
+                        </Link>
+                        <button
+                          className="linkbuttonred text-sm md:text-base w-25 h-9 text-white rounded-md"
+                          type="button"
+                          onClick={() => handleDeleteProperty(property._id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

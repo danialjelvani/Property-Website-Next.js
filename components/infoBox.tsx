@@ -21,7 +21,7 @@ const infoBox = ({
 }: IinfoBoxProps) => {
   return (
     <div
-      className={`${backgroundColor} ${textColor} px-6 py-4 text-sm md:text-base rounded-lg shadow-[0_0_30px] shadow-neutral-800`}
+      className={`${backgroundColor} ${textColor} px-6 md:px-5 lg:px-7 py-4 text-sm md:text-base rounded-lg shadow-[0_0_30px] shadow-neutral-800`}
     >
       <h2 className="md:text-2xl text-xl font-bold">{title}</h2>
       <p className="mt-2 mb-4">{children}</p>

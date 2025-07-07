@@ -18,11 +18,11 @@ const ShareButtons = ({ property }: { property: Iproperty }) => {
 
   return (
     <>
-      <div className="linkbuttonslate flex flex-col gap-3 p-2 rounded-lg">
+      <div className="linkbuttonslate flex flex-col md:mt-0 md:mb-4 my-6 gap-3 p-2 rounded-lg">
         <h3 className="text-center text-lg font-bold text-white">
           Share This Property
         </h3>
-        <div className="flex gap-6 justify-center mb-1">
+        <div className="flex gap-7 md:gap-2 lg:gap-7 justify-center mb-1">
           <EmailShareButton
             url={shareURL}
             children={<EmailIcon size={32} round />}

@@ -58,7 +58,7 @@ const PropertyContactForm = ({ property }: { property: Iproperty }) => {
   };
 
   return (
-    <div className="bg-orange-400/90 p-6 rounded-lg shadow-md">
+    <div className="bg-orange-400/90 p-6 mb-3 rounded-lg shadow-md">
       <h3 className="text-xl font-bold mb-6">Contact Property Manager</h3>
       {!session ? (
         <div className="text-white flex justify-around items-center gap-2 text-shadow-[0_0_3px] text-shadow-white/90 mb-4">

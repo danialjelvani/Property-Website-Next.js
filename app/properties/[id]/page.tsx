@@ -67,13 +67,13 @@ const PropertyPage = () => {
 
           <section>
             <div
-              className="bg-black/40 p-6 w-full
+              className="bg-black/40 p-5 w-full -mt-2
             [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_80%,transparent)]"
             >
               <Link
                 href="/properties"
                 scroll={false}
-                className="text-white hover:text-yellow-600 w-full xl:ml-20
+                className="text-white hover:text-yellow-600 w-full xl:ml-20 text-sm lg:text-base
                 active:text-shadow-2xs active:text-shadow-yellow-200 active:transition-all active:duration-200"
               >
                 <FaArrowLeft className="inline m-2 mt-1" /> Back to Properties Page
@@ -83,8 +83,8 @@ const PropertyPage = () => {
 
           {/*     <!-- Property Info -->
            */}
-          <section className="-mt-5 text-black">
-            <div className="container max-w-7xl m-auto py-10 px-6">
+          <section className="text-black md:mt-2">
+            <div className="container max-w-7xl m-auto y-10 px-6">
               <div className="grid grid-cols-1 md:grid-cols-[70%_28%] w-full gap-6">
                 <PropertyDetails property={property} />
 

@@ -18,9 +18,9 @@ const propertyDetails = ({ property }: any) => {
     <section>
       <div className="bg-orange-400/90 p-6 rounded-xl shadow-md text-center md:text-left">
         <div className="text-gray-800 mb-4">{property.type}</div>
-        <h1 className="text-3xl font-bold mb-4">{property.name}</h1>
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4">{property.name}</h1>
         <div className="text-gray-500 mb-4 flex align-middle justify-center md:justify-start">
-          <FaMapMarker className="text-lg text-orange-800 mr-1 mt-0.5" />
+          <FaMapMarker className="md:text-lg text-orange-800 mr-1 mt-0.5" />
           <p className="text-orange-800">
             {property.location.street}, {property.location.city},{" "}
             {property.location.state}, {property.location.zip}
@@ -34,18 +34,18 @@ const propertyDetails = ({ property }: any) => {
 
         <div className="flex flex-col md:flex-row justify-around">
           <div className="flex items-center justify-center mb-4 border-b border-gray-800 md:border-b-0 pb-4 md:pb-0">
-            <div className="text-gray-700 mr-2 font-bold">Nightly</div>
-            <div className="text-2xl font-bold text-gray-800">
+            <div className="text-gray-800 mr-2 font-bold">Nightly</div>
+            <div className="font-bold text-gray-800">
               {property.rates.nightly ? (
                 `$${property.rates.nightly.toLocaleString()}`
               ) : (
-                <FaTimes className="text-red-700" />
+                <FaTimes className="text-red-700 text-lg md:text-xl lg:text-2xl" />
               )}
             </div>
           </div>
           <div className="flex items-center justify-center mb-4 border-b border-gray-800 md:border-b-0 pb-4 md:pb-0">
-            <div className="text-gray-700 mr-2 font-bold">Weekly</div>
-            <div className="text-2xl font-bold text-gray-800">
+            <div className="text-gray-800 mr-2 font-bold">Weekly</div>
+            <div className="text-lg md:text-xl lg:text-2xl font-bold text-gray-800">
               {property.rates.weekly ? (
                 `$${property.rates.weekly.toLocaleString()}`
               ) : (
@@ -54,8 +54,8 @@ const propertyDetails = ({ property }: any) => {
             </div>
           </div>
           <div className="flex items-center justify-center mb-4 pb-4 md:pb-0">
-            <div className="text-gray-700 mr-2 font-bold">Monthly</div>
-            <div className="text-2xl font-bold text-gray-800">
+            <div className="text-gray-800 mr-2 font-bold">Monthly</div>
+            <div className="text-lg md:text-xl lg:text-2xl font-bold text-gray-800">
               {property.rates.monthly ? (
                 `$${property.rates.monthly.toLocaleString()}`
               ) : (
@@ -68,7 +68,7 @@ const propertyDetails = ({ property }: any) => {
 
       <div className="bg-orange-400/90 p-6 rounded-lg shadow-md mt-6">
         <h3 className="text-lg font-bold mb-6">Description & Details</h3>
-        <div className="flex justify-center gap-4 text-gray-800 mb-4 text-xl space-x-9">
+        <div className="flex justify-center gap-4 text-gray-800 mb-4 text-lg md:text-xl space-x-9">
           <p>
             <FaBed className="inline -mt-1 mr-1" /> {property.beds}
             <span className="hidden sm:inline"> Beds</span>
@@ -99,7 +99,7 @@ const propertyDetails = ({ property }: any) => {
       </div>
 
 
-      {property.lat && property.lng && (<div className="bg-orange-400/90 p-6 rounded-lg shadow-md mt-6 -mb-2 md:-mb-12">
+      {property.lat && property.lng && (<div className="bg-orange-400/90 p-6 rounded-lg shadow-md mt-6 lg:-mb-3">
         <MapViewer lat={parseFloat(property.lat)} lng={parseFloat(property.lng)} />
       </div>)}
 

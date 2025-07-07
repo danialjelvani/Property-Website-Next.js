@@ -17,8 +17,8 @@ const FeaturedProperties = async () => {
   return (
     properties.length > 0 && (
       <section className="pt-6 pb-10">
-        <div className="linkbuttonteal py-2 container-xl lg:container m-auto">
-          <h2 className={`xl:text-4xl text-3xl ${myFont.className} tracking-wider bg-gradient-to-b from-gray-950 via-gray-950 to-gray-900 bg-clip-text text-transparent text-shadow-white/30 text-shadow-[0_0_30px] mt-6 mb-5 lg:mb-7 text-center`}>
+        <div className="linkbuttonsky2 py-2 container-xl lg:container m-auto">
+          <h2 className={`xl:text-4xl text-3xl ${myFont.className} tracking-wider bg-gradient-to-b from-sky-950 via-sky-950 to-sky-900 bg-clip-text text-transparent mt-6 mb-5 lg:mb-7 text-center`}>
             Featured Properties
           </h2>
           <FeaturedPropertiesScroll properties={randomProperties} />

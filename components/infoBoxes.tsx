@@ -5,12 +5,12 @@ const infoBoxes = () => {
   return (
     <div>
       <section>
-        <div className="container-xl lg:container m-auto">
+        <div className="container-xl -mt-8 -mb-4 lg:container m-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
             <InfoBox
               title="For Renters"
               backgroundColor="bg-black/60"
-              textColor="text-emerald-200"
+              textColor="text-emerald-100"
               buttonInfo={{
                 backgroundColor: "linkbuttonemerald",
                 textColor: "text-white",
@@ -23,11 +23,11 @@ const infoBoxes = () => {
             </InfoBox>
 
             <InfoBox
-              textColor="text-slate-100"
-              backgroundColor="bg-stone-900/70"
+              textColor="text-emerald-100"
+              backgroundColor="bg-black/60"
               title="For Property Owners"
               buttonInfo={{
-                backgroundColor: "linkbuttonslate",
+                backgroundColor: "linkbuttonemerald",
                 textColor: "text-white",
                 link: "/properties/add",
                 text: "Add Property",

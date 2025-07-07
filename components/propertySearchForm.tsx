@@ -31,7 +31,7 @@ const PropertySearchForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mt-2 mx-auto max-w-2xl w-full flex flex-col md:flex-row items-center -mb-3"
+      className="mt-2 pb-6 md:pb-0 mx-auto max-w-2xl w-full flex flex-col md:flex-row items-center -mb-3"
     >
       <div className="w-full md:w-3/5 md:pr-2 mb-1 md:mb-0">
         <label htmlFor="location" className="sr-only">
@@ -69,7 +69,7 @@ const PropertySearchForm = () => {
       </div>
       <button
         type="submit"
-        className="md:ml-4 text-sm lg:text-base mt-1 md:mt-0 w-full md:w-auto px-6 h-9 lg:h-11 rounded-lg text-white/90 linkbuttonskygray focus:outline-none focus:ring focus:ring-white/50"
+        className="md:ml-4 text-sm lg:text-base mt-1 md:mt-0 w-full md:w-auto px-6 h-9 lg:h-11 rounded-lg text-white/90 linkbuttondark focus:outline-none focus:ring focus:ring-white/50"
       >
         Search
       </button>
