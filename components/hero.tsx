@@ -12,7 +12,7 @@ const hero = () => {
             <h1 className={`text-7xl tracking-wide ${myFont.className} bg-gradient-to-b from-gray-950 via-gray-950 to-gray-900 bg-clip-text text-transparent lg:text-8xl`}>
               Isfahan Rentals
             </h1>
-            <p className="mt-4 lg:mt-8 mb-4 lg:mb-8 text-black text-shadow-white text-shadow-[0_0_20px] md:text-xl">
+            <p className="mt-4 lg:mt-8 mb-4 lg:mb-8 text-black text-shadow-white text-shadow-[0_0_20px] text-xl">
               Discover the perfect property that suits your needs
             </p>
           </div>

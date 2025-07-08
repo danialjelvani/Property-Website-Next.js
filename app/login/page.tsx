@@ -27,7 +27,7 @@ export default function LoginPage() {
 
   return (
     <div className="container flex items-center justify-center mx-auto min-h-[75vh] max-w-xl">
-      <div className="flex flex-col items-center bg-orange-500/85 px-1 md:px-5 py-7 shadow-[0_0_10px] shadow-amber-300 rounded-xl m-4">
+      <div className="flex flex-col items-center linkbuttonsky4 px-1 md:px-5 py-7 shadow-[0_0_10px] shadow-amber-300 rounded-xl m-4">
         <div className="p-2 self-start ml-10 text-2xl lg:text-3xl font-semibold text-white text-shadow-[0_0_6px] text-shadow-white/50 mt-2">
           Welcome Back!
         </div>

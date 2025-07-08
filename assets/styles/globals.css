@@ -115,6 +115,13 @@ textarea {
   active:scale-95 transition-all;
 }
 
+.linkbuttonneutral2 {
+  @apply bg-gradient-to-b from-neutral-400 via-neutral-700 to-neutral-500
+  hover:bg-gradient-to-b hover:from-neutral-500 hover:via-neutral-800 hover:to-neutral-600
+  active:bg-gradient-to-b active:from-neutral-500 active:via-neutral-800 active:to-neutral-600
+  active:scale-95 transition-all;
+}
+
 .linkbuttonamber {
   @apply bg-gradient-to-b from-orange-200 via-amber-600 to-orange-300
   hover:bg-gradient-to-b hover:from-orange-200 hover:via-amber-700 hover:to-orange-300
@@ -144,6 +151,22 @@ textarea {
   @apply bg-gradient-to-b from-sky-300/80 via-sky-700/40 to-sky-800/20;
 }
 
+.linkbuttonsky3 {
+  @apply bg-gradient-to-b from-sky-400 via-sky-700/80 to-sky-800/50;
+}
+
+.linkbuttonsky4 {
+  @apply bg-gradient-to-b from-sky-300/90 via-sky-400/80 to-sky-400/70;
+}
+
+.linkbuttonneutral {
+  @apply bg-gradient-to-b from-neutral-500 via-neutral-700/80 to-neutral-700/50;
+}
+
+.linkbuttonslate2 {
+  @apply bg-gradient-to-b from-slate-500 via-slate-700/80 to-slate-700/50;
+}
+
 .linkbuttonskygray {
   @apply bg-gradient-to-b from-sky-700/50 via-gray-700/30 to-sky-700/50
   hover:bg-gradient-to-b hover:from-sky-700/60 hover:via-sky-800/40 hover:to-sky-700/60
@@ -156,7 +179,7 @@ textarea {
 }
 
 .linkbuttongreen {
-  @apply bg-gradient-to-b from-green-500 via-green-500/80 to-green-500/40;
+  @apply bg-gradient-to-b from-green-400 via-green-500/90 to-green-400/40;
 }
 
 .linkbuttonred {

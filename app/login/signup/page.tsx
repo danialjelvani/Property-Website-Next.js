@@ -40,7 +40,7 @@ export default function SignupPage() {
     <div className="flex justify-center mx-auto min-h-[75vh] items-center text-white">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center bg-orange-500/85 px-4 md:px-5 py-8 shadow-[0_0_10px] shadow-amber-300 m-4 p-8 rounded-2xl w-full max-w-sm"
+        className="flex flex-col items-center linkbuttonsky4 px-4 md:px-5 py-8 shadow-[0_0_10px] shadow-amber-300 m-4 p-8 rounded-2xl w-full max-w-sm"
       >
         <h2 className="text-2xl lg:text-3xl font-bold mb-5 text-center text-white text-shadow-[0_0_6px] text-shadow-white/40">
           Sign Up

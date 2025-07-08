@@ -476,7 +476,7 @@ const PropertyEditForm = () => {
           ></textarea>
         </div>
 
-        <div className="mb-4 bg-amber-600 p-4 rounded-lg">
+        <div className="mb-4 bg-sky-600/40 p-4 rounded-lg">
           <label className="block text-gray-800 font-bold mb-2">Location</label>
           <input
             type="text"
@@ -782,7 +782,7 @@ const PropertyEditForm = () => {
           </div>
         </div>
 
-        <div className="mb-4 bg-amber-600 p-4 rounded-lg">
+        <div className="mb-4 bg-sky-600/40 p-4 rounded-lg">
           <label className="block text-gray-800 font-bold mb-2">
             Rates (Leave blank if not applicable)
           </label>

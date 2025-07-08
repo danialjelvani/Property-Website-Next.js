@@ -10,6 +10,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import ScrollRestorer from "@/components/scrollRestorer";
 import PropertySearchForm from "@/components/propertySearchForm";
 import Pagination from "@/components/pagination";
+import { myFont } from "@/components/fonts";
 
 const SearchResultsPage = () => {
   const [loading, setLoading] = useState(true);
@@ -65,24 +66,24 @@ const SearchResultsPage = () => {
       ) : (
         <div>
           <div
-            className="bg-black/40 grid grid-cols-3 items-center h-20 mt-2
+            className="bg-black/40 grid grid-cols-3 items-center h-20 -mt-8 md:mt-0 -mb-7 md:-mb-5
                   [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_80%,transparent)]"
           >
             <div>
               <Link
                 href="/properties"
                 scroll={false}
-                className="text-white hover:text-yellow-600 xl:ml-20 md:inline-block mt-2 text-xs md:text-base
+                className="text-white hover:text-yellow-600 xl:ml-20 md:inline-block mt-2 text-xs md:text-sm
                       active:text-shadow-2xs active:text-shadow-yellow-200 active:transition-all active:duration-200
                       flex items-center"
               >
                 <FaArrowLeft className="inline w-5 m-2 mt-1" />{" "}
-                <span className="md:mb-0 mb-1.5">Back to Properties Page</span>
+                <span className="md:mb-0 mb-1.5 -ml-1">Back to Properties Page</span>
               </Link>
             </div>{" "}
             <h1
-              className="xl:text-3xl md:text-2xl text-base text-center text-shadow-md text-shadow-white/30
-             text-white tracking-wide font-Title2 col-start-2"
+              className={`xl:text-2xl lg:text-xl md:text-lg text-base text-center
+             text-white {myFont.className} col-start-2`}
             >
               Search Results
             </h1>
@@ -90,8 +91,8 @@ const SearchResultsPage = () => {
               {total} result{total === 1 ? "" : "s"} found
             </p>
           </div>
-          <section className="px-4 -mt-18">
-            <div className="container-xl lg:container m-auto px-4 py-6 mt-17">
+          <section className="px-4">
+            <div className="container-xl lg:container m-auto px-4 py-6">
               {properties.length === 0 ? (
                 <p className="text-white text-shadow-md text-shadow-white/30 text-center">
                   No search results found

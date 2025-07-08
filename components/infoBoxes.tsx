@@ -9,10 +9,10 @@ const infoBoxes = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
             <InfoBox
               title="For Renters"
-              backgroundColor="bg-black/60"
+              backgroundColor="linkbuttonneutral"
               textColor="text-emerald-100"
               buttonInfo={{
-                backgroundColor: "linkbuttonemerald",
+                backgroundColor: "linkbuttonneutral2",
                 textColor: "text-white",
                 link: "/properties",
                 text: "Browse Properties",
@@ -23,11 +23,11 @@ const infoBoxes = () => {
             </InfoBox>
 
             <InfoBox
-              textColor="text-emerald-100"
-              backgroundColor="bg-black/60"
+              textColor="text-white"
+              backgroundColor="linkbuttonslate2"
               title="For Property Owners"
               buttonInfo={{
-                backgroundColor: "linkbuttonemerald",
+                backgroundColor: "linkbuttonslate",
                 textColor: "text-white",
                 link: "/properties/add",
                 text: "Add Property",

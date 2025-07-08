@@ -101,16 +101,16 @@ const Message = ({
             </span>
           </li>
         </ul>
-        <div className="flex gap-3 justify-center md:justify-start md:mt-4">
+        <div className="flex gap-3 justify-center md:justify-start">
           <button
             onClick={handleDeleteClick}
-            className="self-start mt-4 linkbuttonred w-35 h-10 text-center text-white px-2 py-2 rounded-md"
+            className="self-start mt-4 text-sm lg:text-base linkbuttonred w-35 h-10 text-center text-white px-2 py-2 rounded-md"
           >
             Delete
           </button>
           <button
             onClick={handleReadClick}
-            className={`self-start mt-4 ${
+            className={`self-start mt-4 text-sm lg:text-base ${
               isRead ? "linkbuttonemerald" : "linkbuttonamber"
             } w-35 h-10 text-center text-white px-2 py-2 rounded-md`}
           >

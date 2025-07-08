@@ -93,7 +93,7 @@ const ProfilePage = () => {
   ) : (
     <section className="bg-black/10 text-black">
       <div className="container max-w-6xl flex justify-center items-center lg:min-h-[80vh] m-auto">
-        <div className="bg-orange-500/85 p-4 pb-8 md:pb-4 grow shadow-[0_0_10px] shadow-amber-300 rounded-xl m-2">
+        <div className="linkbuttonsky4 p-4 pb-8 md:pb-4 grow shadow-[0_0_10px] shadow-amber-300 rounded-xl m-2">
           <h1
             className={`text-3xl md:text-4xl ${myFont.className} text-gray-800 text-center md:ml-3 lg:ml-10 md:text-left md:mt-6`}
           >
