@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { myFont } from "@/components/fonts";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -27,8 +28,8 @@ export default function LoginPage() {
 
   return (
     <div className="container flex items-center justify-center mx-auto min-h-[75vh] max-w-xl">
-      <div className="flex flex-col items-center linkbuttonsky4 px-1 md:px-5 py-7 shadow-[0_0_10px] shadow-amber-300 rounded-xl m-4">
-        <div className="p-2 self-start ml-10 text-2xl lg:text-3xl font-semibold text-white text-shadow-[0_0_6px] text-shadow-white/50 mt-2">
+      <div className="flex flex-col items-center linkbuttonsky4 px-1 md:px-5 py-7 shadow-[0_0_10px] shadow-sky-300 rounded-xl m-4">
+        <div className={`p-2 self-start ml-10 ${myFont.className} text-3xl lg:text-4xl text-gray-800 text-shadow-[0_0_6px] text-shadow-white/50 mt-2`}>
           Welcome Back!
         </div>
         <div className="p-2 self-start mx-10 mt-1 text-white">
@@ -64,7 +65,7 @@ export default function LoginPage() {
 
         <Link
           href="/login/signup"
-          className="linkbuttonamber text-white font-bold py-2 px-8 rounded-md"
+          className="linkbuttonslate text-white font-bold py-2 px-8 rounded-md"
         >
           Sign Up
         </Link>

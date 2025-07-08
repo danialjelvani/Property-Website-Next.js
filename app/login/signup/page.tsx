@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { myFont } from "@/components/fonts";
 export default function SignupPage() {
   const router = useRouter();
   const [username, setUsername] = useState("");
@@ -40,9 +41,9 @@ export default function SignupPage() {
     <div className="flex justify-center mx-auto min-h-[75vh] items-center text-white">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center linkbuttonsky4 px-4 md:px-5 py-8 shadow-[0_0_10px] shadow-amber-300 m-4 p-8 rounded-2xl w-full max-w-sm"
+        className="flex flex-col items-center linkbuttonsky4 px-4 md:px-5 py-8 shadow-[0_0_10px] shadow-sky-300 m-4 p-8 rounded-2xl w-full max-w-sm"
       >
-        <h2 className="text-2xl lg:text-3xl font-bold mb-5 text-center text-white text-shadow-[0_0_6px] text-shadow-white/40">
+        <h2 className={`text-3xl lg:text-4xl ${myFont.className} mb-5 text-center text-gray-800 text-shadow-[0_0_6px] text-shadow-white/40`}>
           Sign Up
         </h2>
         <div className="mb-5">Join us — it’s fast, easy, and free!</div>
@@ -81,7 +82,7 @@ export default function SignupPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full linkbuttonamber text-white font-bold py-3 mt-3 rounded-xl transition disabled:opacity-50"
+          className="w-full linkbuttonslate text-white font-bold py-3 mt-3 rounded-xl transition disabled:opacity-50"
         >
           {loading ? "Signing up..." : "Sign Up"}
         </button>

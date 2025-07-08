@@ -111,7 +111,7 @@ const Message = ({
           <button
             onClick={handleReadClick}
             className={`self-start mt-4 text-sm lg:text-base ${
-              isRead ? "linkbuttonemerald" : "linkbuttonamber"
+              isRead ? "linkbuttonslate" : "linkbuttonsky"
             } w-35 h-10 text-center text-white px-2 py-2 rounded-md`}
           >
             {isRead ? "Mark As New" : "Mark As Read"}

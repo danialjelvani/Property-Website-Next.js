@@ -898,7 +898,7 @@ const PropertyEditForm = () => {
             onClick={handleClick}
             className="border rounded-lg w-full py-2 px-3 cursor-pointer linkbuttondark"
           >
-            <p className="opacity-75 text-white text-center mb-1 font-semibold">
+            <p className="text-white text-center mb-1 font-semibold">
               Click to add images
             </p>
             <p className="opacity-60 text-center text-md md:text-base text-white">

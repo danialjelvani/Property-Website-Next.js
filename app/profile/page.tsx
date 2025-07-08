@@ -93,7 +93,7 @@ const ProfilePage = () => {
   ) : (
     <section className="bg-black/10 text-black">
       <div className="container max-w-6xl flex justify-center items-center lg:min-h-[80vh] m-auto">
-        <div className="linkbuttonsky4 p-4 pb-8 md:pb-4 grow shadow-[0_0_10px] shadow-amber-300 rounded-xl m-2">
+        <div className="linkbuttonsky4 p-4 pb-8 md:pb-4 grow shadow-[0_0_10px] shadow-sky-300 rounded-xl m-2">
           <h1
             className={`text-3xl md:text-4xl ${myFont.className} text-gray-800 text-center md:ml-3 lg:ml-10 md:text-left md:mt-6`}
           >
@@ -101,7 +101,7 @@ const ProfilePage = () => {
           </h1>
           <div className="md:flex  md:gap-5 lg:gap-10 md:flex-row">
             <div className="md:w-1/6 md:ml md:mr-15 md:ml-6 lg:ml-10 md:flex-col gap-8 flex flex-row mt-6 md:mt-10">
-              <div className="md:mb-3 mb-6 -mt-2 md:mt-0 md:w-[100px] md:h-[100px] w-20 h-20 mx-auto md:mx-0 rounded-full">
+              <div className="hidden md:mb-3 mb-6 -mt-2 md:mt-0 md:w-[100px] md:h-[100px] w-20 h-20 mx-auto md:mx-0 rounded-full">
                 <Image
                   className="rounded-full mx-auto md:mx-0"
                   src={profileDefault}
@@ -112,22 +112,24 @@ const ProfilePage = () => {
                 />
               </div>
 
-              <div className="flex flex-2/3 flex-col -mt-2 md:flex-none justify-around">
-                <h2 className="text-md md:text-lg md:mb-6">
-                  <span className="font-bold text-md md:text-xl text-gray-200">
-                    Name:{" "}
-                  </span>{" "}
-                  <span className="md:block">{profileName}</span>
-                </h2>
-                <h2 className="text-md md:text-lg md:mb-6">
-                  <span className="font-bold text-md md:text-xl text-gray-200">
-                    Email:{" "}
-                  </span>{" "}
-                  <span className="md:block">{profileEmail}</span>
-                </h2>
+              <div className="flex flex-2/3 -mt-2 md:flex-col justify-around mb-6">
+                <div>
+                  <h2 className="text-md md:text-lg md:mb-6">
+                    <span className="font-bold text-md md:text-xl text-gray-200">
+                      Name:{" "}
+                    </span>{" "}
+                    <span className="md:block">{profileName}</span>
+                  </h2>
+                  <h2 className="text-md md:text-lg md:mb-6">
+                    <span className="font-bold text-md md:text-xl text-gray-200">
+                      Email:{" "}
+                    </span>{" "}
+                    <span className="md:block">{profileEmail}</span>
+                  </h2>
+                </div>
 
                 <button
-                  className="linkbuttondark rounded-md cursor-pointer w-35 h-8 md:h-10 text-sm md:text-base block text-shadow-[0_0_10px] text-shadow-white/30 text-white mb-4 mt-2 md:mb-2"
+                  className="linkbuttondark rounded-md cursor-pointer w-30 md:w-36 h-8 md:h-10 text-sm md:text-base block text-shadow-[0_0_10px] text-shadow-white/30 text-white mb-4 mt-2 md:mb-2"
                   onClick={handleDeleteUser}
                 >
                   Delete Account
@@ -185,7 +187,7 @@ const ProfilePage = () => {
                       </div>
                       <div className="mt-4 flex justify-start">
                         <Link href={`/properties/${property._id}/edit`}>
-                          <button className="text-center linkbuttonamber text-white rounded-md mr-2 text-sm md:text-base w-25 h-9">
+                          <button className="text-center linkbuttonslate text-white rounded-md mr-2 text-sm md:text-base w-25 h-9">
                             Edit
                           </button>
                         </Link>
