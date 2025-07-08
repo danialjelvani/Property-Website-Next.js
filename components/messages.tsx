@@ -57,7 +57,7 @@ const Messages = () => {
       <div className="container max-w-6xl md:flex justify-center items-center md:min-h-[80vh] m-auto mt-1">
         <div className="linkbuttonsky4 grow px-2 md:px-5 py-3 lg:py-5 shadow-[0_0_10px] shadow-sky-300 rounded-xl mx-2">
           <h1 className={`md:text-3xl text-2xl ${myFont.className} text-gray-800 text-center md:mb-10 mb-6`}>
-            Your Messages
+            My Messages
             <span className="text-xs md:text-sm md:-mb-5 block md:mt-3 mt-2 -mb-2 font-sans">
               You have {messageCount} message
               {messageCount === 1 ? "" : "s"}
