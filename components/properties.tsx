@@ -43,6 +43,16 @@ const Properties = () => {
     fetchProperties();
   }, [page, pageSize]);
 
+  useEffect(() => {
+    let top = 0;
+
+    if (window.innerWidth <= 720) {
+      top = 125;
+    }
+
+    window.scrollTo({ top, behavior: "smooth" });
+  }, [page]);
+
   return loading ? (
     <LoadingSpinner />
   ) : (
@@ -61,7 +71,7 @@ const Properties = () => {
         )}
         <Pagination page={page} pageSize={pageSize} total={total} />
       </div>
-      <ScrollRestorer />
+      {/* <ScrollRestorer /> */}
     </section>
   );
 };

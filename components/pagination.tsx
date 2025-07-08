@@ -28,7 +28,7 @@ const Pagination = ({
     <section className="container mx-auto text-sm lg:text-base flex justify-center items-center mt-8 text-white text-shadow-[0_0_2px] text-shadow-black/50">
       <button
         disabled={page === 1}
-        className="mr-2 px-3 py-1.5 linkbuttongray rounded-md cursor-pointer w-20"
+        className={`${page === 1 ? "opacity-50 cursor-not-allowed" : "cursor-pointer"} mr-2 px-3 py-1.5 linkbuttongray rounded-md w-20`}
         onClick={() => handlePageChange(page - 1)}
       >
         Previous
@@ -40,7 +40,7 @@ const Pagination = ({
 
       <button
         disabled={page >= totalpages}
-        className="ml-2 px-3 py-1.5 linkbuttongray rounded-md cursor-pointer w-20"
+        className={`linkbuttongray ${page >= totalpages ? "opacity-50 cursor-not-allowed" : "cursor-pointer"} ml-2 px-3 py-1.5 rounded-md w-20`}
         onClick={() => handlePageChange(page + 1)}
       >
         Next

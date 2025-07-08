@@ -1,20 +1,21 @@
 import React from "react";
-import Image from "next/image";
-import logo from "@/assets/images/logo.png";
+import Link from "next/link";
+import { FaGithub } from "react-icons/fa";
 
 const footer = () => {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
   return (
     <footer className="bg-black/40 w-full py-4">
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-around px-4">
-        <div className="mb-2 md:mb-0">
-          <Image src={logo} alt="Logo" className="h-8 w-auto" />
-        </div>
-        <div>
-          <p className="text-sm text-gray-500 mt-2 md:mt-0">
-            &copy; {currentYear} Isfahan Rentals. All rights reserved.
-          </p>
-        </div>
+      <div className="flex items-center justify-center">
+        <FaGithub className="text-xl mr-2" />
+        <Link
+          className="ml-1 text-sm text-white/70 hover:text-white active:text-white transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://github.com/danialjelvani"
+        >
+          Connect with me on GitHub: <span className="underline">danialjelvani</span>
+        </Link>
       </div>
     </footer>
   );

@@ -38,7 +38,7 @@ const SavedProperties = () => {
   ) : (
     <>
       <div
-        className="bg-black/40 grid grid-cols-3 items-center h-20 mt-2
+        className="bg-black/40 grid grid-cols-3 items-center h-20 -mt-3 md:-mt-2 -mb-8 md:-mb-5
                 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_80%,transparent)]"
       >
         <div className="">
@@ -54,18 +54,18 @@ const SavedProperties = () => {
           </Link>
         </div>{" "}
         <h1
-          className="xl:text-3xl md:text-2xl text-base text-center text-shadow-md text-shadow-white/30
-           text-white tracking-wide font-Title2 col-start-2 "
+          className="xl:text-2xl lg:text-xl md:text-lg text-base text-center text-shadow-md text-shadow-white/30
+           text-white tracking-wide col-start-2 "
         >
-          Saved properties
+          Saved Properties
         </h1>
       </div>
-      <section className="px-4 py-6">
+      <section className="px-4">
         <div className="container-xl lg:container m-auto px-4 py-6">
           {properties.length === 0 ? (
             <p>No saved properties</p>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {properties.map((property: Iproperty) => (
                 <PropertyCard key={property._id} property={property} />
               ))}
