@@ -11,7 +11,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = (searchParams.get("callbackUrl") || "/");
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -25,7 +25,8 @@ export default function LoginPage() {
       toast.error("Invalid email or password");
     } else {
       toast.success("Login successful");
-      router.push(res?.url || "/");
+      const url = new URL(res?.url || "/");
+      router.push(url.pathname + url.search);
     }
   }
 
