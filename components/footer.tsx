@@ -6,7 +6,7 @@ const footer = () => {
   const currentYear = new Date().getFullYear();
   return (
     <footer className="bg-black/40 w-full py-4">
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center -mt-1">
         <FaGithub className="text-xl mr-2" />
         <Link
           className="ml-1 text-sm text-white/70 hover:text-white active:text-white transition-colors"

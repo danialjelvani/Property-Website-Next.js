@@ -5,7 +5,6 @@ import connectDB from "@/config/database";
 import User from "@/models/User";
 
 export const authOptions: AuthOptions = {
-  debug: true,
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -25,6 +24,9 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
+  pages:{
+    signIn: "/login",
+  },
   session: {
     strategy: "jwt",
   },
