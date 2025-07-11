@@ -35,7 +35,7 @@ const propertyDetails = ({ property }: any) => {
         <div className="flex flex-col md:flex-row justify-around">
           <div className="flex items-center justify-center mb-4 border-b border-gray-800 md:border-b-0 pb-4 md:pb-0">
             <div className="text-gray-800 mr-2 font-bold">Nightly</div>
-            <div className="font-bold text-gray-800">
+            <div className="text-lg md:text-xl lg:text-2xl font-bold text-gray-800">
               {property.rates.nightly ? (
                 `$${property.rates.nightly.toLocaleString()}`
               ) : (
