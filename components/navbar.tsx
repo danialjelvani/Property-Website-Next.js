@@ -6,10 +6,10 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import logo from "@/assets/images/logo2.png";
 import profileDefault from "@/assets/images/profile.png";
-import { FaGoogle } from "react-icons/fa";
 import { signOut, useSession } from "next-auth/react";
 import UnreadMessageCount from "./unreadMessageCount";
 import { myFont } from "./fonts";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const [isMounted, setIsMounted] = useState(false); // to check if component is mounted and prevent SSR mismatch
@@ -257,8 +257,11 @@ const Navbar = () => {
                   <button
                     onClick={() => {
                       setIsProfileMenuOpen(false);
+                      toast.success("Signed out successfully");
                       signOut({ redirect: false });
-                      router.push("/");
+                      setTimeout(() => {
+                        window.location.href = "/";
+                      }, 1000);
                     }}
                     className="block linkactive linkactive2 linkhover w-full px-4 py-2 text-sm cursor-pointer text-gray-300"
                     role="menuitem"

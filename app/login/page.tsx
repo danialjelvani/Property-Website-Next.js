@@ -26,7 +26,9 @@ export default function LoginPage() {
     } else {
       toast.success("Login successful");
       const url = new URL(res?.url || "/");
-      router.push(url.pathname + url.search);
+      setTimeout(() => {
+        window.location.href = url.pathname + url.search;
+      }, 1000);
     }
   }
 

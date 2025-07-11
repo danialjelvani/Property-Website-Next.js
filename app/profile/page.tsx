@@ -79,7 +79,9 @@ const ProfilePage = () => {
       }
       toast.success("User deleted successfully");
       signOut({ redirect: false });
-      router.push("/");
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 1000);
     } catch (error) {
       toast.error("Failed to delete user");
       console.log(error);

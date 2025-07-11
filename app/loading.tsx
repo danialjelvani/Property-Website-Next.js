@@ -4,7 +4,7 @@ import { GridLoader } from "react-spinners";
 const LoadingPage = () => {
   return (
     <GridLoader
-      color="#ffff5555"
+      color="#D0730E"
       cssOverride={{
         display: "block",
         margin: "300px auto",
