@@ -141,7 +141,7 @@ const ProfilePage = () => {
 
             <div className="md:w-[400px] lg:w-[600px] xl:w-[700px] grow -mt-2 md:-mt-6">
               <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-4 md:mb-6">
-                Your Listings{" "}
+                My Listings{" "}
                 <span className="text-sm">
                   ({" "}
                   {properties.length === 1
