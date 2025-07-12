@@ -67,7 +67,7 @@ type AmenityType =
   | "Gym/Fitness Center"
   | "Air Conditioning"
   | "Balcony/Patio"
-  | "Mdart TV"
+  | "Smart TV"
   | "Coffee Maker";
 
 const PropertyEditForm = () => {
@@ -758,14 +758,14 @@ const PropertyEditForm = () => {
             <div>
               <input
                 type="checkbox"
-                id="amenity_mdart_tv"
+                id="amenity_Smart_tv"
                 name="amenities"
-                value="Mdart TV"
+                value="Smart TV"
                 className="mr-2"
                 onChange={handleAmenitiesChange}
-                checked={fields.amenities.includes("Mdart TV")}
+                checked={fields.amenities.includes("Smart TV")}
               />
-              <label htmlFor="amenity_mdart_tv">Mdart TV</label>
+              <label htmlFor="amenity_Smart_tv">Smart TV</label>
             </div>
             <div>
               <input
