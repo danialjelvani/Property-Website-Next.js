@@ -10,7 +10,7 @@ A full-featured, mobile-friendly real estate listing web application built with 
 
 You can log in as a test user to explore the platform:
 
-**Email:** test@test.com
+**Email:** test@test.com <br />
 **Password:** test
 
 ---
