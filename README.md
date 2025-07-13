@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏡 Isfahan Rentals
 
-## Getting Started
+A full-featured, mobile-friendly real estate listing web application built with **Next.js 15**, **TypeScript**, and **Tailwind CSS**. This project is an improved and extended version of Brad Traversy's Property Pulse course javascript project, enhanced with modern UI/UX upgrades, advanced features, and production-ready optimizations.
 
-First, run the development server:
+**🔗 Live Demo:** [property-website-jd.vercel.app](https://property-website-jd.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **Authentication**: NextAuth.js (Credentials Provider + JWT)
+- **Database**: MongoDB (via Mongoose)
+- **Image Hosting**: Cloudinary (client-side uploads)
+- **Maps**: Leaflet
+- **Deployment**: Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🌟 Features & Improvements
 
-To learn more about Next.js, take a look at the following resources:
+### 🌐 General Enhancements
+- Fully responsive design optimized for all screen sizes.
+- Custom font implemented via `next/font` to prevent FOUT (Flash of Unstyled Text).
+- Featured Properties section is now horizontally centered and scrollable on the homepage.
+- Properties page auto-scrolls to relevant sections based on screen size.
+- Optional scroll restoration added to retain scroll position when navigating back.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 📦 Properties Functionality
+- **Geo-location support**: Properties can now be pinned on an interactive map; location data is saved with each listing.
+- **Edit page enhancements**:
+  - Restores all property data including pinned map location.
+  - Allows re-positioning of the map pin.
+  - Restores previously uploaded images with options to delete or add new ones.
+- **Pagination**:
+  - Server-side pagination implemented on both the Properties and Search Results pages.
+  - Search Results page now displays the total number of results.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🖼️ Image Upload Experience
+- Switched from server-side to client-side image uploads to avoid timeout errors and enhance UX.
+- Real-time upload progress indicator added.
+- Successfully uploaded images are displayed as small previews with file names.
+- Users can delete uploaded images before submitting the form.
+- Deleted images are also removed from Cloudinary to prevent orphaned files and reduce clutter.
 
-## Deploy on Vercel
+### 🔐 Authentication & Authorization
+- Integrated authentication using **NextAuth Credentials Provider** with JWT strategy.
+- Sign-in and sign-out include full page refreshes and proper redirects to prevent UI inconsistencies and fix redirect issues.
+- Middleware added to protect routes and store callback URLs for redirecting users after successful login.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 👤 Profile & Account Management
+- Profile page displays user property listings in a clean, scrollable UI—showing one property per view with pixel-accurate responsiveness.
+- **Delete Account** functionality added: completely removes the user and all associated listings from the database.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 💬 Messaging System
+- Messages page displays:
+  - Total number of messages.
+  - Message index for each entry.
+  - Responsive, scrollable UI with one message visible per scroll view.
+- Supports client-side message deletion and automatic UI update.
+
+---
