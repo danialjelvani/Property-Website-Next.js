@@ -6,6 +6,21 @@ A full-featured, mobile-friendly real estate listing web application built with 
 
 ---
 
+## 🧪 Test User
+
+You can log in as a test user to explore the platform:
+
+**Email:** test@test.com
+**Password:** test
+
+---
+
+## 🖼 Preview
+
+![App Preview](public/preview.png)
+
+---
+
 ## 🚀 Tech Stack
 
 - **Framework**: Next.js 15 (App Router)
