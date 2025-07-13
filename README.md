@@ -17,7 +17,7 @@ You can log in as a test user to explore the platform:
 
 ## 🖼 Preview
 
-![App Preview](public/preview.png)
+![App Preview](public/preview.webp)
 
 ---
 
